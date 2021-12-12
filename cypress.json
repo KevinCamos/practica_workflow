@@ -1,4 +1,4 @@
 {
-  "baseUrl": ".",
+  "baseUrl": "http://localhost:3000",
   "projectId": "rncg2z"
 }
