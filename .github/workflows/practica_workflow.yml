@@ -27,13 +27,13 @@ jobs:
         uses: actions/checkout@v2
       - name: Cypress run
         uses: cypress-io/github-action@v2
-      - name: 'Upload Artifact'
         # let's give this action an ID so we can refer
         # to its output values later
         id: cypress
         # Continue the build in case of an error, as we need to set the
         # commit status in the next step, both in case of success and failure
         continue-on-error: true
+      - name: 'Upload Artifact'
         uses: actions/upload-artifact@v2
         with:
           name: my-artifact
