@@ -7,8 +7,9 @@ export const usersRepo = {
   getById,
   create,
   update,
-  delete: _delete,
+  _delete,
   deleteAllUsers,
+  saveData
 };
 
 function getAll() {

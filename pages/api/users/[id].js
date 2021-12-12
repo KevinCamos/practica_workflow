@@ -29,7 +29,7 @@ function handler(req, res) {
   }
 
   function deleteUser() {
-    usersRepo.delete(req.query.id);
+    usersRepo._delete(req.query.id);
     return res.status(200).json({});
   }
 }
