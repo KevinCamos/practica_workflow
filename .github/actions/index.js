@@ -45,7 +45,6 @@ try {
 
 
 
-
     // // replace the value below with the Telegram token you receive from @BotFather
     // const token = core.getInput('token-telegram');
     // const nombre = core.getInput('myname');

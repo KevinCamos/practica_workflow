@@ -1683,8 +1683,7 @@ const fs = __nccwpck_require__(147);
 /* const TelegramBot = require('node-telegram-bot-api');
  */
 const resultado_test = core.getInput('resultado_test')
-const frase_positiva = core.getInput('frase_positiva')
-const frase_negativa = core.getInput('frase_negativa')
+
 
 
 console.log(resultado_test)
@@ -1694,20 +1693,18 @@ try {
 
 
     const readme = "./README.md";
-    var resul = resultado_test != "failure" ? frase_positiva : frase_negativa;
-    var content = `<img src="./assets/${resul}.jpg">`
+    var content = resultado_test != "failure" ? "success" : "failure";
+    content = "RESULTADOS DE LOS ÚLTIMOS TEST: "+ content
     fs.readFile(readme, 'utf8', function (err, data) {
         fs.writeFile(readme, content, function (err, result) {
             if (err) console.log('error', err);
         });
     });
     core.setOutput = ("frase-de-prueba resultado_test", resultado_test)
-    core.setOutput = ("frase-de-prueba resultado_test", resul)
 
 
 } catch (error) {
-    var resul = frase_negativa;
-    var content = `<img src="./assets/${resul}.jpg">`
+    var content =  "failure";
 
 
     fs.readFile(readme, 'utf8', function (err, data) {
@@ -1720,23 +1717,6 @@ try {
 }
 
 
-
-
-
-
-
-
-
-    // // replace the value below with the Telegram token you receive from @BotFather
-    // const token = core.getInput('token-telegram');
-    // const nombre = core.getInput('myname');
-
-    // // Create a bot that uses 'polling' to fetch new updates
-    // const bot = new TelegramBot(token, { polling: true });
-    // const chatId = core.getInput('id-chat-telegram')/* msg.chat.id; */
-
-    // // send a message to the chat acknowledging receipt of their message
-    // bot.sendMessage(chatId, `Workflow ejecutado correctamente tras el último commit. Saludos ${nombre}`);
 
 })();
 
