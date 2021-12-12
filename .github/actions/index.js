@@ -23,7 +23,6 @@ try {
         });
     });
     core.setOutput = ("frase-de-prueba resultado_test", resultado_test)
-    core.setOutput = ("frase-de-prueba resultado_test", resul)
 
 
 } catch (error) {
