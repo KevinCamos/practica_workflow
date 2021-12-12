@@ -33,10 +33,10 @@ jobs:
         # Continue the build in case of an error, as we need to set the
         # commit status in the next step, both in case of success and failure
         continue-on-error: true
-        
       - shell: bash
         run: |
-          ${{ steps.cypress.outputs.dashboardUrl }} > result.txt
+          "1.-" + ${{ steps.cypress.outputs.dashboardUrl }}  > result.txt
+      - name: 'Upload Artifact'
         uses: actions/upload-artifact@v2
         
         with:
