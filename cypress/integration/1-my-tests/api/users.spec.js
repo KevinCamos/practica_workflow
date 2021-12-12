@@ -1,6 +1,6 @@
-<reference types="cypress" />
+<reference types="cypress"/>
 
-let TOTAL_USERS = 10;
+const TOTAL_USERS = 10;
 
 describe("Test de endpoints", () => {
   before(() => {
