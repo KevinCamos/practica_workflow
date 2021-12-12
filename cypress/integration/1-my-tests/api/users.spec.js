@@ -1,4 +1,5 @@
-<reference types="cypress"/>
+///<reference types="cypress"/>
+
 
 const TOTAL_USERS = 10;
 

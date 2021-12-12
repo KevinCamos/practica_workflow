@@ -1,4 +1,5 @@
-<reference types="cypress" />
+///<reference types="cypress"
+/>
 
 let TOTAL_USERS = 10;
 
