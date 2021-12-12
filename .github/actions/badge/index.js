@@ -1693,7 +1693,7 @@ try {
 
     const readme = "./README.md";
     var content = resultado_test != "failure" ? succes:fail;
-    content =`RESULTADOS DE LOS ÚLTIMOS TEST: + ![Image text](${content})`
+    content =`RESULTADOS DE LOS ÚLTIMOS TEST: ![Image text](${content})`
     fs.readFile(readme, 'utf8', function (err, data) {
         fs.writeFile(readme, content, function (err, result) {
             if (err) console.log('error', err);
