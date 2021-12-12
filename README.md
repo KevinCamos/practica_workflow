@@ -1,1 +1,1 @@
-RESULTADOS DE LOS ÚLTIMOS TEST: success
+RESULTADOS DE LOS ÚLTIMOS TEST: + ![Image text](https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg)
