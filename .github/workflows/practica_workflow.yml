@@ -10,6 +10,13 @@ jobs:
     steps:
       - name: checkout_codigo
         uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          npm install
+
+      - name: Lint files
+        run: |
+          npm run lint
       - name: eje_lintern
         uses: github/super-linter@v4
         env:
@@ -19,13 +26,7 @@ jobs:
           LINTER_RULES_PATH: /
           JAVASCRIPT_ES_CONFIG_FILE: .eslintrc.json
           VALIDATE_JAVASCRIPT_ES: true
-      - name: Install dependencies
-        run: |
-          npm install
-
-      - name: Lint files
-        run: |
-          npm run lint
+  
         
   # test-execution:
   #   runs-on: ubuntu-latest
