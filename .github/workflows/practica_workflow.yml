@@ -47,6 +47,7 @@ jobs:
 
   Add_badge_job:
     runs-on: ubuntu-latest
+    if: ${{always()}}
     needs: Cypress_job
     steps:
       - name: checkout_codigo
