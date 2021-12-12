@@ -1,0 +1,51 @@
+################################
+# Run Linter against code base #
+################################
+
+name: main_workflow
+on: [push]
+jobs:
+  eslintr_ejecucion:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout_codigo
+        uses: actions/checkout@v2
+      - name: eje_lintern
+        uses: github/super-linter@v4
+        env:
+          VALIDATE_ALL_CODEBASE: true
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LINTER_RULES_PATH: /
+          JAVASCRIPT_ES_CONFIG_FILE: .eslintrc.json
+          VALIDATE_JAVASCRIPT_ES: true
+      - name: Install dependencies
+        run: |
+          npm install
+
+      - name: Lint files
+        run: |
+          npm run lint
+        
+  # test-execution:
+  #   runs-on: ubuntu-latest
+  #   needs: eslintr_ejecucion
+  #   # if: github.ref == 'refs/heads/nodejs_jest_job'
+  #   steps:
+  #     - name: checkout_codigo
+  #       uses: actions/checkout@v2
+  #     - name: Run jest tests
+  #       run: npm install jest && npm test
+  # environment_test_execution:
+  #   runs-on: ubuntu-latest
+  #   needs: test-execution
+  #   # if: github.ref == 'refs/heads/nodejs_environment_job'
+    
+  #   steps:
+  #     - name: Test Javascript Hello Action
+  #       uses: adeloyedeji/github-actions-hello@v1.0
+  #       env:
+  #         DESTINATION_PERSON: 2DAW
+  #       with: 
+  #         who-to-greet: ${{ env.DESTINATION_PERSON }}
+  
