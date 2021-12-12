@@ -70,6 +70,6 @@ jobs:
           git config user.email kevincamossoto@gmail.com
           git add .
           git commit -m "update readme"
-          git push origin github_action_readme
+          git push origin main
 
 
