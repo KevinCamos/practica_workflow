@@ -6,17 +6,16 @@ const fs = require("fs");
  */
 const resultado_test = core.getInput('resultado_test')
 
-
-
+var succes= "https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg"
+var fail =  "https://img.shields.io/badge/test-failure-red";
 console.log(resultado_test)
 
 
 try {
 
-
     const readme = "./README.md";
-    var content = resultado_test != "failure" ? "success" : "failure";
-    content = "RESULTADOS DE LOS ÚLTIMOS TEST: "+ content
+    var content = resultado_test != "failure" ? succes:fail;
+    content =`RESULTADOS DE LOS ÚLTIMOS TEST: + ![Image text](${content})`
     fs.readFile(readme, 'utf8', function (err, data) {
         fs.writeFile(readme, content, function (err, result) {
             if (err) console.log('error', err);
@@ -39,19 +38,3 @@ try {
 }
 
 
-
-
-
-
-
-
-    // // replace the value below with the Telegram token you receive from @BotFather
-    // const token = core.getInput('token-telegram');
-    // const nombre = core.getInput('myname');
-
-    // // Create a bot that uses 'polling' to fetch new updates
-    // const bot = new TelegramBot(token, { polling: true });
-    // const chatId = core.getInput('id-chat-telegram')/* msg.chat.id; */
-
-    // // send a message to the chat acknowledging receipt of their message
-    // bot.sendMessage(chatId, `Workflow ejecutado correctamente tras el último commit. Saludos ${nombre}`);
