@@ -127,11 +127,11 @@ jobs:
       - name: Action Update Readme
         uses: ./.github/actions/discord/
         with:
-          discord_token: ${{ secrets.DISCORD_TOKEN }}"
-          id_channel: ${{ secrets.CHANNEL_ID }}"
-          # commit_author: ${{ env.GIT_COMMIT_AUTHOR }}"
-          # commit_committer: ${{ env.GIT_COMMIT_COMMITTER }}"
-          # commit_message: ${{ env.GIT_COMMIT_MESSAGE_SUBJECT }}"
+          discord_token: ${{ secrets.DISCORD_TOKEN }}
+          id_channel: ${{ secrets.CHANNEL_ID }}
+          commit_author: ${{ env.GIT_COMMIT_AUTHOR }}
+          commit_committer: ${{ env.GIT_COMMIT_COMMITTER }}
+          commit_message: ${{ env.GIT_COMMIT_MESSAGE_SUBJECT }}
          
          
             

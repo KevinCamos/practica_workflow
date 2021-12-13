@@ -7,15 +7,15 @@ inputs:
     id_channel: 
       description: 'id_channel'
       required: true
-    # commit_author: 
-    #   description: 'commit_author'
-    #   required: true
-    # commit_committer: 
-    #   description: 'commit_committer'
-    #   required: true
-    # commit_message: 
-    #   description: 'commit_message'
-    #   required: true
+    commit_author: 
+      description: 'commit_author'
+      required: true
+    commit_committer: 
+      description: 'commit_committer'
+      required: true
+    commit_message: 
+      description: 'commit_message'
+      required: true
       
       
 outputs:
