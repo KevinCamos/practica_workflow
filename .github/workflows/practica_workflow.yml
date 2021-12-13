@@ -29,8 +29,8 @@ jobs:
       uses: cypress-io/github-action@v2
       with:
         config-file: cypress.json
-        build: npm run build
         start: npm start
+        build: npm run build
 
       # let's give this action an ID so we can refer
       # to its output values later
