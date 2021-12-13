@@ -70,7 +70,7 @@ jobs:
         git config user.name KevinCamos
         git config user.email kevincamossoto@gmail.com
         git add .
-        git commit -m "update readme"
+        git commit --allow-empty -m "update readme"
         git push 
 
 
