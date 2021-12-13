@@ -1,4 +1,4 @@
-name: 'badge'
+name: 'email'
 description: 'Resultado Test'
 inputs:
     linter_job: 
