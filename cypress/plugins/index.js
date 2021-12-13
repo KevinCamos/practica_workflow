@@ -1,5 +1,4 @@
-///<reference types="cypress"/>
-
+/// <reference types="cypress" />
 // ***********************************************************
 // This example plugins/index.js can be used to load plugins
 //
@@ -17,20 +16,7 @@
  * @type {Cypress.PluginConfig}
  */
 // eslint-disable-next-line no-unused-vars
-  module.exports = (on, config) => {
+module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
-  // cypress/plugins/index.js
-  // modify the config values
-  config.defaultCommandTimeout = 10000
-
-  // read an environment variable and
-  // pass its value to the specs
-  config.env.userName = 'Kevin'
-  // the specs will be able to access the above value
-  // by using Cypress.env('userName')
-  
-  // IMPORTANT return the updated config object
-  return config
 }
-
