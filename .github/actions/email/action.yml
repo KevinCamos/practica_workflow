@@ -1,0 +1,30 @@
+name: 'badge'
+description: 'Resultado Test'
+inputs:
+    linter_job: 
+      description: 'Resultado de linter_job'
+      required: true
+    cypress_job: 
+      description: 'Resultado de cypress_job'
+      required: true
+    add_badge_job: 
+      description: 'Resultado de add_badge_job'
+      required: true
+    deploy_job: 
+      description: 'Resultado de deploy_job'
+      required: true
+    send_from: 
+      description: 'Emisor del correo'
+      required: true
+    send_to: 
+      description: 'Receptor del correo'
+      required: true
+    apy_key: 
+      description: 'API_KEY de MialChimp Mandrill'
+      required: true
+outputs:
+  respuesta:
+    description: 'README Modificado!'
+runs:
+  using: 'node12'
+  main: 'index.js'
