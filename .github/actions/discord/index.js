@@ -51231,5 +51231,5 @@ client.login(`${discord_token}`);
 })();
 
 module.exports = __webpack_exports__;
-/******/ })()
+/******/})()
 ;
