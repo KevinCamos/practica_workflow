@@ -100,7 +100,7 @@ jobs:
     needs: [Add_badge_job, Deploy_job]
     steps:
       - name: Action Update Readme
-        uses: ./.github/actions/badge/
+        uses: ./.github/actions/email/
         # id: hello 
         with:
           linter_job: ${{ needs.Linter_job.result }}
