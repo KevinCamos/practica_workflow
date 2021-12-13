@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Image from "next/image";
+import Img from "next/Img";
 
 export default function Home() {
   return (
@@ -53,7 +53,7 @@ export default function Home() {
           rel="noopener noreferrer"
         >
           Powered by{" "}
-          <Image
+          <Img
             src="/vercel.svg"
             alt="Vercel Logo"
             className="logo"
