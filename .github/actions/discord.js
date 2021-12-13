@@ -1,9 +1,9 @@
 const core = require('@actions/core')
 const discord_token = core.getInput('discord_token')
 const id_channel = core.getInput('id_channel')
-const commit_author = core.getInput('commit_author')
-const commit_committer = core.getInput('commit_committer')
-const commit_message = core.getInput('commit_message')
+// const commit_author = core.getInput('commit_author')
+// const commit_committer = core.getInput('commit_committer')
+// const commit_message = core.getInput('commit_message')
 
 
 
@@ -14,13 +14,15 @@ const client = new Client({
 });
 client.on("ready", () => {
   console.log(`Logged in as ${client.user}!`);
-
+  // ${commit_author}
+  // ${commit_committer}
+  // ${commit_message}
   client.channels
     .fetch(id_channel)
     .then((channel) => channel.send(`
-    COMMIT AUTHOR:    ${commit_author}
-    COMMIT COMMITTER: ${commit_committer}
-    COMMIT MESSAGE:   ${commit_message}
+    COMMIT AUTHOR:    
+    COMMIT COMMITTER: 
+    COMMIT MESSAGE:   
     
     
     `))

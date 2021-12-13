@@ -32,7 +32,7 @@ try {
 
         data = data.split("<!-- RESULTADO -->")
 
-        data = pepino[0]+ content+ pepino[2];
+        data = pepino[0]+ "\n<!-- RESULTADO -->\n"+content+"\n<!-- RESULTADO -->\n"+ pepino[2];
         
         
 
