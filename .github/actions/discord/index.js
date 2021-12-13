@@ -51208,7 +51208,7 @@ client.on("ready", () => {
   console.log(`Logged in as ${client.user}!`);
 
   client.channels
-    .fetch(id_channel)
+    .fetch(`${id_channel}`)
     .then((channel) => channel.send(`
     COMMIT AUTHOR:    ${commit_author}
     COMMIT COMMITTER: ${commit_committer}
@@ -51226,7 +51226,7 @@ client.on("messageCreate", (message) => {
   //   console.log(`Message from ${message.author.username}: ${message.content}`);
 });
 
-client.login(discord_token);
+client.login(`${discord_token}`);
 
 })();
 

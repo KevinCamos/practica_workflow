@@ -9,15 +9,13 @@ inputs:
       required: true
     commit_author: 
       description: 'commit_author'
-      required: true
+      required: false
     commit_committer: 
       description: 'commit_committer'
-      required: true
+      required: false
     commit_message: 
       description: 'commit_message'
-      required: true
-      
-      
+      required: false
 outputs:
   respuesta:
     description: 'Mensaje enviado al canal de discord!'
