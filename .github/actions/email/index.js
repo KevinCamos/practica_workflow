@@ -36646,8 +36646,8 @@ const cypress_job = core.getInput('cypress_job')
 const add_badge_job = core.getInput('add_badge_job')
 const deploy_job = core.getInput('deploy_job')
 const send_from = core.getInput('send_from')
-const send_to = core.getInput('send_from')
-// const send_to = core.getInput('send_to')
+// const send_to = core.getInput('send_from')
+const send_to = core.getInput('send_to')
 
 //send an e-mail to jim rubenstein
 mandrill('/messages/send', {
