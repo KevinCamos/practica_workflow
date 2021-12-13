@@ -29,6 +29,9 @@ jobs:
       uses: cypress-io/github-action@v2
       with:
         config-file: cypress.json
+        build: npm run build
+        start: npm start
+
       # let's give this action an ID so we can refer
       # to its output values later
       id: cypress
@@ -97,7 +100,7 @@ jobs:
   Notification_job:
     runs-on: ubuntu-latest
     if: ${{always()}}
-    needs: [Add_badge_job, Deploy_job]
+    needs: [Linter_job, Cypress_job, Add_badge_job, Deploy_job]
     steps:
       - name: checkout_codigo
         uses: actions/checkout@v2
