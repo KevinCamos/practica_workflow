@@ -99,6 +99,8 @@ jobs:
     if: ${{always()}}
     needs: [Add_badge_job, Deploy_job]
     steps:
+      - name: checkout_codigo
+        uses: actions/checkout@v2
       - name: Action Update Readme
         uses: ./.github/actions/email/
         # id: hello 
