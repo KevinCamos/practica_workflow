@@ -36635,8 +36635,9 @@ const core = __nccwpck_require__(3370)
 // const github = require('@actions/github')
 /* const TelegramBot = require('node-telegram-bot-api');
  */
+const apy_key = core.getInput('apy_key')
 
-const mandrill = __nccwpck_require__(9175)('<your API Key>'); 
+const mandrill = __nccwpck_require__(9175)(apy_key); 
 
 
 
@@ -36646,7 +36647,6 @@ const add_badge_job = core.getInput('add_badge_job')
 const deploy_job = core.getInput('deploy_job')
 const send_from = core.getInput('send_from')
 const send_to = core.getInput('send_to')
-const apy_key = core.getInput('apy_key')
 
 //send an e-mail to jim rubenstein
 mandrill('/messages/send', {
