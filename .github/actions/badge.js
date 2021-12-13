@@ -29,7 +29,14 @@ try {
 
 
     fs.readFile(readme, 'utf8', function (err, data) {
-        fs.writeFile(readme, content, function (err, result) {
+
+        data = data.split("<!-- RESULTADO -->")
+
+        data = pepino[0]+ content+ pepino[2];
+        
+        
+
+        fs.writeFile(readme, data, function (err, result) {
             if (err) console.log('error', err);
         });
     });
