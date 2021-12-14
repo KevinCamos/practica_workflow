@@ -6,18 +6,2857 @@
 
 var Ee=Object.create;var T=Object.defineProperty;var ve=Object.getOwnPropertyDescriptor;var Re=Object.getOwnPropertyNames;var Me=Object.getPrototypeOf,De=Object.prototype.hasOwnProperty;var _e=(t,e,n)=>e in t?T(t,e,{enumerable:!0,configurable:!0,writable:!0,value:n}):t[e]=n;var $e=t=>T(t,"__esModule",{value:!0});var L=(t,e)=>{$e(t);for(var n in e)T(t,n,{get:e[n],enumerable:!0})},ke=(t,e,n)=>{if(e&&typeof e=="object"||typeof e=="function")for(let o of Re(e))!De.call(t,o)&&o!=="default"&&T(t,o,{get:()=>e[o],enumerable:!(n=ve(e,o))||n.enumerable});return t},s=t=>ke($e(T(t!=null?Ee(Me(t)):{},"default",t&&t.__esModule&&"default"in t?{get:()=>t.default,enumerable:!0}:{value:t,enumerable:!0})),t),I=(t,e,n,o)=>{for(var p=o>1?void 0:o?ve(e,n):e,P=t.length-1,$;P>=0;P--)($=t[P])&&(p=(o?$(e,n,p):$(p))||p);return o&&p&&T(e,n,p),p};var i=(t,e,n)=>(_e(t,typeof e!="symbol"?e+"":e,n),n);L(exports,{ContextMenuCommandAssertions:()=>Te,ContextMenuCommandBuilder:()=>Le,Embed:()=>B,EmbedAssertions:()=>ie,Faces:()=>oe,SlashCommandAssertions:()=>ae,SlashCommandBooleanOption:()=>G,SlashCommandBuilder:()=>K,SlashCommandChannelOption:()=>F,SlashCommandIntegerOption:()=>J,SlashCommandMentionableOption:()=>q,SlashCommandNumberOption:()=>V,SlashCommandRoleOption:()=>W,SlashCommandStringOption:()=>j,SlashCommandSubcommandBuilder:()=>f,SlashCommandSubcommandGroupBuilder:()=>O,SlashCommandUserOption:()=>z,TimestampStyles:()=>nt,blockQuote:()=>je,bold:()=>Je,channelMention:()=>Ye,codeBlock:()=>Ue,formatEmoji:()=>et,hideLinkEmbed:()=>ze,hyperlink:()=>Ke,inlineCode:()=>Ge,italic:()=>Fe,memberNicknameMention:()=>Xe,quote:()=>We,roleMention:()=>Ze,spoiler:()=>Qe,strikethrough:()=>Ve,time:()=>tt,underscore:()=>qe,userMention:()=>He});var ie={};L(ie,{authorNamePredicate:()=>X,colorPredicate:()=>Y,descriptionPredicate:()=>Z,embedFieldPredicate:()=>Ie,embedFieldsArrayPredicate:()=>M,fieldInlinePredicate:()=>R,fieldNamePredicate:()=>v,fieldValuePredicate:()=>E,footerTextPredicate:()=>ee,timestampPredicate:()=>te,titlePredicate:()=>ne,urlPredicate:()=>b,validateFieldLength:()=>D});var r=s(__nccwpck_require__(870)),v=r.default.string.minLength(1).maxLength(256),E=r.default.string.minLength(1).maxLength(1024),R=r.default.optional.boolean,Ie=r.default.object.exactShape({name:v,value:E,inline:R}),M=r.default.array.ofType(Ie);function D(t,e){(0,r.default)(t.length+e,"field amount",r.default.number.lessThanOrEqual(25))}var X=r.default.any(v,r.default.null),b=r.default.any(r.default.string.url,r.default.nullOrUndefined),Y=r.default.any(r.default.number.greaterThanOrEqual(0).lessThanOrEqual(16777215),r.default.null),Z=r.default.any(r.default.string.minLength(1).maxLength(4096),r.default.null),ee=r.default.any(r.default.string.minLength(1).maxLength(2048),r.default.null),te=r.default.any(r.default.number,r.default.date,r.default.null),ne=r.default.any(v,r.default.null);var m=s(__nccwpck_require__(870));var B=class{constructor(e={}){i(this,"fields");i(this,"title");i(this,"description");i(this,"url");i(this,"color");i(this,"timestamp");i(this,"thumbnail");i(this,"image");i(this,"video");i(this,"author");i(this,"provider");i(this,"footer");this.title=e.title,this.description=e.description,this.url=e.url,this.color=e.color,this.thumbnail=e.thumbnail,this.image=e.image,this.video=e.video,this.author=e.author,this.provider=e.provider,this.footer=e.footer,this.fields=e.fields??[],e.timestamp&&(this.timestamp=new Date(e.timestamp).toISOString())}get length(){return(this.title?.length??0)+(this.description?.length??0)+this.fields.reduce((e,n)=>e+n.name.length+n.value.length,0)+(this.footer?.text.length??0)+(this.author?.name.length??0)}addField(e){return this.addFields(e)}addFields(...e){return(0,m.default)(e,"fields",M),D(this.fields,e.length),this.fields.push(...B.normalizeFields(...e)),this}spliceFields(e,n,...o){return(0,m.default)(o,"fields",M),D(this.fields,o.length-n),this.fields.splice(e,n,...B.normalizeFields(...o)),this}setAuthor(e){if(e===null)return this.author=void 0,this;let{name:n,iconURL:o,url:p}=e;return(0,m.default)(n,"name",X),(0,m.default)(o,"iconURL",b),(0,m.default)(p,"url",b),this.author={name:n,url:p,icon_url:o},this}setColor(e){return(0,m.default)(e,"color",Y),this.color=e??void 0,this}setDescription(e){return(0,m.default)(e,"description",Z),this.description=e??void 0,this}setFooter(e){if(e===null)return this.footer=void 0,this;let{text:n,iconURL:o}=e;return(0,m.default)(n,"text",ee),(0,m.default)(o,"iconURL",b),this.footer={text:n,icon_url:o},this}setImage(e){return(0,m.default)(e,"url",b),this.image=e?{url:e}:void 0,this}setThumbnail(e){return(0,m.default)(e,"url",b),this.thumbnail=e?{url:e}:void 0,this}setTimestamp(e=Date.now()){return(0,m.default)(e,"timestamp",te),this.timestamp=e?new Date(e).toISOString():void 0,this}setTitle(e){return(0,m.default)(e,"title",ne),this.title=e??void 0,this}setURL(e){return(0,m.default)(e,"url",b),this.url=e??void 0,this}toJSON(){return{...this}}static normalizeFields(...e){return e.flat(1/0).map(n=>((0,m.default)(n.name,"field name",v),(0,m.default)(n.value,"field value",E),(0,m.default)(n.inline,"field inline",R),{name:n.name,value:n.value,inline:n.inline??void 0}))}};function Ue(t,e){return typeof e=="undefined"?`\`\`\`
 ${t}\`\`\``:`\`\`\`${t}
-${e}\`\`\``}function Ge(t){return`\`${t}\``}function Fe(t){return`_${t}_`}function Je(t){return`**${t}**`}function qe(t){return`__${t}__`}function Ve(t){return`~~${t}~~`}function We(t){return`> ${t}`}function je(t){return`>>> ${t}`}function ze(t){return`<${t}>`}function Ke(t,e,n){return n?`[${t}](${e} "${n}")`:`[${t}](${e})`}function Qe(t){return`||${t}||`}function He(t){return`<@${t}>`}function Xe(t){return`<@!${t}>`}function Ye(t){return`<#${t}>`}function Ze(t){return`<@&${t}>`}function et(t,e=!1){return`<${e?"a":""}:_:${t}>`}function tt(t,e){return typeof t!="number"&&(t=Math.floor((t?.getTime()??Date.now())/1e3)),typeof e=="string"?`<t:${t}:${e}>`:`<t:${t}>`}var nt={ShortTime:"t",LongTime:"T",ShortDate:"d",LongDate:"D",ShortDateTime:"f",LongDateTime:"F",RelativeTime:"R"},oe;(function(o){o.Shrug="\xAF\\_(\u30C4)\\_/\xAF",o.Tableflip="(\u256F\xB0\u25A1\xB0\uFF09\u256F\uFE35 \u253B\u2501\u253B",o.Unflip="\u252C\u2500\u252C \u30CE( \u309C-\u309C\u30CE)"})(oe||(oe={}));var ae={};L(ae,{assertReturnOfBuilder:()=>y,validateDefaultPermission:()=>re,validateDescription:()=>U,validateMaxChoicesLength:()=>se,validateMaxOptionsLength:()=>C,validateName:()=>k,validateRequiredParameters:()=>x});var _=s(__nccwpck_require__(3052)),h=s(__nccwpck_require__(870));function x(t,e,n){k(t),U(e),C(n)}var it=h.default.string.lowercase.minLength(1).maxLength(32).addValidator({message:(t,e)=>`Expected ${e} to match "^[\\p{L}\\p{N}_-]+$", got ${t} instead`,validator:t=>/^[\p{L}\p{N}_-]+$/u.test(t)});function k(t){(0,h.default)(t,"name",it)}var ot=h.default.string.minLength(1).maxLength(100);function U(t){(0,h.default)(t,"description",ot)}var rt=h.default.boolean;function re(t){(0,h.default)(t,"default_permission",rt)}var Be=h.default.array.maxLength(25);function C(t){(0,h.default)(t,"options",Be)}function se(t){(0,h.default)(t,"choices",Be)}function y(t,e){let n=e.name;if(_.default.nullOrUndefined(t))throw new TypeError(`Expected to receive a ${n} builder, got ${t===null?"null":"undefined"} instead.`);if(_.default.primitive(t))throw new TypeError(`Expected to receive a ${n} builder, got a primitive (${typeof t}) instead.`);if(!(t instanceof e)){let o=t,p=_.default.function_(t)?t.name:o.constructor.name,P=Reflect.get(o,Symbol.toStringTag),$=P?`${p} [${P}]`:p;throw new TypeError(`Expected to receive a ${n} builder, got ${$} instead.`)}}var we=s(__nccwpck_require__(8599));var me=s(__nccwpck_require__(8453));var N=s(__nccwpck_require__(870));var S=class{constructor(){i(this,"name");i(this,"description")}setName(e){return k(e),Reflect.set(this,"name",e),this}setDescription(e){return U(e),Reflect.set(this,"description",e),this}};var d=class extends S{constructor(e){super();i(this,"required",!1);i(this,"type");this.type=e}setRequired(e){return(0,N.default)(e,"required",N.default.boolean),this.required=e,this}toJSON(){return x(this.name,this.description,[]),(0,N.default)(this.required,"required",N.default.boolean),{type:this.type,name:this.name,description:this.description,required:this.required}}};var G=class extends d{constructor(){super(me.ApplicationCommandOptionType.Boolean);i(this,"type",me.ApplicationCommandOptionType.Boolean)}};var le=s(__nccwpck_require__(8453));var l=s(__nccwpck_require__(8453)),pe=s(__nccwpck_require__(870));var st=[l.ChannelType.GuildCategory,l.ChannelType.GuildNews,l.ChannelType.GuildNewsThread,l.ChannelType.GuildStore,l.ChannelType.GuildStageVoice,l.ChannelType.GuildText,l.ChannelType.GuildVoice,l.ChannelType.GuildPublicThread,l.ChannelType.GuildPrivateThread],at=pe.default.number.oneOf(st),de=class extends d{constructor(){super(...arguments);i(this,"channelTypes")}addChannelType(e){return this.channelTypes??=[],(0,pe.default)(e,"channel type",at),this.channelTypes.push(e),this}addChannelTypes(e){return e.forEach(n=>this.addChannelType(n)),this}toJSON(){return{...super.toJSON(),type:l.ApplicationCommandOptionType.Channel,channel_types:this.channelTypes}}};var F=class extends de{constructor(){super(le.ApplicationCommandOptionType.Channel);i(this,"type",le.ApplicationCommandOptionType.Channel)}};var he=s(__nccwpck_require__(8453));var c=s(__nccwpck_require__(8453)),u=s(__nccwpck_require__(870));var ce=u.default.string.minLength(1).maxLength(100),Ne=u.default.number.finite,mt=u.default.array.ofType(u.default.array.exactShape([ce,u.default.any(u.default.string,Ne)])),g=class extends d{constructor(){super(...arguments);i(this,"choices")}addChoice(e,n){return this.choices??=[],se(this.choices),(0,u.default)(e,`${ue[this.type]} choice name`,ce),this.type===c.ApplicationCommandOptionType.String?(0,u.default)(n,"string choice value",ce):(0,u.default)(n,`${ue[this.type]} choice value`,Ne),this.choices.push({name:e,value:n}),this}addChoices(e){(0,u.default)(e,`${ue[this.type]} choices`,mt);for(let[n,o]of e)this.addChoice(n,o);return this}toJSON(){return{...super.toJSON(),choices:this.choices}}},ue={[c.ApplicationCommandOptionType.Subcommand]:"subcommand",[c.ApplicationCommandOptionType.SubcommandGroup]:"subcommand group",[c.ApplicationCommandOptionType.String]:"string",[c.ApplicationCommandOptionType.Integer]:"integer",[c.ApplicationCommandOptionType.Boolean]:"boolean",[c.ApplicationCommandOptionType.User]:"user",[c.ApplicationCommandOptionType.Channel]:"channel",[c.ApplicationCommandOptionType.Role]:"role",[c.ApplicationCommandOptionType.Mentionable]:"mentionable",[c.ApplicationCommandOptionType.Number]:"number"};var J=class extends g{constructor(){super(he.ApplicationCommandOptionType.Integer);i(this,"type",he.ApplicationCommandOptionType.Integer)}};var Ce=s(__nccwpck_require__(8453));var q=class extends d{constructor(){super(Ce.ApplicationCommandOptionType.Mentionable);i(this,"type",Ce.ApplicationCommandOptionType.Mentionable)}};var fe=s(__nccwpck_require__(8453));var V=class extends g{constructor(){super(fe.ApplicationCommandOptionType.Number);i(this,"type",fe.ApplicationCommandOptionType.Number)}};var be=s(__nccwpck_require__(8453));var W=class extends d{constructor(){super(be.ApplicationCommandOptionType.Role);i(this,"type",be.ApplicationCommandOptionType.Role)}};var xe=s(__nccwpck_require__(8453));var j=class extends g{constructor(){super(xe.ApplicationCommandOptionType.String);i(this,"type",xe.ApplicationCommandOptionType.String)}};var ye=s(__nccwpck_require__(8453));var z=class extends d{constructor(){super(ye.ApplicationCommandOptionType.User);i(this,"type",ye.ApplicationCommandOptionType.User)}};var w=class{constructor(){i(this,"options")}addBooleanOption(e){return this._sharedAddOptionMethod(e,G)}addUserOption(e){return this._sharedAddOptionMethod(e,z)}addChannelOption(e){return this._sharedAddOptionMethod(e,F)}addRoleOption(e){return this._sharedAddOptionMethod(e,W)}addMentionableOption(e){return this._sharedAddOptionMethod(e,q)}addStringOption(e){return this._sharedAddOptionMethod(e,j)}addIntegerOption(e){return this._sharedAddOptionMethod(e,J)}addNumberOption(e){return this._sharedAddOptionMethod(e,V)}_sharedAddOptionMethod(e,n){let{options:o}=this;C(o);let p=typeof e=="function"?e(new n):e;return y(p,n),o.push(p),this}};var Se=s(__nccwpck_require__(8453)),ge=s(__nccwpck_require__(8599));var O=class{constructor(){i(this,"name");i(this,"description");i(this,"options",[])}addSubcommand(e){let{options:n}=this;C(n);let o=typeof e=="function"?e(new f):e;return y(o,f),n.push(o),this}toJSON(){return x(this.name,this.description,this.options),{type:Se.ApplicationCommandOptionType.SubcommandGroup,name:this.name,description:this.description,options:this.options.map(e=>e.toJSON())}}};O=I([(0,ge.mix)(S)],O);var f=class{constructor(){i(this,"name");i(this,"description");i(this,"options",[])}toJSON(){return x(this.name,this.description,this.options),{type:Se.ApplicationCommandOptionType.Subcommand,name:this.name,description:this.description,options:this.options.map(e=>e.toJSON())}}};f=I([(0,ge.mix)(S,w)],f);var K=class{constructor(){i(this,"name");i(this,"description");i(this,"options",[]);i(this,"defaultPermission")}toJSON(){return x(this.name,this.description,this.options),{name:this.name,description:this.description,options:this.options.map(e=>e.toJSON()),default_permission:this.defaultPermission}}setDefaultPermission(e){return re(e),Reflect.set(this,"defaultPermission",e),this}addSubcommandGroup(e){let{options:n}=this;C(n);let o=typeof e=="function"?e(new O):e;return y(o,O),n.push(o),this}addSubcommand(e){let{options:n}=this;C(n);let o=typeof e=="function"?e(new f):e;return y(o,f),n.push(o),this}};K=I([(0,we.mix)(w,S)],K);var Te={};L(Te,{validateDefaultPermission:()=>Pe,validateName:()=>Q,validateRequiredParameters:()=>Ae,validateType:()=>H});var A=s(__nccwpck_require__(870)),Oe=s(__nccwpck_require__(8453));function Ae(t,e){Q(t),H(e)}var pt=A.default.string.minLength(1).maxLength(32).matches(/^( *[\p{L}\p{N}_-]+ *)+$/u);function Q(t){(0,A.default)(t,"name",pt)}var dt=A.default.number.oneOf([Oe.ApplicationCommandType.User,Oe.ApplicationCommandType.Message]);function H(t){(0,A.default)(t,"type",dt)}var lt=A.default.boolean;function Pe(t){(0,A.default)(t,"default_permission",lt)}var Le=class{constructor(){i(this,"name");i(this,"type");i(this,"defaultPermission")}setName(e){return Q(e),Reflect.set(this,"name",e),this}setType(e){return H(e),Reflect.set(this,"type",e),this}setDefaultPermission(e){return Pe(e),Reflect.set(this,"defaultPermission",e),this}toJSON(){return Ae(this.name,this.type),{name:this.name,type:this.type,default_permission:this.defaultPermission}}};0&&(0);
+${e}\`\`\``}function Ge(t){return`\`${t}\``}function Fe(t){return`_${t}_`}function Je(t){return`**${t}**`}function qe(t){return`__${t}__`}function Ve(t){return`~~${t}~~`}function We(t){return`> ${t}`}function je(t){return`>>> ${t}`}function ze(t){return`<${t}>`}function Ke(t,e,n){return n?`[${t}](${e} "${n}")`:`[${t}](${e})`}function Qe(t){return`||${t}||`}function He(t){return`<@${t}>`}function Xe(t){return`<@!${t}>`}function Ye(t){return`<#${t}>`}function Ze(t){return`<@&${t}>`}function et(t,e=!1){return`<${e?"a":""}:_:${t}>`}function tt(t,e){return typeof t!="number"&&(t=Math.floor((t?.getTime()??Date.now())/1e3)),typeof e=="string"?`<t:${t}:${e}>`:`<t:${t}>`}var nt={ShortTime:"t",LongTime:"T",ShortDate:"d",LongDate:"D",ShortDateTime:"f",LongDateTime:"F",RelativeTime:"R"},oe;(function(o){o.Shrug="\xAF\\_(\u30C4)\\_/\xAF",o.Tableflip="(\u256F\xB0\u25A1\xB0\uFF09\u256F\uFE35 \u253B\u2501\u253B",o.Unflip="\u252C\u2500\u252C \u30CE( \u309C-\u309C\u30CE)"})(oe||(oe={}));var ae={};L(ae,{assertReturnOfBuilder:()=>y,validateDefaultPermission:()=>re,validateDescription:()=>U,validateMaxChoicesLength:()=>se,validateMaxOptionsLength:()=>C,validateName:()=>k,validateRequiredParameters:()=>x});var _=s(__nccwpck_require__(3052)),h=s(__nccwpck_require__(870));function x(t,e,n){k(t),U(e),C(n)}var it=h.default.string.lowercase.minLength(1).maxLength(32).addValidator({message:(t,e)=>`Expected ${e} to match "^[\\p{L}\\p{N}_-]+$", got ${t} instead`,validator:t=>/^[\p{L}\p{N}_-]+$/u.test(t)});function k(t){(0,h.default)(t,"name",it)}var ot=h.default.string.minLength(1).maxLength(100);function U(t){(0,h.default)(t,"description",ot)}var rt=h.default.boolean;function re(t){(0,h.default)(t,"default_permission",rt)}var Be=h.default.array.maxLength(25);function C(t){(0,h.default)(t,"options",Be)}function se(t){(0,h.default)(t,"choices",Be)}function y(t,e){let n=e.name;if(_.default.nullOrUndefined(t))throw new TypeError(`Expected to receive a ${n} builder, got ${t===null?"null":"undefined"} instead.`);if(_.default.primitive(t))throw new TypeError(`Expected to receive a ${n} builder, got a primitive (${typeof t}) instead.`);if(!(t instanceof e)){let o=t,p=_.default.function_(t)?t.name:o.constructor.name,P=Reflect.get(o,Symbol.toStringTag),$=P?`${p} [${P}]`:p;throw new TypeError(`Expected to receive a ${n} builder, got ${$} instead.`)}}var we=s(__nccwpck_require__(8599));var me=s(__nccwpck_require__(6634));var N=s(__nccwpck_require__(870));var S=class{constructor(){i(this,"name");i(this,"description")}setName(e){return k(e),Reflect.set(this,"name",e),this}setDescription(e){return U(e),Reflect.set(this,"description",e),this}};var d=class extends S{constructor(e){super();i(this,"required",!1);i(this,"type");this.type=e}setRequired(e){return(0,N.default)(e,"required",N.default.boolean),this.required=e,this}toJSON(){return x(this.name,this.description,[]),(0,N.default)(this.required,"required",N.default.boolean),{type:this.type,name:this.name,description:this.description,required:this.required}}};var G=class extends d{constructor(){super(me.ApplicationCommandOptionType.Boolean);i(this,"type",me.ApplicationCommandOptionType.Boolean)}};var le=s(__nccwpck_require__(6634));var l=s(__nccwpck_require__(6634)),pe=s(__nccwpck_require__(870));var st=[l.ChannelType.GuildCategory,l.ChannelType.GuildNews,l.ChannelType.GuildNewsThread,l.ChannelType.GuildStore,l.ChannelType.GuildStageVoice,l.ChannelType.GuildText,l.ChannelType.GuildVoice,l.ChannelType.GuildPublicThread,l.ChannelType.GuildPrivateThread],at=pe.default.number.oneOf(st),de=class extends d{constructor(){super(...arguments);i(this,"channelTypes")}addChannelType(e){return this.channelTypes??=[],(0,pe.default)(e,"channel type",at),this.channelTypes.push(e),this}addChannelTypes(e){return e.forEach(n=>this.addChannelType(n)),this}toJSON(){return{...super.toJSON(),type:l.ApplicationCommandOptionType.Channel,channel_types:this.channelTypes}}};var F=class extends de{constructor(){super(le.ApplicationCommandOptionType.Channel);i(this,"type",le.ApplicationCommandOptionType.Channel)}};var he=s(__nccwpck_require__(6634));var c=s(__nccwpck_require__(6634)),u=s(__nccwpck_require__(870));var ce=u.default.string.minLength(1).maxLength(100),Ne=u.default.number.finite,mt=u.default.array.ofType(u.default.array.exactShape([ce,u.default.any(u.default.string,Ne)])),g=class extends d{constructor(){super(...arguments);i(this,"choices")}addChoice(e,n){return this.choices??=[],se(this.choices),(0,u.default)(e,`${ue[this.type]} choice name`,ce),this.type===c.ApplicationCommandOptionType.String?(0,u.default)(n,"string choice value",ce):(0,u.default)(n,`${ue[this.type]} choice value`,Ne),this.choices.push({name:e,value:n}),this}addChoices(e){(0,u.default)(e,`${ue[this.type]} choices`,mt);for(let[n,o]of e)this.addChoice(n,o);return this}toJSON(){return{...super.toJSON(),choices:this.choices}}},ue={[c.ApplicationCommandOptionType.Subcommand]:"subcommand",[c.ApplicationCommandOptionType.SubcommandGroup]:"subcommand group",[c.ApplicationCommandOptionType.String]:"string",[c.ApplicationCommandOptionType.Integer]:"integer",[c.ApplicationCommandOptionType.Boolean]:"boolean",[c.ApplicationCommandOptionType.User]:"user",[c.ApplicationCommandOptionType.Channel]:"channel",[c.ApplicationCommandOptionType.Role]:"role",[c.ApplicationCommandOptionType.Mentionable]:"mentionable",[c.ApplicationCommandOptionType.Number]:"number"};var J=class extends g{constructor(){super(he.ApplicationCommandOptionType.Integer);i(this,"type",he.ApplicationCommandOptionType.Integer)}};var Ce=s(__nccwpck_require__(6634));var q=class extends d{constructor(){super(Ce.ApplicationCommandOptionType.Mentionable);i(this,"type",Ce.ApplicationCommandOptionType.Mentionable)}};var fe=s(__nccwpck_require__(6634));var V=class extends g{constructor(){super(fe.ApplicationCommandOptionType.Number);i(this,"type",fe.ApplicationCommandOptionType.Number)}};var be=s(__nccwpck_require__(6634));var W=class extends d{constructor(){super(be.ApplicationCommandOptionType.Role);i(this,"type",be.ApplicationCommandOptionType.Role)}};var xe=s(__nccwpck_require__(6634));var j=class extends g{constructor(){super(xe.ApplicationCommandOptionType.String);i(this,"type",xe.ApplicationCommandOptionType.String)}};var ye=s(__nccwpck_require__(6634));var z=class extends d{constructor(){super(ye.ApplicationCommandOptionType.User);i(this,"type",ye.ApplicationCommandOptionType.User)}};var w=class{constructor(){i(this,"options")}addBooleanOption(e){return this._sharedAddOptionMethod(e,G)}addUserOption(e){return this._sharedAddOptionMethod(e,z)}addChannelOption(e){return this._sharedAddOptionMethod(e,F)}addRoleOption(e){return this._sharedAddOptionMethod(e,W)}addMentionableOption(e){return this._sharedAddOptionMethod(e,q)}addStringOption(e){return this._sharedAddOptionMethod(e,j)}addIntegerOption(e){return this._sharedAddOptionMethod(e,J)}addNumberOption(e){return this._sharedAddOptionMethod(e,V)}_sharedAddOptionMethod(e,n){let{options:o}=this;C(o);let p=typeof e=="function"?e(new n):e;return y(p,n),o.push(p),this}};var Se=s(__nccwpck_require__(6634)),ge=s(__nccwpck_require__(8599));var O=class{constructor(){i(this,"name");i(this,"description");i(this,"options",[])}addSubcommand(e){let{options:n}=this;C(n);let o=typeof e=="function"?e(new f):e;return y(o,f),n.push(o),this}toJSON(){return x(this.name,this.description,this.options),{type:Se.ApplicationCommandOptionType.SubcommandGroup,name:this.name,description:this.description,options:this.options.map(e=>e.toJSON())}}};O=I([(0,ge.mix)(S)],O);var f=class{constructor(){i(this,"name");i(this,"description");i(this,"options",[])}toJSON(){return x(this.name,this.description,this.options),{type:Se.ApplicationCommandOptionType.Subcommand,name:this.name,description:this.description,options:this.options.map(e=>e.toJSON())}}};f=I([(0,ge.mix)(S,w)],f);var K=class{constructor(){i(this,"name");i(this,"description");i(this,"options",[]);i(this,"defaultPermission")}toJSON(){return x(this.name,this.description,this.options),{name:this.name,description:this.description,options:this.options.map(e=>e.toJSON()),default_permission:this.defaultPermission}}setDefaultPermission(e){return re(e),Reflect.set(this,"defaultPermission",e),this}addSubcommandGroup(e){let{options:n}=this;C(n);let o=typeof e=="function"?e(new O):e;return y(o,O),n.push(o),this}addSubcommand(e){let{options:n}=this;C(n);let o=typeof e=="function"?e(new f):e;return y(o,f),n.push(o),this}};K=I([(0,we.mix)(w,S)],K);var Te={};L(Te,{validateDefaultPermission:()=>Pe,validateName:()=>Q,validateRequiredParameters:()=>Ae,validateType:()=>H});var A=s(__nccwpck_require__(870)),Oe=s(__nccwpck_require__(6634));function Ae(t,e){Q(t),H(e)}var pt=A.default.string.minLength(1).maxLength(32).matches(/^( *[\p{L}\p{N}_-]+ *)+$/u);function Q(t){(0,A.default)(t,"name",pt)}var dt=A.default.number.oneOf([Oe.ApplicationCommandType.User,Oe.ApplicationCommandType.Message]);function H(t){(0,A.default)(t,"type",dt)}var lt=A.default.boolean;function Pe(t){(0,A.default)(t,"default_permission",lt)}var Le=class{constructor(){i(this,"name");i(this,"type");i(this,"defaultPermission")}setName(e){return Q(e),Reflect.set(this,"name",e),this}setType(e){return H(e),Reflect.set(this,"type",e),this}setDefaultPermission(e){return Pe(e),Reflect.set(this,"defaultPermission",e),this}toJSON(){return Ae(this.name,this.type),{name:this.name,type:this.type,default_permission:this.defaultPermission}}};0&&(0);
 //# sourceMappingURL=index.js.map
 
 
 /***/ }),
 
-/***/ 2374:
+/***/ 7585:
 /***/ ((__unused_webpack_module, exports) => {
 
-var u=Object.defineProperty;var f=(o,e,i)=>e in o?u(o,e,{enumerable:!0,configurable:!0,writable:!0,value:i}):o[e]=i;var K=o=>u(o,"__esModule",{value:!0}),h=(o,e)=>u(o,"name",{value:e,configurable:!0});var p=(o,e)=>{K(o);for(var i in e)u(o,i,{get:e[i],enumerable:!0})};var a=(o,e,i)=>(f(o,typeof e!="symbol"?e+"":e,i),i);p(exports,{Collection:()=>s,default:()=>d});var c=class extends Map{hasAll(...e){return e.every(i=>super.has(i))}hasAny(...e){return e.some(i=>super.has(i))}first(e){if(typeof e=="undefined")return this.values().next().value;if(e<0)return this.last(e*-1);e=Math.min(this.size,e);let i=this.values();return Array.from({length:e},()=>i.next().value)}firstKey(e){if(typeof e=="undefined")return this.keys().next().value;if(e<0)return this.lastKey(e*-1);e=Math.min(this.size,e);let i=this.keys();return Array.from({length:e},()=>i.next().value)}last(e){let i=[...this.values()];return typeof e=="undefined"?i[i.length-1]:e<0?this.first(e*-1):e?i.slice(-e):[]}lastKey(e){let i=[...this.keys()];return typeof e=="undefined"?i[i.length-1]:e<0?this.firstKey(e*-1):e?i.slice(-e):[]}at(e=0){return e=Math.floor(e),[...this.values()].at(e)}keyAt(e=0){return e=Math.floor(e),[...this.keys()].at(e)}random(e){let i=[...this.values()];return typeof e=="undefined"?i[Math.floor(Math.random()*i.length)]:!i.length||!e?[]:Array.from({length:Math.min(e,i.length)},()=>i.splice(Math.floor(Math.random()*i.length),1)[0])}randomKey(e){let i=[...this.keys()];return typeof e=="undefined"?i[Math.floor(Math.random()*i.length)]:!i.length||!e?[]:Array.from({length:Math.min(e,i.length)},()=>i.splice(Math.floor(Math.random()*i.length),1)[0])}find(e,i){typeof i!="undefined"&&(e=e.bind(i));for(let[t,n]of this)if(e(n,t,this))return n}findKey(e,i){typeof i!="undefined"&&(e=e.bind(i));for(let[t,n]of this)if(e(n,t,this))return t}sweep(e,i){typeof i!="undefined"&&(e=e.bind(i));let t=this.size;for(let[n,l]of this)e(l,n,this)&&this.delete(n);return t-this.size}filter(e,i){typeof i!="undefined"&&(e=e.bind(i));let t=new this.constructor[Symbol.species];for(let[n,l]of this)e(l,n,this)&&t.set(n,l);return t}partition(e,i){typeof i!="undefined"&&(e=e.bind(i));let t=[new this.constructor[Symbol.species],new this.constructor[Symbol.species]];for(let[n,l]of this)e(l,n,this)?t[0].set(n,l):t[1].set(n,l);return t}flatMap(e,i){let t=this.map(e,i);return new this.constructor[Symbol.species]().concat(...t)}map(e,i){typeof i!="undefined"&&(e=e.bind(i));let t=this.entries();return Array.from({length:this.size},()=>{let[n,l]=t.next().value;return e(l,n,this)})}mapValues(e,i){typeof i!="undefined"&&(e=e.bind(i));let t=new this.constructor[Symbol.species];for(let[n,l]of this)t.set(n,e(l,n,this));return t}some(e,i){typeof i!="undefined"&&(e=e.bind(i));for(let[t,n]of this)if(e(n,t,this))return!0;return!1}every(e,i){typeof i!="undefined"&&(e=e.bind(i));for(let[t,n]of this)if(!e(n,t,this))return!1;return!0}reduce(e,i){let t;if(typeof i!="undefined"){t=i;for(let[l,r]of this)t=e(t,r,l,this);return t}let n=!0;for(let[l,r]of this){if(n){t=r,n=!1;continue}t=e(t,r,l,this)}if(n)throw new TypeError("Reduce of empty collection with no initial value");return t}each(e,i){return this.forEach(e,i),this}tap(e,i){return typeof i!="undefined"&&(e=e.bind(i)),e(this),this}clone(){return new this.constructor[Symbol.species](this)}concat(...e){let i=this.clone();for(let t of e)for(let[n,l]of t)i.set(n,l);return i}equals(e){if(!e)return!1;if(this===e)return!0;if(this.size!==e.size)return!1;for(let[i,t]of this)if(!e.has(i)||t!==e.get(i))return!1;return!0}sort(e=c.defaultSort){let i=[...this.entries()];i.sort((t,n)=>e(t[1],n[1],t[0],n[0])),super.clear();for(let[t,n]of i)super.set(t,n);return this}intersect(e){let i=new this.constructor[Symbol.species];for(let[t,n]of e)this.has(t)&&i.set(t,n);return i}difference(e){let i=new this.constructor[Symbol.species];for(let[t,n]of e)this.has(t)||i.set(t,n);for(let[t,n]of this)e.has(t)||i.set(t,n);return i}sorted(e=c.defaultSort){return new this.constructor[Symbol.species](this).sort((i,t,n,l)=>e(i,t,n,l))}toJSON(){return[...this.values()]}static defaultSort(e,i){return Number(e>i)||Number(e===i)-1}},s=c;h(s,"Collection"),a(s,"default",c);var d=s;0&&(0);
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+//# sourceMappingURL=common.js.map
+
+/***/ }),
+
+/***/ 8174:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+/**
+ * Types extracted from https://discord.com/developers/docs/topics/gateway
+ */
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.GatewayDispatchEvents = exports.GatewayIntentBits = exports.GatewayCloseCodes = exports.GatewayOpcodes = exports.GatewayVersion = void 0;
+__exportStar(__nccwpck_require__(7585), exports);
+exports.GatewayVersion = '9';
+/**
+ * https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-opcodes
+ */
+var GatewayOpcodes;
+(function (GatewayOpcodes) {
+    /**
+     * An event was dispatched
+     */
+    GatewayOpcodes[GatewayOpcodes["Dispatch"] = 0] = "Dispatch";
+    /**
+     * A bidirectional opcode to maintain an active gateway connection.
+     * Fired periodically by the client, or fired by the gateway to request an immediate heartbeat from the client.
+     */
+    GatewayOpcodes[GatewayOpcodes["Heartbeat"] = 1] = "Heartbeat";
+    /**
+     * Starts a new session during the initial handshake
+     */
+    GatewayOpcodes[GatewayOpcodes["Identify"] = 2] = "Identify";
+    /**
+     * Update the client's presence
+     */
+    GatewayOpcodes[GatewayOpcodes["PresenceUpdate"] = 3] = "PresenceUpdate";
+    /**
+     * Used to join/leave or move between voice channels
+     */
+    GatewayOpcodes[GatewayOpcodes["VoiceStateUpdate"] = 4] = "VoiceStateUpdate";
+    /**
+     * Resume a previous session that was disconnected
+     */
+    GatewayOpcodes[GatewayOpcodes["Resume"] = 6] = "Resume";
+    /**
+     * You should attempt to reconnect and resume immediately
+     */
+    GatewayOpcodes[GatewayOpcodes["Reconnect"] = 7] = "Reconnect";
+    /**
+     * Request information about offline guild members in a large guild
+     */
+    GatewayOpcodes[GatewayOpcodes["RequestGuildMembers"] = 8] = "RequestGuildMembers";
+    /**
+     * The session has been invalidated. You should reconnect and identify/resume accordingly
+     */
+    GatewayOpcodes[GatewayOpcodes["InvalidSession"] = 9] = "InvalidSession";
+    /**
+     * Sent immediately after connecting, contains the `heartbeat_interval` to use
+     */
+    GatewayOpcodes[GatewayOpcodes["Hello"] = 10] = "Hello";
+    /**
+     * Sent in response to receiving a heartbeat to acknowledge that it has been received
+     */
+    GatewayOpcodes[GatewayOpcodes["HeartbeatAck"] = 11] = "HeartbeatAck";
+})(GatewayOpcodes = exports.GatewayOpcodes || (exports.GatewayOpcodes = {}));
+/**
+ * https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-close-event-codes
+ */
+var GatewayCloseCodes;
+(function (GatewayCloseCodes) {
+    /**
+     * We're not sure what went wrong. Try reconnecting?
+     */
+    GatewayCloseCodes[GatewayCloseCodes["UnknownError"] = 4000] = "UnknownError";
+    /**
+     * You sent an invalid Gateway opcode or an invalid payload for an opcode. Don't do that!
+     *
+     * See https://discord.com/developers/docs/topics/gateway#payloads-and-opcodes
+     */
+    GatewayCloseCodes[GatewayCloseCodes["UnknownOpcode"] = 4001] = "UnknownOpcode";
+    /**
+     * You sent an invalid payload to us. Don't do that!
+     *
+     * See https://discord.com/developers/docs/topics/gateway#sending-payloads
+     */
+    GatewayCloseCodes[GatewayCloseCodes["DecodeError"] = 4002] = "DecodeError";
+    /**
+     * You sent us a payload prior to identifying
+     *
+     * See https://discord.com/developers/docs/topics/gateway#identify
+     */
+    GatewayCloseCodes[GatewayCloseCodes["NotAuthenticated"] = 4003] = "NotAuthenticated";
+    /**
+     * The account token sent with your identify payload is incorrect
+     *
+     * See https://discord.com/developers/docs/topics/gateway#identify
+     */
+    GatewayCloseCodes[GatewayCloseCodes["AuthenticationFailed"] = 4004] = "AuthenticationFailed";
+    /**
+     * You sent more than one identify payload. Don't do that!
+     */
+    GatewayCloseCodes[GatewayCloseCodes["AlreadyAuthenticated"] = 4005] = "AlreadyAuthenticated";
+    /**
+     * The sequence sent when resuming the session was invalid. Reconnect and start a new session
+     *
+     * See https://discord.com/developers/docs/topics/gateway#resume
+     */
+    GatewayCloseCodes[GatewayCloseCodes["InvalidSeq"] = 4007] = "InvalidSeq";
+    /**
+     * Woah nelly! You're sending payloads to us too quickly. Slow it down! You will be disconnected on receiving this
+     */
+    GatewayCloseCodes[GatewayCloseCodes["RateLimited"] = 4008] = "RateLimited";
+    /**
+     * Your session timed out. Reconnect and start a new one
+     */
+    GatewayCloseCodes[GatewayCloseCodes["SessionTimedOut"] = 4009] = "SessionTimedOut";
+    /**
+     * You sent us an invalid shard when identifying
+     *
+     * See https://discord.com/developers/docs/topics/gateway#sharding
+     */
+    GatewayCloseCodes[GatewayCloseCodes["InvalidShard"] = 4010] = "InvalidShard";
+    /**
+     * The session would have handled too many guilds - you are required to shard your connection in order to connect
+     *
+     * See https://discord.com/developers/docs/topics/gateway#sharding
+     */
+    GatewayCloseCodes[GatewayCloseCodes["ShardingRequired"] = 4011] = "ShardingRequired";
+    /**
+     * You sent an invalid version for the gateway
+     */
+    GatewayCloseCodes[GatewayCloseCodes["InvalidAPIVersion"] = 4012] = "InvalidAPIVersion";
+    /**
+     * You sent an invalid intent for a Gateway Intent. You may have incorrectly calculated the bitwise value
+     *
+     * See https://discord.com/developers/docs/topics/gateway#gateway-intents
+     */
+    GatewayCloseCodes[GatewayCloseCodes["InvalidIntents"] = 4013] = "InvalidIntents";
+    /**
+     * You sent a disallowed intent for a Gateway Intent. You may have tried to specify an intent that you have not
+     * enabled or are not whitelisted for
+     *
+     * See https://discord.com/developers/docs/topics/gateway#gateway-intents
+     *
+     * See https://discord.com/developers/docs/topics/gateway#privileged-intents
+     */
+    GatewayCloseCodes[GatewayCloseCodes["DisallowedIntents"] = 4014] = "DisallowedIntents";
+})(GatewayCloseCodes = exports.GatewayCloseCodes || (exports.GatewayCloseCodes = {}));
+/**
+ * https://discord.com/developers/docs/topics/gateway#list-of-intents
+ */
+var GatewayIntentBits;
+(function (GatewayIntentBits) {
+    GatewayIntentBits[GatewayIntentBits["Guilds"] = 1] = "Guilds";
+    GatewayIntentBits[GatewayIntentBits["GuildMembers"] = 2] = "GuildMembers";
+    GatewayIntentBits[GatewayIntentBits["GuildBans"] = 4] = "GuildBans";
+    GatewayIntentBits[GatewayIntentBits["GuildEmojisAndStickers"] = 8] = "GuildEmojisAndStickers";
+    GatewayIntentBits[GatewayIntentBits["GuildIntegrations"] = 16] = "GuildIntegrations";
+    GatewayIntentBits[GatewayIntentBits["GuildWebhooks"] = 32] = "GuildWebhooks";
+    GatewayIntentBits[GatewayIntentBits["GuildInvites"] = 64] = "GuildInvites";
+    GatewayIntentBits[GatewayIntentBits["GuildVoiceStates"] = 128] = "GuildVoiceStates";
+    GatewayIntentBits[GatewayIntentBits["GuildPresences"] = 256] = "GuildPresences";
+    GatewayIntentBits[GatewayIntentBits["GuildMessages"] = 512] = "GuildMessages";
+    GatewayIntentBits[GatewayIntentBits["GuildMessageReactions"] = 1024] = "GuildMessageReactions";
+    GatewayIntentBits[GatewayIntentBits["GuildMessageTyping"] = 2048] = "GuildMessageTyping";
+    GatewayIntentBits[GatewayIntentBits["DirectMessages"] = 4096] = "DirectMessages";
+    GatewayIntentBits[GatewayIntentBits["DirectMessageReactions"] = 8192] = "DirectMessageReactions";
+    GatewayIntentBits[GatewayIntentBits["DirectMessageTyping"] = 16384] = "DirectMessageTyping";
+})(GatewayIntentBits = exports.GatewayIntentBits || (exports.GatewayIntentBits = {}));
+/**
+ * https://discord.com/developers/docs/topics/gateway#commands-and-events-gateway-events
+ */
+var GatewayDispatchEvents;
+(function (GatewayDispatchEvents) {
+    GatewayDispatchEvents["ChannelCreate"] = "CHANNEL_CREATE";
+    GatewayDispatchEvents["ChannelDelete"] = "CHANNEL_DELETE";
+    GatewayDispatchEvents["ChannelPinsUpdate"] = "CHANNEL_PINS_UPDATE";
+    GatewayDispatchEvents["ChannelUpdate"] = "CHANNEL_UPDATE";
+    GatewayDispatchEvents["GuildBanAdd"] = "GUILD_BAN_ADD";
+    GatewayDispatchEvents["GuildBanRemove"] = "GUILD_BAN_REMOVE";
+    GatewayDispatchEvents["GuildCreate"] = "GUILD_CREATE";
+    GatewayDispatchEvents["GuildDelete"] = "GUILD_DELETE";
+    GatewayDispatchEvents["GuildEmojisUpdate"] = "GUILD_EMOJIS_UPDATE";
+    GatewayDispatchEvents["GuildIntegrationsUpdate"] = "GUILD_INTEGRATIONS_UPDATE";
+    GatewayDispatchEvents["GuildMemberAdd"] = "GUILD_MEMBER_ADD";
+    GatewayDispatchEvents["GuildMemberRemove"] = "GUILD_MEMBER_REMOVE";
+    GatewayDispatchEvents["GuildMembersChunk"] = "GUILD_MEMBERS_CHUNK";
+    GatewayDispatchEvents["GuildMemberUpdate"] = "GUILD_MEMBER_UPDATE";
+    GatewayDispatchEvents["GuildRoleCreate"] = "GUILD_ROLE_CREATE";
+    GatewayDispatchEvents["GuildRoleDelete"] = "GUILD_ROLE_DELETE";
+    GatewayDispatchEvents["GuildRoleUpdate"] = "GUILD_ROLE_UPDATE";
+    GatewayDispatchEvents["GuildStickersUpdate"] = "GUILD_STICKERS_UPDATE";
+    GatewayDispatchEvents["GuildUpdate"] = "GUILD_UPDATE";
+    GatewayDispatchEvents["IntegrationCreate"] = "INTEGRATION_CREATE";
+    GatewayDispatchEvents["IntegrationDelete"] = "INTEGRATION_DELETE";
+    GatewayDispatchEvents["IntegrationUpdate"] = "INTEGRATION_UPDATE";
+    GatewayDispatchEvents["InteractionCreate"] = "INTERACTION_CREATE";
+    GatewayDispatchEvents["InviteCreate"] = "INVITE_CREATE";
+    GatewayDispatchEvents["InviteDelete"] = "INVITE_DELETE";
+    GatewayDispatchEvents["MessageCreate"] = "MESSAGE_CREATE";
+    GatewayDispatchEvents["MessageDelete"] = "MESSAGE_DELETE";
+    GatewayDispatchEvents["MessageDeleteBulk"] = "MESSAGE_DELETE_BULK";
+    GatewayDispatchEvents["MessageReactionAdd"] = "MESSAGE_REACTION_ADD";
+    GatewayDispatchEvents["MessageReactionRemove"] = "MESSAGE_REACTION_REMOVE";
+    GatewayDispatchEvents["MessageReactionRemoveAll"] = "MESSAGE_REACTION_REMOVE_ALL";
+    GatewayDispatchEvents["MessageReactionRemoveEmoji"] = "MESSAGE_REACTION_REMOVE_EMOJI";
+    GatewayDispatchEvents["MessageUpdate"] = "MESSAGE_UPDATE";
+    GatewayDispatchEvents["PresenceUpdate"] = "PRESENCE_UPDATE";
+    GatewayDispatchEvents["StageInstanceCreate"] = "STAGE_INSTANCE_CREATE";
+    GatewayDispatchEvents["StageInstanceDelete"] = "STAGE_INSTANCE_DELETE";
+    GatewayDispatchEvents["StageInstanceUpdate"] = "STAGE_INSTANCE_UPDATE";
+    GatewayDispatchEvents["Ready"] = "READY";
+    GatewayDispatchEvents["Resumed"] = "RESUMED";
+    GatewayDispatchEvents["ThreadCreate"] = "THREAD_CREATE";
+    GatewayDispatchEvents["ThreadDelete"] = "THREAD_DELETE";
+    GatewayDispatchEvents["ThreadListSync"] = "THREAD_LIST_SYNC";
+    GatewayDispatchEvents["ThreadMembersUpdate"] = "THREAD_MEMBERS_UPDATE";
+    GatewayDispatchEvents["ThreadMemberUpdate"] = "THREAD_MEMBER_UPDATE";
+    GatewayDispatchEvents["ThreadUpdate"] = "THREAD_UPDATE";
+    GatewayDispatchEvents["TypingStart"] = "TYPING_START";
+    GatewayDispatchEvents["UserUpdate"] = "USER_UPDATE";
+    GatewayDispatchEvents["VoiceServerUpdate"] = "VOICE_SERVER_UPDATE";
+    GatewayDispatchEvents["VoiceStateUpdate"] = "VOICE_STATE_UPDATE";
+    GatewayDispatchEvents["WebhooksUpdate"] = "WEBHOOKS_UPDATE";
+})(GatewayDispatchEvents = exports.GatewayDispatchEvents || (exports.GatewayDispatchEvents = {}));
+// #endregion Shared
+//# sourceMappingURL=v9.js.map
+
+/***/ }),
+
+/***/ 9352:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.FormattingPatterns = void 0;
+/**
+ * https://discord.com/developers/docs/reference#message-formatting-formats
+ */
+exports.FormattingPatterns = {
+    /**
+     * Regular expression for matching a user mention, strictly without a nickname
+     *
+     * The `id` group property is present on the `exec` result of this expression
+     */
+    User: /<@(?<id>\d{17,20})>/,
+    /**
+     * Regular expression for matching a user mention, strictly with a nickname
+     *
+     * The `id` group property is present on the `exec` result of this expression
+     */
+    UserWithNickname: /<@!(?<id>\d{17,20})>/,
+    /**
+     * Regular expression for matching a user mention, with or without a nickname
+     *
+     * The `id` group property is present on the `exec` result of this expression
+     */
+    UserWithOptionalNickname: /<@!?(?<id>\d{17,20})>/,
+    /**
+     * Regular expression for matching a channel mention
+     *
+     * The `id` group property is present on the `exec` result of this expression
+     */
+    Channel: /<#(?<id>\d{17,20})>/,
+    /**
+     * Regular expression for matching a role mention
+     *
+     * The `id` group property is present on the `exec` result of this expression
+     */
+    Role: /<@&(?<id>\d{17,20})>/,
+    /**
+     * Regular expression for matching a custom emoji, either static or animated
+     *
+     * The `animated`, `name` and `id` group properties are present on the `exec` result of this expression
+     */
+    Emoji: /<(?<animated>a)?:(?<name>\w{2,32}):(?<id>\d{17,20})>/,
+    /**
+     * Regular expression for matching strictly an animated custom emoji
+     *
+     * The `animated`, `name` and `id` group properties are present on the `exec` result of this expression
+     */
+    AnimatedEmoji: /<(?<animated>a):(?<name>\w{2,32}):(?<id>\d{17,20})>/,
+    /**
+     * Regular expression for matching strictly a static custom emoji
+     *
+     * The `name` and `id` group properties are present on the `exec` result of this expression
+     */
+    StaticEmoji: /<:(?<name>\w{2,32}):(?<id>\d{17,20})>/,
+    /**
+     * Regular expression for matching a timestamp, either default or custom styled
+     *
+     * The `timestamp` and `style` group properties are present on the `exec` result of this expression
+     */
+    Timestamp: /<t:(?<timestamp>-?\d{1,13})(:(?<style>[tTdDfFR]))?>/,
+    /**
+     * Regular expression for matching strictly default styled timestamps
+     *
+     * The `timestamp` group property is present on the `exec` result of this expression
+     */
+    DefaultStyledTimestamp: /<t:(?<timestamp>-?\d{1,13})>/,
+    /**
+     * Regular expression for matching strictly custom styled timestamps
+     *
+     * The `timestamp` and `style` group properties are present on the `exec` result of this expression
+     */
+    StyledTimestamp: /<t:(?<timestamp>-?\d{1,13}):(?<style>[tTdDfFR])>/,
+};
+/**
+ * Freezes the formatting patterns
+ * @internal
+ */
+Object.freeze(exports.FormattingPatterns);
+//# sourceMappingURL=globals.js.map
+
+/***/ }),
+
+/***/ 880:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ApplicationCommandOptionType = void 0;
+/**
+ * https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-option-type
+ */
+var ApplicationCommandOptionType;
+(function (ApplicationCommandOptionType) {
+    ApplicationCommandOptionType[ApplicationCommandOptionType["Subcommand"] = 1] = "Subcommand";
+    ApplicationCommandOptionType[ApplicationCommandOptionType["SubcommandGroup"] = 2] = "SubcommandGroup";
+    ApplicationCommandOptionType[ApplicationCommandOptionType["String"] = 3] = "String";
+    ApplicationCommandOptionType[ApplicationCommandOptionType["Integer"] = 4] = "Integer";
+    ApplicationCommandOptionType[ApplicationCommandOptionType["Boolean"] = 5] = "Boolean";
+    ApplicationCommandOptionType[ApplicationCommandOptionType["User"] = 6] = "User";
+    ApplicationCommandOptionType[ApplicationCommandOptionType["Channel"] = 7] = "Channel";
+    ApplicationCommandOptionType[ApplicationCommandOptionType["Role"] = 8] = "Role";
+    ApplicationCommandOptionType[ApplicationCommandOptionType["Mentionable"] = 9] = "Mentionable";
+    ApplicationCommandOptionType[ApplicationCommandOptionType["Number"] = 10] = "Number";
+})(ApplicationCommandOptionType = exports.ApplicationCommandOptionType || (exports.ApplicationCommandOptionType = {}));
+//# sourceMappingURL=chatInput.js.map
+
+/***/ }),
+
+/***/ 9970:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+//# sourceMappingURL=contextMenu.js.map
+
+/***/ }),
+
+/***/ 1462:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ApplicationCommandPermissionType = void 0;
+/**
+ * https://discord.com/developers/docs/interactions/application-commands#application-command-permissions-object-application-command-permission-type
+ */
+var ApplicationCommandPermissionType;
+(function (ApplicationCommandPermissionType) {
+    ApplicationCommandPermissionType[ApplicationCommandPermissionType["Role"] = 1] = "Role";
+    ApplicationCommandPermissionType[ApplicationCommandPermissionType["User"] = 2] = "User";
+})(ApplicationCommandPermissionType = exports.ApplicationCommandPermissionType || (exports.ApplicationCommandPermissionType = {}));
+//# sourceMappingURL=permissions.js.map
+
+/***/ }),
+
+/***/ 2818:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ApplicationCommandType = void 0;
+__exportStar(__nccwpck_require__(880), exports);
+__exportStar(__nccwpck_require__(9970), exports);
+__exportStar(__nccwpck_require__(1462), exports);
+/**
+ * https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-types
+ */
+var ApplicationCommandType;
+(function (ApplicationCommandType) {
+    ApplicationCommandType[ApplicationCommandType["ChatInput"] = 1] = "ChatInput";
+    ApplicationCommandType[ApplicationCommandType["User"] = 2] = "User";
+    ApplicationCommandType[ApplicationCommandType["Message"] = 3] = "Message";
+})(ApplicationCommandType = exports.ApplicationCommandType || (exports.ApplicationCommandType = {}));
+//# sourceMappingURL=applicationCommands.js.map
+
+/***/ }),
+
+/***/ 3804:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+//# sourceMappingURL=base.js.map
+
+/***/ }),
+
+/***/ 6039:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+//# sourceMappingURL=messageComponents.js.map
+
+/***/ }),
+
+/***/ 1295:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+//# sourceMappingURL=ping.js.map
+
+/***/ }),
+
+/***/ 6468:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.InteractionResponseType = exports.InteractionType = void 0;
+/**
+ * https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-type
+ */
+var InteractionType;
+(function (InteractionType) {
+    InteractionType[InteractionType["Ping"] = 1] = "Ping";
+    InteractionType[InteractionType["ApplicationCommand"] = 2] = "ApplicationCommand";
+    InteractionType[InteractionType["MessageComponent"] = 3] = "MessageComponent";
+})(InteractionType = exports.InteractionType || (exports.InteractionType = {}));
+/**
+ * https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-callback-type
+ */
+var InteractionResponseType;
+(function (InteractionResponseType) {
+    /**
+     * ACK a `Ping`
+     */
+    InteractionResponseType[InteractionResponseType["Pong"] = 1] = "Pong";
+    /**
+     * Respond to an interaction with a message
+     */
+    InteractionResponseType[InteractionResponseType["ChannelMessageWithSource"] = 4] = "ChannelMessageWithSource";
+    /**
+     * ACK an interaction and edit to a response later, the user sees a loading state
+     */
+    InteractionResponseType[InteractionResponseType["DeferredChannelMessageWithSource"] = 5] = "DeferredChannelMessageWithSource";
+    /**
+     * ACK a button interaction and update it to a loading state
+     */
+    InteractionResponseType[InteractionResponseType["DeferredMessageUpdate"] = 6] = "DeferredMessageUpdate";
+    /**
+     * ACK a button interaction and edit the message to which the button was attached
+     */
+    InteractionResponseType[InteractionResponseType["UpdateMessage"] = 7] = "UpdateMessage";
+})(InteractionResponseType = exports.InteractionResponseType || (exports.InteractionResponseType = {}));
+//# sourceMappingURL=responses.js.map
+
+/***/ }),
+
+/***/ 9927:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+/**
+ * Types extracted from https://discord.com/developers/docs/resources/application
+ */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ApplicationFlags = void 0;
+/**
+ * https://discord.com/developers/docs/resources/application#application-object-application-flags
+ */
+var ApplicationFlags;
+(function (ApplicationFlags) {
+    ApplicationFlags[ApplicationFlags["ManagedEmoji"] = 4] = "ManagedEmoji";
+    ApplicationFlags[ApplicationFlags["GroupDMCreate"] = 16] = "GroupDMCreate";
+    ApplicationFlags[ApplicationFlags["RPCHasConnected"] = 2048] = "RPCHasConnected";
+    ApplicationFlags[ApplicationFlags["GatewayPresence"] = 4096] = "GatewayPresence";
+    ApplicationFlags[ApplicationFlags["GatewayPresenceLimited"] = 8192] = "GatewayPresenceLimited";
+    ApplicationFlags[ApplicationFlags["GatewayGuildMembers"] = 16384] = "GatewayGuildMembers";
+    ApplicationFlags[ApplicationFlags["GatewayGuildMembersLimited"] = 32768] = "GatewayGuildMembersLimited";
+    ApplicationFlags[ApplicationFlags["VerificationPendingGuildLimit"] = 65536] = "VerificationPendingGuildLimit";
+    ApplicationFlags[ApplicationFlags["Embedded"] = 131072] = "Embedded";
+})(ApplicationFlags = exports.ApplicationFlags || (exports.ApplicationFlags = {}));
+//# sourceMappingURL=application.js.map
+
+/***/ }),
+
+/***/ 6822:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+/**
+ * Types extracted from https://discord.com/developers/docs/resources/audit-log
+ */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AuditLogOptionsType = exports.AuditLogEvent = void 0;
+/**
+ * https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-audit-log-events
+ */
+var AuditLogEvent;
+(function (AuditLogEvent) {
+    AuditLogEvent[AuditLogEvent["GuildUpdate"] = 1] = "GuildUpdate";
+    AuditLogEvent[AuditLogEvent["ChannelCreate"] = 10] = "ChannelCreate";
+    AuditLogEvent[AuditLogEvent["ChannelUpdate"] = 11] = "ChannelUpdate";
+    AuditLogEvent[AuditLogEvent["ChannelDelete"] = 12] = "ChannelDelete";
+    AuditLogEvent[AuditLogEvent["ChannelOverwriteCreate"] = 13] = "ChannelOverwriteCreate";
+    AuditLogEvent[AuditLogEvent["ChannelOverwriteUpdate"] = 14] = "ChannelOverwriteUpdate";
+    AuditLogEvent[AuditLogEvent["ChannelOverwriteDelete"] = 15] = "ChannelOverwriteDelete";
+    AuditLogEvent[AuditLogEvent["MemberKick"] = 20] = "MemberKick";
+    AuditLogEvent[AuditLogEvent["MemberPrune"] = 21] = "MemberPrune";
+    AuditLogEvent[AuditLogEvent["MemberBanAdd"] = 22] = "MemberBanAdd";
+    AuditLogEvent[AuditLogEvent["MemberBanRemove"] = 23] = "MemberBanRemove";
+    AuditLogEvent[AuditLogEvent["MemberUpdate"] = 24] = "MemberUpdate";
+    AuditLogEvent[AuditLogEvent["MemberRoleUpdate"] = 25] = "MemberRoleUpdate";
+    AuditLogEvent[AuditLogEvent["MemberMove"] = 26] = "MemberMove";
+    AuditLogEvent[AuditLogEvent["MemberDisconnect"] = 27] = "MemberDisconnect";
+    AuditLogEvent[AuditLogEvent["BotAdd"] = 28] = "BotAdd";
+    AuditLogEvent[AuditLogEvent["RoleCreate"] = 30] = "RoleCreate";
+    AuditLogEvent[AuditLogEvent["RoleUpdate"] = 31] = "RoleUpdate";
+    AuditLogEvent[AuditLogEvent["RoleDelete"] = 32] = "RoleDelete";
+    AuditLogEvent[AuditLogEvent["InviteCreate"] = 40] = "InviteCreate";
+    AuditLogEvent[AuditLogEvent["InviteUpdate"] = 41] = "InviteUpdate";
+    AuditLogEvent[AuditLogEvent["InviteDelete"] = 42] = "InviteDelete";
+    AuditLogEvent[AuditLogEvent["WebhookCreate"] = 50] = "WebhookCreate";
+    AuditLogEvent[AuditLogEvent["WebhookUpdate"] = 51] = "WebhookUpdate";
+    AuditLogEvent[AuditLogEvent["WebhookDelete"] = 52] = "WebhookDelete";
+    AuditLogEvent[AuditLogEvent["EmojiCreate"] = 60] = "EmojiCreate";
+    AuditLogEvent[AuditLogEvent["EmojiUpdate"] = 61] = "EmojiUpdate";
+    AuditLogEvent[AuditLogEvent["EmojiDelete"] = 62] = "EmojiDelete";
+    AuditLogEvent[AuditLogEvent["MessageDelete"] = 72] = "MessageDelete";
+    AuditLogEvent[AuditLogEvent["MessageBulkDelete"] = 73] = "MessageBulkDelete";
+    AuditLogEvent[AuditLogEvent["MessagePin"] = 74] = "MessagePin";
+    AuditLogEvent[AuditLogEvent["MessageUnpin"] = 75] = "MessageUnpin";
+    AuditLogEvent[AuditLogEvent["IntegrationCreate"] = 80] = "IntegrationCreate";
+    AuditLogEvent[AuditLogEvent["IntegrationUpdate"] = 81] = "IntegrationUpdate";
+    AuditLogEvent[AuditLogEvent["IntegrationDelete"] = 82] = "IntegrationDelete";
+    AuditLogEvent[AuditLogEvent["StageInstanceCreate"] = 83] = "StageInstanceCreate";
+    AuditLogEvent[AuditLogEvent["StageInstanceUpdate"] = 84] = "StageInstanceUpdate";
+    AuditLogEvent[AuditLogEvent["StageInstanceDelete"] = 85] = "StageInstanceDelete";
+    AuditLogEvent[AuditLogEvent["StickerCreate"] = 90] = "StickerCreate";
+    AuditLogEvent[AuditLogEvent["StickerUpdate"] = 91] = "StickerUpdate";
+    AuditLogEvent[AuditLogEvent["StickerDelete"] = 92] = "StickerDelete";
+    AuditLogEvent[AuditLogEvent["ThreadCreate"] = 110] = "ThreadCreate";
+    AuditLogEvent[AuditLogEvent["ThreadUpdate"] = 111] = "ThreadUpdate";
+    AuditLogEvent[AuditLogEvent["ThreadDelete"] = 112] = "ThreadDelete";
+})(AuditLogEvent = exports.AuditLogEvent || (exports.AuditLogEvent = {}));
+var AuditLogOptionsType;
+(function (AuditLogOptionsType) {
+    AuditLogOptionsType["Role"] = "0";
+    AuditLogOptionsType["Member"] = "1";
+})(AuditLogOptionsType = exports.AuditLogOptionsType || (exports.AuditLogOptionsType = {}));
+//# sourceMappingURL=auditLog.js.map
+
+/***/ }),
+
+/***/ 6677:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+/**
+ * Types extracted from https://discord.com/developers/docs/resources/channel
+ */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ButtonStyle = exports.ComponentType = exports.AllowedMentionsTypes = exports.EmbedType = exports.ThreadMemberFlags = exports.ThreadAutoArchiveDuration = exports.OverwriteType = exports.MessageFlags = exports.MessageActivityType = exports.MessageType = exports.VideoQualityMode = exports.ChannelType = void 0;
+/**
+ * https://discord.com/developers/docs/resources/channel#channel-object-channel-types
+ */
+var ChannelType;
+(function (ChannelType) {
+    /**
+     * A text channel within a guild
+     */
+    ChannelType[ChannelType["GuildText"] = 0] = "GuildText";
+    /**
+     * A direct message between users
+     */
+    ChannelType[ChannelType["DM"] = 1] = "DM";
+    /**
+     * A voice channel within a guild
+     */
+    ChannelType[ChannelType["GuildVoice"] = 2] = "GuildVoice";
+    /**
+     * A direct message between multiple users
+     */
+    ChannelType[ChannelType["GroupDM"] = 3] = "GroupDM";
+    /**
+     * An organizational category that contains up to 50 channels
+     *
+     * See https://support.discord.com/hc/en-us/articles/115001580171-Channel-Categories-101
+     */
+    ChannelType[ChannelType["GuildCategory"] = 4] = "GuildCategory";
+    /**
+     * A channel that users can follow and crosspost into their own guild
+     *
+     * See https://support.discord.com/hc/en-us/articles/360032008192
+     */
+    ChannelType[ChannelType["GuildNews"] = 5] = "GuildNews";
+    /**
+     * A channel in which game developers can sell their game on Discord
+     *
+     * See https://discord.com/developers/docs/game-and-server-management/special-channels
+     */
+    ChannelType[ChannelType["GuildStore"] = 6] = "GuildStore";
+    /**
+     * A thread channel (public) within a Guild News channel
+     */
+    ChannelType[ChannelType["GuildNewsThread"] = 10] = "GuildNewsThread";
+    /**
+     * A public thread channel within a Guild Text channel
+     */
+    ChannelType[ChannelType["GuildPublicThread"] = 11] = "GuildPublicThread";
+    /**
+     * A private thread channel within a Guild Text channel
+     */
+    ChannelType[ChannelType["GuildPrivateThread"] = 12] = "GuildPrivateThread";
+    /**
+     * A voice channel for hosting events with an audience
+     *
+     * See https://support.discord.com/hc/en-us/articles/1500005513722
+     */
+    ChannelType[ChannelType["GuildStageVoice"] = 13] = "GuildStageVoice";
+})(ChannelType = exports.ChannelType || (exports.ChannelType = {}));
+var VideoQualityMode;
+(function (VideoQualityMode) {
+    /**
+     * Discord chooses the quality for optimal performance
+     */
+    VideoQualityMode[VideoQualityMode["Auto"] = 1] = "Auto";
+    /**
+     * 720p
+     */
+    VideoQualityMode[VideoQualityMode["Full"] = 2] = "Full";
+})(VideoQualityMode = exports.VideoQualityMode || (exports.VideoQualityMode = {}));
+/**
+ * https://discord.com/developers/docs/resources/channel#message-object-message-types
+ */
+var MessageType;
+(function (MessageType) {
+    MessageType[MessageType["Default"] = 0] = "Default";
+    MessageType[MessageType["RecipientAdd"] = 1] = "RecipientAdd";
+    MessageType[MessageType["RecipientRemove"] = 2] = "RecipientRemove";
+    MessageType[MessageType["Call"] = 3] = "Call";
+    MessageType[MessageType["ChannelNameChange"] = 4] = "ChannelNameChange";
+    MessageType[MessageType["ChannelIconChange"] = 5] = "ChannelIconChange";
+    MessageType[MessageType["ChannelPinnedMessage"] = 6] = "ChannelPinnedMessage";
+    MessageType[MessageType["GuildMemberJoin"] = 7] = "GuildMemberJoin";
+    MessageType[MessageType["UserPremiumGuildSubscription"] = 8] = "UserPremiumGuildSubscription";
+    MessageType[MessageType["UserPremiumGuildSubscriptionTier1"] = 9] = "UserPremiumGuildSubscriptionTier1";
+    MessageType[MessageType["UserPremiumGuildSubscriptionTier2"] = 10] = "UserPremiumGuildSubscriptionTier2";
+    MessageType[MessageType["UserPremiumGuildSubscriptionTier3"] = 11] = "UserPremiumGuildSubscriptionTier3";
+    MessageType[MessageType["ChannelFollowAdd"] = 12] = "ChannelFollowAdd";
+    MessageType[MessageType["GuildDiscoveryDisqualified"] = 14] = "GuildDiscoveryDisqualified";
+    MessageType[MessageType["GuildDiscoveryRequalified"] = 15] = "GuildDiscoveryRequalified";
+    MessageType[MessageType["GuildDiscoveryGracePeriodInitialWarning"] = 16] = "GuildDiscoveryGracePeriodInitialWarning";
+    MessageType[MessageType["GuildDiscoveryGracePeriodFinalWarning"] = 17] = "GuildDiscoveryGracePeriodFinalWarning";
+    MessageType[MessageType["ThreadCreated"] = 18] = "ThreadCreated";
+    MessageType[MessageType["Reply"] = 19] = "Reply";
+    MessageType[MessageType["ChatInputCommand"] = 20] = "ChatInputCommand";
+    MessageType[MessageType["ThreadStarterMessage"] = 21] = "ThreadStarterMessage";
+    MessageType[MessageType["GuildInviteReminder"] = 22] = "GuildInviteReminder";
+    MessageType[MessageType["ContextMenuCommand"] = 23] = "ContextMenuCommand";
+})(MessageType = exports.MessageType || (exports.MessageType = {}));
+/**
+ * https://discord.com/developers/docs/resources/channel#message-object-message-activity-types
+ */
+var MessageActivityType;
+(function (MessageActivityType) {
+    MessageActivityType[MessageActivityType["Join"] = 1] = "Join";
+    MessageActivityType[MessageActivityType["Spectate"] = 2] = "Spectate";
+    MessageActivityType[MessageActivityType["Listen"] = 3] = "Listen";
+    MessageActivityType[MessageActivityType["JoinRequest"] = 5] = "JoinRequest";
+})(MessageActivityType = exports.MessageActivityType || (exports.MessageActivityType = {}));
+/**
+ * https://discord.com/developers/docs/resources/channel#message-object-message-flags
+ */
+var MessageFlags;
+(function (MessageFlags) {
+    /**
+     * This message has been published to subscribed channels (via Channel Following)
+     */
+    MessageFlags[MessageFlags["Crossposted"] = 1] = "Crossposted";
+    /**
+     * This message originated from a message in another channel (via Channel Following)
+     */
+    MessageFlags[MessageFlags["IsCrosspost"] = 2] = "IsCrosspost";
+    /**
+     * Do not include any embeds when serializing this message
+     */
+    MessageFlags[MessageFlags["SuppressEmbeds"] = 4] = "SuppressEmbeds";
+    /**
+     * The source message for this crosspost has been deleted (via Channel Following)
+     */
+    MessageFlags[MessageFlags["SourceMessageDeleted"] = 8] = "SourceMessageDeleted";
+    /**
+     * This message came from the urgent message system
+     */
+    MessageFlags[MessageFlags["Urgent"] = 16] = "Urgent";
+    /**
+     * This message has an associated thread, which shares its id
+     */
+    MessageFlags[MessageFlags["HasThread"] = 32] = "HasThread";
+    /**
+     * This message is only visible to the user who invoked the Interaction
+     */
+    MessageFlags[MessageFlags["Ephemeral"] = 64] = "Ephemeral";
+    /**
+     * This message is an Interaction Response and the bot is "thinking"
+     */
+    MessageFlags[MessageFlags["Loading"] = 128] = "Loading";
+})(MessageFlags = exports.MessageFlags || (exports.MessageFlags = {}));
+var OverwriteType;
+(function (OverwriteType) {
+    OverwriteType[OverwriteType["Role"] = 0] = "Role";
+    OverwriteType[OverwriteType["Member"] = 1] = "Member";
+})(OverwriteType = exports.OverwriteType || (exports.OverwriteType = {}));
+var ThreadAutoArchiveDuration;
+(function (ThreadAutoArchiveDuration) {
+    ThreadAutoArchiveDuration[ThreadAutoArchiveDuration["OneHour"] = 60] = "OneHour";
+    ThreadAutoArchiveDuration[ThreadAutoArchiveDuration["OneDay"] = 1440] = "OneDay";
+    ThreadAutoArchiveDuration[ThreadAutoArchiveDuration["ThreeDays"] = 4320] = "ThreeDays";
+    ThreadAutoArchiveDuration[ThreadAutoArchiveDuration["OneWeek"] = 10080] = "OneWeek";
+})(ThreadAutoArchiveDuration = exports.ThreadAutoArchiveDuration || (exports.ThreadAutoArchiveDuration = {}));
+var ThreadMemberFlags;
+(function (ThreadMemberFlags) {
+})(ThreadMemberFlags = exports.ThreadMemberFlags || (exports.ThreadMemberFlags = {}));
+/**
+ * https://discord.com/developers/docs/resources/channel#embed-object-embed-types
+ * @deprecated *Embed types should be considered deprecated and might be removed in a future API version*
+ */
+var EmbedType;
+(function (EmbedType) {
+    /**
+     * Generic embed rendered from embed attributes
+     */
+    EmbedType["Rich"] = "rich";
+    /**
+     * Image embed
+     */
+    EmbedType["Image"] = "image";
+    /**
+     * Video embed
+     */
+    EmbedType["Video"] = "video";
+    /**
+     * Animated gif image embed rendered as a video embed
+     */
+    EmbedType["GIFV"] = "gifv";
+    /**
+     * Article embed
+     */
+    EmbedType["Article"] = "article";
+    /**
+     * Link embed
+     */
+    EmbedType["Link"] = "link";
+})(EmbedType = exports.EmbedType || (exports.EmbedType = {}));
+/**
+ * https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mention-types
+ */
+var AllowedMentionsTypes;
+(function (AllowedMentionsTypes) {
+    /**
+     * Controls @everyone and @here mentions
+     */
+    AllowedMentionsTypes["Everyone"] = "everyone";
+    /**
+     * Controls role mentions
+     */
+    AllowedMentionsTypes["Role"] = "roles";
+    /**
+     * Controls user mentions
+     */
+    AllowedMentionsTypes["User"] = "users";
+})(AllowedMentionsTypes = exports.AllowedMentionsTypes || (exports.AllowedMentionsTypes = {}));
+/**
+ * https://discord.com/developers/docs/interactions/message-components#component-types
+ */
+var ComponentType;
+(function (ComponentType) {
+    /**
+     * Action Row component
+     */
+    ComponentType[ComponentType["ActionRow"] = 1] = "ActionRow";
+    /**
+     * Button component
+     */
+    ComponentType[ComponentType["Button"] = 2] = "Button";
+    /**
+     * Select Menu component
+     */
+    ComponentType[ComponentType["SelectMenu"] = 3] = "SelectMenu";
+})(ComponentType = exports.ComponentType || (exports.ComponentType = {}));
+/**
+ * https://discord.com/developers/docs/interactions/message-components#button-object-button-styles
+ */
+var ButtonStyle;
+(function (ButtonStyle) {
+    ButtonStyle[ButtonStyle["Primary"] = 1] = "Primary";
+    ButtonStyle[ButtonStyle["Secondary"] = 2] = "Secondary";
+    ButtonStyle[ButtonStyle["Success"] = 3] = "Success";
+    ButtonStyle[ButtonStyle["Danger"] = 4] = "Danger";
+    ButtonStyle[ButtonStyle["Link"] = 5] = "Link";
+})(ButtonStyle = exports.ButtonStyle || (exports.ButtonStyle = {}));
+//# sourceMappingURL=channel.js.map
+
+/***/ }),
+
+/***/ 7840:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+/**
+ * Types extracted from https://discord.com/developers/docs/resources/emoji
+ */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+//# sourceMappingURL=emoji.js.map
+
+/***/ }),
+
+/***/ 4353:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+/**
+ * Types extracted from https://discord.com/developers/docs/topics/gateway
+ */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ActivityFlags = exports.ActivityType = exports.ActivityPlatform = exports.PresenceUpdateStatus = void 0;
+var PresenceUpdateStatus;
+(function (PresenceUpdateStatus) {
+    PresenceUpdateStatus["Online"] = "online";
+    PresenceUpdateStatus["DoNotDisturb"] = "dnd";
+    PresenceUpdateStatus["Idle"] = "idle";
+    /**
+     * Invisible and shown as offline
+     */
+    PresenceUpdateStatus["Invisible"] = "invisible";
+    PresenceUpdateStatus["Offline"] = "offline";
+})(PresenceUpdateStatus = exports.PresenceUpdateStatus || (exports.PresenceUpdateStatus = {}));
+var ActivityPlatform;
+(function (ActivityPlatform) {
+    ActivityPlatform["Desktop"] = "desktop";
+    ActivityPlatform["Samsung"] = "samsung";
+    ActivityPlatform["Xbox"] = "xbox";
+})(ActivityPlatform = exports.ActivityPlatform || (exports.ActivityPlatform = {}));
+/**
+ * https://discord.com/developers/docs/topics/gateway#activity-object-activity-types
+ */
+var ActivityType;
+(function (ActivityType) {
+    /**
+     * Playing {game}
+     */
+    ActivityType[ActivityType["Game"] = 0] = "Game";
+    /**
+     * Streaming {details}
+     */
+    ActivityType[ActivityType["Streaming"] = 1] = "Streaming";
+    /**
+     * Listening to {name}
+     */
+    ActivityType[ActivityType["Listening"] = 2] = "Listening";
+    /**
+     * Watching {details}
+     */
+    ActivityType[ActivityType["Watching"] = 3] = "Watching";
+    /**
+     * {emoji} {details}
+     */
+    ActivityType[ActivityType["Custom"] = 4] = "Custom";
+    /**
+     * Competing in {name}
+     */
+    ActivityType[ActivityType["Competing"] = 5] = "Competing";
+})(ActivityType = exports.ActivityType || (exports.ActivityType = {}));
+/**
+ * https://discord.com/developers/docs/topics/gateway#activity-object-activity-flags
+ */
+var ActivityFlags;
+(function (ActivityFlags) {
+    ActivityFlags[ActivityFlags["Instance"] = 1] = "Instance";
+    ActivityFlags[ActivityFlags["Join"] = 2] = "Join";
+    ActivityFlags[ActivityFlags["Spectate"] = 4] = "Spectate";
+    ActivityFlags[ActivityFlags["JoinRequest"] = 8] = "JoinRequest";
+    ActivityFlags[ActivityFlags["Sync"] = 16] = "Sync";
+    ActivityFlags[ActivityFlags["Play"] = 32] = "Play";
+})(ActivityFlags = exports.ActivityFlags || (exports.ActivityFlags = {}));
+//# sourceMappingURL=gateway.js.map
+
+/***/ }),
+
+/***/ 7665:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+/**
+ * Types extracted from https://discord.com/developers/docs/resources/guild
+ */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.MembershipScreeningFieldType = exports.GuildWidgetStyle = exports.IntegrationExpireBehavior = exports.GuildFeature = exports.GuildSystemChannelFlags = exports.GuildPremiumTier = exports.GuildVerificationLevel = exports.GuildNSFWLevel = exports.GuildMFALevel = exports.GuildExplicitContentFilter = exports.GuildDefaultMessageNotifications = void 0;
+/**
+ * https://discord.com/developers/docs/resources/guild#guild-object-default-message-notification-level
+ */
+var GuildDefaultMessageNotifications;
+(function (GuildDefaultMessageNotifications) {
+    GuildDefaultMessageNotifications[GuildDefaultMessageNotifications["AllMessages"] = 0] = "AllMessages";
+    GuildDefaultMessageNotifications[GuildDefaultMessageNotifications["OnlyMentions"] = 1] = "OnlyMentions";
+})(GuildDefaultMessageNotifications = exports.GuildDefaultMessageNotifications || (exports.GuildDefaultMessageNotifications = {}));
+/**
+ * https://discord.com/developers/docs/resources/guild#guild-object-explicit-content-filter-level
+ */
+var GuildExplicitContentFilter;
+(function (GuildExplicitContentFilter) {
+    GuildExplicitContentFilter[GuildExplicitContentFilter["Disabled"] = 0] = "Disabled";
+    GuildExplicitContentFilter[GuildExplicitContentFilter["MembersWithoutRoles"] = 1] = "MembersWithoutRoles";
+    GuildExplicitContentFilter[GuildExplicitContentFilter["AllMembers"] = 2] = "AllMembers";
+})(GuildExplicitContentFilter = exports.GuildExplicitContentFilter || (exports.GuildExplicitContentFilter = {}));
+/**
+ * https://discord.com/developers/docs/resources/guild#guild-object-mfa-level
+ */
+var GuildMFALevel;
+(function (GuildMFALevel) {
+    GuildMFALevel[GuildMFALevel["None"] = 0] = "None";
+    GuildMFALevel[GuildMFALevel["Elevated"] = 1] = "Elevated";
+})(GuildMFALevel = exports.GuildMFALevel || (exports.GuildMFALevel = {}));
+/**
+ * https://discord.com/developers/docs/resources/guild#guild-object-guild-nsfw-level
+ */
+var GuildNSFWLevel;
+(function (GuildNSFWLevel) {
+    GuildNSFWLevel[GuildNSFWLevel["Default"] = 0] = "Default";
+    GuildNSFWLevel[GuildNSFWLevel["Explicit"] = 1] = "Explicit";
+    GuildNSFWLevel[GuildNSFWLevel["Safe"] = 2] = "Safe";
+    GuildNSFWLevel[GuildNSFWLevel["AgeRestricted"] = 3] = "AgeRestricted";
+})(GuildNSFWLevel = exports.GuildNSFWLevel || (exports.GuildNSFWLevel = {}));
+/**
+ * https://discord.com/developers/docs/resources/guild#guild-object-verification-level
+ */
+var GuildVerificationLevel;
+(function (GuildVerificationLevel) {
+    /**
+     * Unrestricted
+     */
+    GuildVerificationLevel[GuildVerificationLevel["None"] = 0] = "None";
+    /**
+     * Must have verified email on account
+     */
+    GuildVerificationLevel[GuildVerificationLevel["Low"] = 1] = "Low";
+    /**
+     * Must be registered on Discord for longer than 5 minutes
+     */
+    GuildVerificationLevel[GuildVerificationLevel["Medium"] = 2] = "Medium";
+    /**
+     * Must be a member of the guild for longer than 10 minutes
+     */
+    GuildVerificationLevel[GuildVerificationLevel["High"] = 3] = "High";
+    /**
+     * Must have a verified phone number
+     */
+    GuildVerificationLevel[GuildVerificationLevel["VeryHigh"] = 4] = "VeryHigh";
+})(GuildVerificationLevel = exports.GuildVerificationLevel || (exports.GuildVerificationLevel = {}));
+/**
+ * https://discord.com/developers/docs/resources/guild#guild-object-premium-tier
+ */
+var GuildPremiumTier;
+(function (GuildPremiumTier) {
+    GuildPremiumTier[GuildPremiumTier["None"] = 0] = "None";
+    GuildPremiumTier[GuildPremiumTier["Tier1"] = 1] = "Tier1";
+    GuildPremiumTier[GuildPremiumTier["Tier2"] = 2] = "Tier2";
+    GuildPremiumTier[GuildPremiumTier["Tier3"] = 3] = "Tier3";
+})(GuildPremiumTier = exports.GuildPremiumTier || (exports.GuildPremiumTier = {}));
+/**
+ * https://discord.com/developers/docs/resources/guild#guild-object-system-channel-flags
+ */
+var GuildSystemChannelFlags;
+(function (GuildSystemChannelFlags) {
+    /**
+     * Suppress member join notifications
+     */
+    GuildSystemChannelFlags[GuildSystemChannelFlags["SuppressJoinNotifications"] = 1] = "SuppressJoinNotifications";
+    /**
+     * Suppress server boost notifications
+     */
+    GuildSystemChannelFlags[GuildSystemChannelFlags["SuppressPremiumSubscriptions"] = 2] = "SuppressPremiumSubscriptions";
+    /**
+     * Suppress server setup tips
+     */
+    GuildSystemChannelFlags[GuildSystemChannelFlags["SuppressGuildReminderNotifications"] = 4] = "SuppressGuildReminderNotifications";
+})(GuildSystemChannelFlags = exports.GuildSystemChannelFlags || (exports.GuildSystemChannelFlags = {}));
+/**
+ * https://discord.com/developers/docs/resources/guild#guild-object-guild-features
+ */
+var GuildFeature;
+(function (GuildFeature) {
+    /**
+     * Guild has access to set an animated guild icon
+     */
+    GuildFeature["AnimatedIcon"] = "ANIMATED_ICON";
+    /**
+     * Guild has access to set a guild banner image
+     */
+    GuildFeature["Banner"] = "BANNER";
+    /**
+     * Guild has access to use commerce features (i.e. create store channels)
+     */
+    GuildFeature["Commerce"] = "COMMERCE";
+    /**
+     * Guild can enable welcome screen, Membership Screening and discovery, and receives community updates
+     */
+    GuildFeature["Community"] = "COMMUNITY";
+    /**
+     * Guild is able to be discovered in the directory
+     */
+    GuildFeature["Discoverable"] = "DISCOVERABLE";
+    /**
+     * Guild is able to be featured in the directory
+     */
+    GuildFeature["Featurable"] = "FEATURABLE";
+    /**
+     * Guild has access to set an invite splash background
+     */
+    GuildFeature["InviteSplash"] = "INVITE_SPLASH";
+    /**
+     * Guild has enabled Membership Screening
+     */
+    GuildFeature["MemberVerificationGateEnabled"] = "MEMBER_VERIFICATION_GATE_ENABLED";
+    /**
+     * Guild has enabled monetization
+     */
+    GuildFeature["MonetizationEnabled"] = "MONETIZATION_ENABLED";
+    /**
+     * Guild has increased custom sticker slots
+     */
+    GuildFeature["MoreStickers"] = "MORE_STICKERS";
+    /**
+     * Guild has access to create news channels
+     */
+    GuildFeature["News"] = "NEWS";
+    /**
+     * Guild is partnered
+     */
+    GuildFeature["Partnered"] = "PARTNERED";
+    /**
+     * Guild can be previewed before joining via Membership Screening or the directory
+     */
+    GuildFeature["PreviewEnabled"] = "PREVIEW_ENABLED";
+    /**
+     * Guild has access to create private threads
+     */
+    GuildFeature["PrivateThreads"] = "PRIVATE_THREADS";
+    GuildFeature["RelayEnabled"] = "RELAY_ENABLED";
+    /**
+     * Guild is able to set role icons
+     */
+    GuildFeature["RoleIcons"] = "ROLE_ICONS";
+    /**
+     * Guild has access to the seven day archive time for threads
+     */
+    GuildFeature["SevenDayThreadArchive"] = "SEVEN_DAY_THREAD_ARCHIVE";
+    /**
+     * Guild has access to the three day archive time for threads
+     */
+    GuildFeature["ThreeDayThreadArchive"] = "THREE_DAY_THREAD_ARCHIVE";
+    /**
+     * Guild has enabled ticketed events
+     */
+    GuildFeature["TicketedEventsEnabled"] = "TICKETED_EVENTS_ENABLED";
+    /**
+     * Guild has access to set a vanity URL
+     */
+    GuildFeature["VanityURL"] = "VANITY_URL";
+    /**
+     * Guild is verified
+     */
+    GuildFeature["Verified"] = "VERIFIED";
+    /**
+     * Guild has access to set 384kbps bitrate in voice (previously VIP voice servers)
+     */
+    GuildFeature["VIPRegions"] = "VIP_REGIONS";
+    /**
+     * Guild has enabled the welcome screen
+     */
+    GuildFeature["WelcomeScreenEnabled"] = "WELCOME_SCREEN_ENABLED";
+})(GuildFeature = exports.GuildFeature || (exports.GuildFeature = {}));
+/**
+ * https://discord.com/developers/docs/resources/guild#integration-object-integration-expire-behaviors
+ */
+var IntegrationExpireBehavior;
+(function (IntegrationExpireBehavior) {
+    IntegrationExpireBehavior[IntegrationExpireBehavior["RemoveRole"] = 0] = "RemoveRole";
+    IntegrationExpireBehavior[IntegrationExpireBehavior["Kick"] = 1] = "Kick";
+})(IntegrationExpireBehavior = exports.IntegrationExpireBehavior || (exports.IntegrationExpireBehavior = {}));
+/**
+ * https://discord.com/developers/docs/resources/guild#get-guild-widget-image-widget-style-options
+ */
+var GuildWidgetStyle;
+(function (GuildWidgetStyle) {
+    /**
+     * Shield style widget with Discord icon and guild members online count
+     */
+    GuildWidgetStyle["Shield"] = "shield";
+    /**
+     * Large image with guild icon, name and online count. "POWERED BY DISCORD" as the footer of the widget
+     */
+    GuildWidgetStyle["Banner1"] = "banner1";
+    /**
+     * Smaller widget style with guild icon, name and online count. Split on the right with Discord logo
+     */
+    GuildWidgetStyle["Banner2"] = "banner2";
+    /**
+     * Large image with guild icon, name and online count. In the footer, Discord logo on the left and "Chat Now" on the right
+     */
+    GuildWidgetStyle["Banner3"] = "banner3";
+    /**
+     * Large Discord logo at the top of the widget. Guild icon, name and online count in the middle portion of the widget
+     * and a "JOIN MY SERVER" button at the bottom
+     */
+    GuildWidgetStyle["Banner4"] = "banner4";
+})(GuildWidgetStyle = exports.GuildWidgetStyle || (exports.GuildWidgetStyle = {}));
+var MembershipScreeningFieldType;
+(function (MembershipScreeningFieldType) {
+    /**
+     * Server Rules
+     */
+    MembershipScreeningFieldType["Terms"] = "TERMS";
+})(MembershipScreeningFieldType = exports.MembershipScreeningFieldType || (exports.MembershipScreeningFieldType = {}));
+//# sourceMappingURL=guild.js.map
+
+/***/ }),
+
+/***/ 7178:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+__exportStar(__nccwpck_require__(9927), exports);
+__exportStar(__nccwpck_require__(6822), exports);
+__exportStar(__nccwpck_require__(6677), exports);
+__exportStar(__nccwpck_require__(7840), exports);
+__exportStar(__nccwpck_require__(4353), exports);
+__exportStar(__nccwpck_require__(7665), exports);
+__exportStar(__nccwpck_require__(4175), exports);
+__exportStar(__nccwpck_require__(7909), exports);
+__exportStar(__nccwpck_require__(4757), exports);
+__exportStar(__nccwpck_require__(9962), exports);
+__exportStar(__nccwpck_require__(1126), exports);
+__exportStar(__nccwpck_require__(3659), exports);
+__exportStar(__nccwpck_require__(6066), exports);
+__exportStar(__nccwpck_require__(3029), exports);
+__exportStar(__nccwpck_require__(3903), exports);
+__exportStar(__nccwpck_require__(4153), exports);
+__exportStar(__nccwpck_require__(4968), exports);
 //# sourceMappingURL=index.js.map
 
+/***/ }),
+
+/***/ 4175:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+__exportStar(__nccwpck_require__(3804), exports);
+__exportStar(__nccwpck_require__(6039), exports);
+__exportStar(__nccwpck_require__(1295), exports);
+__exportStar(__nccwpck_require__(6468), exports);
+__exportStar(__nccwpck_require__(2818), exports);
+//# sourceMappingURL=interactions.js.map
+
+/***/ }),
+
+/***/ 7909:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+/**
+ * Types extracted from https://discord.com/developers/docs/resources/invite
+ */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.InviteTargetType = void 0;
+/**
+ * https://discord.com/developers/docs/resources/invite#invite-object-invite-target-types
+ */
+var InviteTargetType;
+(function (InviteTargetType) {
+    InviteTargetType[InviteTargetType["Stream"] = 1] = "Stream";
+    InviteTargetType[InviteTargetType["EmbeddedApplication"] = 2] = "EmbeddedApplication";
+})(InviteTargetType = exports.InviteTargetType || (exports.InviteTargetType = {}));
+//# sourceMappingURL=invite.js.map
+
+/***/ }),
+
+/***/ 4757:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+/**
+ * Types extracted from https://discord.com/developers/docs/topics/oauth2
+ */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.OAuth2Scopes = void 0;
+var OAuth2Scopes;
+(function (OAuth2Scopes) {
+    /**
+     * For oauth2 bots, this puts the bot in the user's selected guild by default
+     */
+    OAuth2Scopes["Bot"] = "bot";
+    /**
+     * Allows [/users/@me/connections](https://discord.com/developers/docs/resources/user#get-user-connections)
+     * to return linked third-party accounts
+     *
+     * See https://discord.com/developers/docs/resources/user#get-user-connections
+     */
+    OAuth2Scopes["Connections"] = "connections";
+    /**
+     * Enables [/users/@me](https://discord.com/developers/docs/resources/user#get-current-user) to return an `email`
+     *
+     * See https://discord.com/developers/docs/resources/user#get-current-user
+     */
+    OAuth2Scopes["Email"] = "email";
+    /**
+     * Allows [/users/@me](https://discord.com/developers/docs/resources/user#get-current-user) without `email`
+     *
+     * See https://discord.com/developers/docs/resources/user#get-current-user
+     */
+    OAuth2Scopes["Identify"] = "identify";
+    /**
+     * Allows [/users/@me/guilds](https://discord.com/developers/docs/resources/user#get-current-user-guilds)
+     * to return basic information about all of a user's guilds
+     *
+     * See https://discord.com/developers/docs/resources/user#get-current-user-guilds
+     */
+    OAuth2Scopes["Guilds"] = "guilds";
+    /**
+     * Allows [/guilds/{guild.id}/members/{user.id}](https://discord.com/developers/docs/resources/guild#add-guild-member)
+     * to be used for joining users to a guild
+     *
+     * See https://discord.com/developers/docs/resources/guild#add-guild-member
+     */
+    OAuth2Scopes["GuildsJoin"] = "guilds.join";
+    /**
+     * Allows your app to join users to a group dm
+     *
+     * See https://discord.com/developers/docs/resources/channel#group-dm-add-recipient
+     */
+    OAuth2Scopes["GroupDMJoins"] = "gdm.join";
+    /**
+     * For local rpc server api access, this allows you to read messages from all client channels
+     * (otherwise restricted to channels/guilds your app creates)
+     */
+    OAuth2Scopes["MessagesRead"] = "messages.read";
+    /**
+     * For local rpc server access, this allows you to control a user's local Discord client - requires Discord approval
+     */
+    OAuth2Scopes["RPC"] = "rpc";
+    /**
+     * For local rpc server api access, this allows you to receive notifications pushed out to the user - requires Discord approval
+     */
+    OAuth2Scopes["RPCNotificationsRead"] = "rpc.notifications.read";
+    /**
+     * This generates a webhook that is returned in the oauth token response for authorization code grants
+     */
+    OAuth2Scopes["WebhookIncoming"] = "webhook.incoming";
+    /**
+     * Allows your app to upload/update builds for a user's applications - requires Discord approval
+     */
+    OAuth2Scopes["ApplicationsBuildsUpload"] = "applications.builds.upload";
+    /**
+     * Allows your app to read build data for a user's applications
+     */
+    OAuth2Scopes["ApplicationsBuildsRead"] = "applications.builds.read";
+    /**
+     * Allows your app to read and update store data (SKUs, store listings, achievements, etc.) for a user's applications
+     */
+    OAuth2Scopes["ApplicationsStoreUpdate"] = "applications.store.update";
+    /**
+     * Allows your app to read entitlements for a user's applications
+     */
+    OAuth2Scopes["ApplicationsEntitlements"] = "applications.entitlements";
+    /**
+     * Allows your app to know a user's friends and implicit relationships - requires Discord approval
+     */
+    OAuth2Scopes["RelationshipsRead"] = "relationships.read";
+    /**
+     * Allows your app to fetch data from a user's "Now Playing/Recently Played" list - requires Discord approval
+     */
+    OAuth2Scopes["ActivitiesRead"] = "activities.read";
+    /**
+     * Allows your app to update a user's activity - requires Discord approval (NOT REQUIRED FOR GAMESDK ACTIVITY MANAGER)
+     *
+     * See https://discord.com/developers/docs/game-sdk/activities
+     */
+    OAuth2Scopes["ActivitiesWrite"] = "activities.write";
+    /**
+     * Allows your app to use Application Commands in a guild
+     *
+     * See https://discord.com/developers/docs/interactions/application-commands
+     */
+    OAuth2Scopes["ApplicationsCommands"] = "applications.commands";
+    /**
+     * Allows your app to update its Application Commands via this bearer token - client credentials grant only
+     *
+     * See https://discord.com/developers/docs/interactions/application-commands
+     */
+    OAuth2Scopes["ApplicationsCommandsUpdate"] = "applications.commands.update";
+})(OAuth2Scopes = exports.OAuth2Scopes || (exports.OAuth2Scopes = {}));
+//# sourceMappingURL=oauth2.js.map
+
+/***/ }),
+
+/***/ 9962:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+/**
+ * Types extracted from https://discord.com/developers/docs/topics/permissions
+ */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PermissionFlagsBits = void 0;
+/**
+ * https://discord.com/developers/docs/topics/permissions#permissions-bitwise-permission-flags
+ *
+ * These flags are exported as `BigInt`s and NOT numbers. Wrapping them in `Number()`
+ * may cause issues, try to use BigInts as much as possible or modules that can
+ * replicate them in some way
+ */
+exports.PermissionFlagsBits = {
+    CreateInstantInvite: 1n << 0n,
+    KickMembers: 1n << 1n,
+    BanMembers: 1n << 2n,
+    Administrator: 1n << 3n,
+    ManageChannels: 1n << 4n,
+    ManageGuild: 1n << 5n,
+    AddReactions: 1n << 6n,
+    ViewAuditLog: 1n << 7n,
+    PrioritySpeaker: 1n << 8n,
+    Stream: 1n << 9n,
+    ViewChannel: 1n << 10n,
+    SendMessages: 1n << 11n,
+    SendTTSMessages: 1n << 12n,
+    ManageMessages: 1n << 13n,
+    EmbedLinks: 1n << 14n,
+    AttachFiles: 1n << 15n,
+    ReadMessageHistory: 1n << 16n,
+    MentionEveryone: 1n << 17n,
+    UseExternalEmojis: 1n << 18n,
+    ViewGuildInsights: 1n << 19n,
+    Connect: 1n << 20n,
+    Speak: 1n << 21n,
+    MuteMembers: 1n << 22n,
+    DeafenMembers: 1n << 23n,
+    MoveMembers: 1n << 24n,
+    UseVAD: 1n << 25n,
+    ChangeNickname: 1n << 26n,
+    ManageNicknames: 1n << 27n,
+    ManageRoles: 1n << 28n,
+    ManageWebhooks: 1n << 29n,
+    ManageEmojisAndStickers: 1n << 30n,
+    UseApplicationCommands: 1n << 31n,
+    RequestToSpeak: 1n << 32n,
+    ManageThreads: 1n << 34n,
+    CreatePublicThreads: 1n << 35n,
+    CreatePrivateThreads: 1n << 36n,
+    UseExternalStickers: 1n << 37n,
+    SendMessagesInThreads: 1n << 38n,
+    StartEmbeddedActivities: 1n << 39n,
+};
+/**
+ * Freeze the object of bits, preventing any modifications to it
+ * @internal
+ */
+Object.freeze(exports.PermissionFlagsBits);
+//# sourceMappingURL=permissions.js.map
+
+/***/ }),
+
+/***/ 1126:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.StageInstancePrivacyLevel = void 0;
+/**
+ * https://discord.com/developers/docs/resources/stage-instance#stage-instance-object-privacy-level
+ */
+var StageInstancePrivacyLevel;
+(function (StageInstancePrivacyLevel) {
+    /**
+     * The stage instance is visible publicly, such as on stage discovery
+     */
+    StageInstancePrivacyLevel[StageInstancePrivacyLevel["Public"] = 1] = "Public";
+    /**
+     * The stage instance is visible to only guild members
+     */
+    StageInstancePrivacyLevel[StageInstancePrivacyLevel["GuildOnly"] = 2] = "GuildOnly";
+})(StageInstancePrivacyLevel = exports.StageInstancePrivacyLevel || (exports.StageInstancePrivacyLevel = {}));
+//# sourceMappingURL=stageInstance.js.map
+
+/***/ }),
+
+/***/ 3659:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+/**
+ * Types extracted from https://discord.com/developers/docs/resources/sticker
+ */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.StickerFormatType = exports.StickerType = void 0;
+/**
+ * https://discord.com/developers/docs/resources/sticker#sticker-object-sticker-types
+ */
+var StickerType;
+(function (StickerType) {
+    /**
+     * An official sticker in a pack, part of Nitro or in a removed purchasable pack
+     */
+    StickerType[StickerType["Standard"] = 1] = "Standard";
+    /**
+     * A sticker uploaded to a Boosted guild for the guild's members
+     */
+    StickerType[StickerType["Guild"] = 2] = "Guild";
+})(StickerType = exports.StickerType || (exports.StickerType = {}));
+/**
+ * https://discord.com/developers/docs/resources/sticker#sticker-object-sticker-format-types
+ */
+var StickerFormatType;
+(function (StickerFormatType) {
+    StickerFormatType[StickerFormatType["PNG"] = 1] = "PNG";
+    StickerFormatType[StickerFormatType["APNG"] = 2] = "APNG";
+    StickerFormatType[StickerFormatType["Lottie"] = 3] = "Lottie";
+})(StickerFormatType = exports.StickerFormatType || (exports.StickerFormatType = {}));
+//# sourceMappingURL=sticker.js.map
+
+/***/ }),
+
+/***/ 6066:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+/**
+ * Types extracted from https://discord.com/developers/docs/topics/teams
+ */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.TeamMemberMembershipState = void 0;
+/**
+ * https://discord.com/developers/docs/topics/teams#data-models-membership-state-enum
+ */
+var TeamMemberMembershipState;
+(function (TeamMemberMembershipState) {
+    TeamMemberMembershipState[TeamMemberMembershipState["Invited"] = 1] = "Invited";
+    TeamMemberMembershipState[TeamMemberMembershipState["Accepted"] = 2] = "Accepted";
+})(TeamMemberMembershipState = exports.TeamMemberMembershipState || (exports.TeamMemberMembershipState = {}));
+//# sourceMappingURL=teams.js.map
+
+/***/ }),
+
+/***/ 3029:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+/**
+ * Types extracted from https://discord.com/developers/docs/resources/template
+ */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+//# sourceMappingURL=template.js.map
+
+/***/ }),
+
+/***/ 3903:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+/**
+ * Types extracted from https://discord.com/developers/docs/resources/user
+ */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ConnectionVisibility = exports.UserPremiumType = exports.UserFlags = void 0;
+/**
+ * https://discord.com/developers/docs/resources/user#user-object-user-flags
+ */
+var UserFlags;
+(function (UserFlags) {
+    UserFlags[UserFlags["None"] = 0] = "None";
+    UserFlags[UserFlags["DiscordEmployee"] = 1] = "DiscordEmployee";
+    UserFlags[UserFlags["PartneredServerOwner"] = 2] = "PartneredServerOwner";
+    UserFlags[UserFlags["DiscordHypeSquadEvents"] = 4] = "DiscordHypeSquadEvents";
+    UserFlags[UserFlags["BugHunterLevel1"] = 8] = "BugHunterLevel1";
+    UserFlags[UserFlags["HypeSquadHouseBravery"] = 64] = "HypeSquadHouseBravery";
+    UserFlags[UserFlags["HypeSquadHouseBrilliance"] = 128] = "HypeSquadHouseBrilliance";
+    UserFlags[UserFlags["HypeSquadHouseBalance"] = 256] = "HypeSquadHouseBalance";
+    UserFlags[UserFlags["EarlySupporter"] = 512] = "EarlySupporter";
+    UserFlags[UserFlags["TeamUser"] = 1024] = "TeamUser";
+    UserFlags[UserFlags["BugHunterLevel2"] = 16384] = "BugHunterLevel2";
+    UserFlags[UserFlags["VerifiedBot"] = 65536] = "VerifiedBot";
+    UserFlags[UserFlags["EarlyVerifiedBotDeveloper"] = 131072] = "EarlyVerifiedBotDeveloper";
+    UserFlags[UserFlags["DiscordCertifiedModerator"] = 262144] = "DiscordCertifiedModerator";
+})(UserFlags = exports.UserFlags || (exports.UserFlags = {}));
+/**
+ * https://discord.com/developers/docs/resources/user#user-object-premium-types
+ */
+var UserPremiumType;
+(function (UserPremiumType) {
+    UserPremiumType[UserPremiumType["None"] = 0] = "None";
+    UserPremiumType[UserPremiumType["NitroClassic"] = 1] = "NitroClassic";
+    UserPremiumType[UserPremiumType["Nitro"] = 2] = "Nitro";
+})(UserPremiumType = exports.UserPremiumType || (exports.UserPremiumType = {}));
+var ConnectionVisibility;
+(function (ConnectionVisibility) {
+    /**
+     * Invisible to everyone except the user themselves
+     */
+    ConnectionVisibility[ConnectionVisibility["None"] = 0] = "None";
+    /**
+     * Visible to everyone
+     */
+    ConnectionVisibility[ConnectionVisibility["Everyone"] = 1] = "Everyone";
+})(ConnectionVisibility = exports.ConnectionVisibility || (exports.ConnectionVisibility = {}));
+//# sourceMappingURL=user.js.map
+
+/***/ }),
+
+/***/ 4153:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+/**
+ * Types extracted from https://discord.com/developers/docs/resources/voice
+ */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+//# sourceMappingURL=voice.js.map
+
+/***/ }),
+
+/***/ 4968:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+/**
+ * Types extracted from https://discord.com/developers/docs/resources/webhook
+ */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.WebhookType = void 0;
+var WebhookType;
+(function (WebhookType) {
+    /**
+     * Incoming Webhooks can post messages to channels with a generated token
+     */
+    WebhookType[WebhookType["Incoming"] = 1] = "Incoming";
+    /**
+     * Channel Follower Webhooks are internal webhooks used with Channel Following to post new messages into channels
+     */
+    WebhookType[WebhookType["ChannelFollower"] = 2] = "ChannelFollower";
+    /**
+     * Application webhooks are webhooks used with Interactions
+     */
+    WebhookType[WebhookType["Application"] = 3] = "Application";
+})(WebhookType = exports.WebhookType || (exports.WebhookType = {}));
+//# sourceMappingURL=webhook.js.map
+
+/***/ }),
+
+/***/ 1504:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.RESTJSONErrorCodes = void 0;
+/**
+ * https://discord.com/developers/docs/topics/opcodes-and-status-codes#json-json-error-codes
+ */
+var RESTJSONErrorCodes;
+(function (RESTJSONErrorCodes) {
+    RESTJSONErrorCodes[RESTJSONErrorCodes["GeneralError"] = 0] = "GeneralError";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownAccount"] = 10001] = "UnknownAccount";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownApplication"] = 10002] = "UnknownApplication";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownChannel"] = 10003] = "UnknownChannel";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownGuild"] = 10004] = "UnknownGuild";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownIntegration"] = 10005] = "UnknownIntegration";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownInvite"] = 10006] = "UnknownInvite";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownMember"] = 10007] = "UnknownMember";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownMessage"] = 10008] = "UnknownMessage";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownPermissionOverwrite"] = 10009] = "UnknownPermissionOverwrite";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownProvider"] = 10010] = "UnknownProvider";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownRole"] = 10011] = "UnknownRole";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownToken"] = 10012] = "UnknownToken";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownUser"] = 10013] = "UnknownUser";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownEmoji"] = 10014] = "UnknownEmoji";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownWebhook"] = 10015] = "UnknownWebhook";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownWebhookService"] = 10016] = "UnknownWebhookService";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownSession"] = 10020] = "UnknownSession";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownBan"] = 10026] = "UnknownBan";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownSKU"] = 10027] = "UnknownSKU";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownStoreListing"] = 10028] = "UnknownStoreListing";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownEntitlement"] = 10029] = "UnknownEntitlement";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownBuild"] = 10030] = "UnknownBuild";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownLobby"] = 10031] = "UnknownLobby";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownBranch"] = 10032] = "UnknownBranch";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownStoreDirectoryLayout"] = 10033] = "UnknownStoreDirectoryLayout";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownRedistributable"] = 10036] = "UnknownRedistributable";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownGiftCode"] = 10038] = "UnknownGiftCode";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownStream"] = 10049] = "UnknownStream";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownPremiumServerSubscribeCooldown"] = 10050] = "UnknownPremiumServerSubscribeCooldown";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownGuildTemplate"] = 10057] = "UnknownGuildTemplate";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownDiscoverableServerCategory"] = 10059] = "UnknownDiscoverableServerCategory";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownSticker"] = 10060] = "UnknownSticker";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownInteraction"] = 10062] = "UnknownInteraction";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownApplicationCommand"] = 10063] = "UnknownApplicationCommand";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownApplicationCommandPermissions"] = 10066] = "UnknownApplicationCommandPermissions";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownStageInstance"] = 10067] = "UnknownStageInstance";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownGuildMemberVerificationForm"] = 10068] = "UnknownGuildMemberVerificationForm";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownGuildWelcomeScreen"] = 10069] = "UnknownGuildWelcomeScreen";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownGuildScheduledEvent"] = 10070] = "UnknownGuildScheduledEvent";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UnknownGuildScheduledEventUser"] = 10071] = "UnknownGuildScheduledEventUser";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["BotsCannotUseThisEndpoint"] = 20001] = "BotsCannotUseThisEndpoint";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["OnlyBotsCanUseThisEndpoint"] = 20002] = "OnlyBotsCanUseThisEndpoint";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["ExplicitContentCannotBeSentToTheDesiredRecipient"] = 20009] = "ExplicitContentCannotBeSentToTheDesiredRecipient";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["NotAuthorizedToPerformThisActionOnThisApplication"] = 20012] = "NotAuthorizedToPerformThisActionOnThisApplication";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["ActionCannotBePerformedDueToSlowmodeRateLimit"] = 20016] = "ActionCannotBePerformedDueToSlowmodeRateLimit";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["OnlyTheOwnerOfThisAccountCanPerformThisAction"] = 20018] = "OnlyTheOwnerOfThisAccountCanPerformThisAction";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["AnnouncementEditLimitExceeded"] = 20022] = "AnnouncementEditLimitExceeded";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["ChannelSendRateLimit"] = 20028] = "ChannelSendRateLimit";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["StageTopicServerNameServerDescriptionOrChannelNamesContainDisallowedWords"] = 20031] = "StageTopicServerNameServerDescriptionOrChannelNamesContainDisallowedWords";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["GuildPremiumSubscriptionLevelTooLow"] = 20035] = "GuildPremiumSubscriptionLevelTooLow";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["MaximumNumberOfGuildsReached"] = 30001] = "MaximumNumberOfGuildsReached";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["MaximumNumberOfFriendsReached"] = 30002] = "MaximumNumberOfFriendsReached";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["MaximumNumberOfPinsReachedForTheChannel"] = 30003] = "MaximumNumberOfPinsReachedForTheChannel";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["MaximumNumberOfRecipientsReached"] = 30004] = "MaximumNumberOfRecipientsReached";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["MaximumNumberOfGuildRolesReached"] = 30005] = "MaximumNumberOfGuildRolesReached";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["MaximumNumberOfWebhooksReached"] = 30007] = "MaximumNumberOfWebhooksReached";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["MaximumNumberOfEmojisReached"] = 30008] = "MaximumNumberOfEmojisReached";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["MaximumNumberOfReactionsReached"] = 30010] = "MaximumNumberOfReactionsReached";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["MaximumNumberOfGuildChannelsReached"] = 30013] = "MaximumNumberOfGuildChannelsReached";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["MaximumNumberOfAttachmentsInAMessageReached"] = 30015] = "MaximumNumberOfAttachmentsInAMessageReached";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["MaximumNumberOfInvitesReached"] = 30016] = "MaximumNumberOfInvitesReached";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["MaximumNumberOfAnimatedEmojisReached"] = 30018] = "MaximumNumberOfAnimatedEmojisReached";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["MaximumNumberOfServerMembersReached"] = 30019] = "MaximumNumberOfServerMembersReached";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["MaximumNumberOfServerCategoriesReached"] = 30030] = "MaximumNumberOfServerCategoriesReached";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["GuildAlreadyHasTemplate"] = 30031] = "GuildAlreadyHasTemplate";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["MaximumThreadParticipants"] = 30033] = "MaximumThreadParticipants";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["MaximumNumberOfNonGuildMemberBansHasBeenExceeded"] = 30035] = "MaximumNumberOfNonGuildMemberBansHasBeenExceeded";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["MaximumNumberOfBanFetchesHasBeenReached"] = 30037] = "MaximumNumberOfBanFetchesHasBeenReached";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["MaximumNumberOfStickersReached"] = 30039] = "MaximumNumberOfStickersReached";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["MaximumNumberOfPruneRequestsHasBeenReached"] = 30040] = "MaximumNumberOfPruneRequestsHasBeenReached";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["Unauthorized"] = 40001] = "Unauthorized";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["VerifyYourAccount"] = 40002] = "VerifyYourAccount";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["OpeningDirectMessagesTooFast"] = 40003] = "OpeningDirectMessagesTooFast";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["RequestEntityTooLarge"] = 40005] = "RequestEntityTooLarge";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["FeatureTemporarilyDisabledServerSide"] = 40006] = "FeatureTemporarilyDisabledServerSide";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UserBannedFromThisGuild"] = 40007] = "UserBannedFromThisGuild";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["TargetUserIsNotConnectedToVoice"] = 40032] = "TargetUserIsNotConnectedToVoice";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["ThisMessageWasAlreadyCrossposted"] = 40033] = "ThisMessageWasAlreadyCrossposted";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["ApplicationCommandWithThatNameAlreadyExists"] = 40041] = "ApplicationCommandWithThatNameAlreadyExists";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["MissingAccess"] = 50001] = "MissingAccess";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["InvalidAccountType"] = 50002] = "InvalidAccountType";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["CannotExecuteActionOnDMChannel"] = 50003] = "CannotExecuteActionOnDMChannel";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["GuildWidgetDisabled"] = 50004] = "GuildWidgetDisabled";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["CannotEditMessageAuthoredByAnotherUser"] = 50005] = "CannotEditMessageAuthoredByAnotherUser";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["CannotSendAnEmptyMessage"] = 50006] = "CannotSendAnEmptyMessage";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["CannotSendMessagesToThisUser"] = 50007] = "CannotSendMessagesToThisUser";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["CannotSendMessagesInVoiceChannel"] = 50008] = "CannotSendMessagesInVoiceChannel";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["ChannelVerificationLevelTooHighForYouToGainAccess"] = 50009] = "ChannelVerificationLevelTooHighForYouToGainAccess";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["OAuth2ApplicationDoesNotHaveBot"] = 50010] = "OAuth2ApplicationDoesNotHaveBot";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["OAuth2ApplicationLimitReached"] = 50011] = "OAuth2ApplicationLimitReached";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["InvalidOAuth2State"] = 50012] = "InvalidOAuth2State";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["MissingPermissions"] = 50013] = "MissingPermissions";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["InvalidToken"] = 50014] = "InvalidToken";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["NoteWasTooLong"] = 50015] = "NoteWasTooLong";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["ProvidedTooFewOrTooManyMessagesToDelete"] = 50016] = "ProvidedTooFewOrTooManyMessagesToDelete";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["MessageCanOnlyBePinnedInTheChannelItWasSentIn"] = 50019] = "MessageCanOnlyBePinnedInTheChannelItWasSentIn";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["InviteCodeInvalidOrTaken"] = 50020] = "InviteCodeInvalidOrTaken";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["CannotExecuteActionOnSystemMessage"] = 50021] = "CannotExecuteActionOnSystemMessage";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["CannotExecuteActionOnThisChannelType"] = 50024] = "CannotExecuteActionOnThisChannelType";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["InvalidOAuth2AccessToken"] = 50025] = "InvalidOAuth2AccessToken";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["MissingRequiredOAuth2Scope"] = 50026] = "MissingRequiredOAuth2Scope";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["InvalidWebhookToken"] = 50027] = "InvalidWebhookToken";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["InvalidRole"] = 50028] = "InvalidRole";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["InvalidRecipients"] = 50033] = "InvalidRecipients";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["OneOfTheMessagesProvidedWasTooOldForBulkDelete"] = 50034] = "OneOfTheMessagesProvidedWasTooOldForBulkDelete";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["InvalidFormBodyOrContentType"] = 50035] = "InvalidFormBodyOrContentType";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["InviteAcceptedToGuildWithoutTheBotBeingIn"] = 50036] = "InviteAcceptedToGuildWithoutTheBotBeingIn";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["InvalidAPIVersion"] = 50041] = "InvalidAPIVersion";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["FileUploadedExceedsMaximumSize"] = 50045] = "FileUploadedExceedsMaximumSize";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["InvalidFileUploaded"] = 50046] = "InvalidFileUploaded";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["CannotSelfRedeemThisGift"] = 50054] = "CannotSelfRedeemThisGift";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["PaymentSourceRequiredToRedeemGift"] = 50070] = "PaymentSourceRequiredToRedeemGift";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["CannotDeleteChannelRequiredForCommunityGuilds"] = 50074] = "CannotDeleteChannelRequiredForCommunityGuilds";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["InvalidStickerSent"] = 50081] = "InvalidStickerSent";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["InvalidActionOnArchivedThread"] = 50083] = "InvalidActionOnArchivedThread";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["InvalidThreadNotificationSettings"] = 50084] = "InvalidThreadNotificationSettings";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["ParameterEarlierThanCreation"] = 50085] = "ParameterEarlierThanCreation";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["ServerNotAvailableInYourLocation"] = 50095] = "ServerNotAvailableInYourLocation";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["ServerNeedsMonetizationEnabledToPerformThisAction"] = 50097] = "ServerNeedsMonetizationEnabledToPerformThisAction";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["ServerNeedsMoreBoostsToPerformThisAction"] = 50101] = "ServerNeedsMoreBoostsToPerformThisAction";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["TwoFactorAuthenticationIsRequired"] = 60003] = "TwoFactorAuthenticationIsRequired";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["NoUsersWithDiscordTagExist"] = 80004] = "NoUsersWithDiscordTagExist";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["ReactionWasBlocked"] = 90001] = "ReactionWasBlocked";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["APIResourceOverloaded"] = 130000] = "APIResourceOverloaded";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["TheStageIsAlreadyOpen"] = 150006] = "TheStageIsAlreadyOpen";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["CannotReplyWithoutPermissionToReadMessageHistory"] = 160002] = "CannotReplyWithoutPermissionToReadMessageHistory";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["ThreadAlreadyCreatedForMessage"] = 160004] = "ThreadAlreadyCreatedForMessage";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["ThreadLocked"] = 160005] = "ThreadLocked";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["MaximumActiveThreads"] = 160006] = "MaximumActiveThreads";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["MaximumActiveAnnouncementThreads"] = 160007] = "MaximumActiveAnnouncementThreads";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["InvalidJSONForUploadedLottieFile"] = 170001] = "InvalidJSONForUploadedLottieFile";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["UploadedLottiesCannotContainRasterizedImages"] = 170002] = "UploadedLottiesCannotContainRasterizedImages";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["StickerMaximumFramerateExceeded"] = 170003] = "StickerMaximumFramerateExceeded";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["StickerFrameCountExceedsMaximumOf1000Frames"] = 170004] = "StickerFrameCountExceedsMaximumOf1000Frames";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["LottieAnimationMaximumDimensionsExceeded"] = 170005] = "LottieAnimationMaximumDimensionsExceeded";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["StickerFramerateIsTooSmallOrTooLarge"] = 170006] = "StickerFramerateIsTooSmallOrTooLarge";
+    RESTJSONErrorCodes[RESTJSONErrorCodes["StickerAnimationDurationExceedsMaximumOf5Seconds"] = 170007] = "StickerAnimationDurationExceedsMaximumOf5Seconds";
+})(RESTJSONErrorCodes = exports.RESTJSONErrorCodes || (exports.RESTJSONErrorCodes = {}));
+//# sourceMappingURL=common.js.map
+
+/***/ }),
+
+/***/ 9555:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+//# sourceMappingURL=auditLog.js.map
+
+/***/ }),
+
+/***/ 4263:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+//# sourceMappingURL=channel.js.map
+
+/***/ }),
+
+/***/ 820:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+//# sourceMappingURL=emoji.js.map
+
+/***/ }),
+
+/***/ 9016:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+//# sourceMappingURL=gateway.js.map
+
+/***/ }),
+
+/***/ 8113:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+//# sourceMappingURL=guild.js.map
+
+/***/ }),
+
+/***/ 6001:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.OAuth2Routes = exports.RouteBases = exports.Routes = exports.APIVersion = void 0;
+__exportStar(__nccwpck_require__(1504), exports);
+__exportStar(__nccwpck_require__(9555), exports);
+__exportStar(__nccwpck_require__(4263), exports);
+__exportStar(__nccwpck_require__(820), exports);
+__exportStar(__nccwpck_require__(9016), exports);
+__exportStar(__nccwpck_require__(8113), exports);
+__exportStar(__nccwpck_require__(5876), exports);
+__exportStar(__nccwpck_require__(886), exports);
+__exportStar(__nccwpck_require__(3894), exports);
+__exportStar(__nccwpck_require__(4885), exports);
+__exportStar(__nccwpck_require__(2291), exports);
+__exportStar(__nccwpck_require__(9305), exports);
+__exportStar(__nccwpck_require__(3124), exports);
+__exportStar(__nccwpck_require__(1306), exports);
+__exportStar(__nccwpck_require__(8878), exports);
+exports.APIVersion = '9';
+exports.Routes = {
+    /**
+     * Route for:
+     * - GET `/guilds/{guild.id}/audit-logs`
+     */
+    guildAuditLog(guildId) {
+        return `/guilds/${guildId}/audit-logs`;
+    },
+    /**
+     * Route for:
+     * - GET    `/channels/{channel.id}`
+     * - PATCH  `/channels/{channel.id}`
+     * - DELETE `/channels/{channel.id}`
+     */
+    channel(channelId) {
+        return `/channels/${channelId}`;
+    },
+    /**
+     * Route for:
+     * - GET  `/channels/{channel.id}/messages`
+     * - POST `/channels/{channel.id}/messages`
+     */
+    channelMessages(channelId) {
+        return `/channels/${channelId}/messages`;
+    },
+    /**
+     * Route for:
+     * - GET    `/channels/{channel.id}/messages/{message.id}`
+     * - PATCH  `/channels/{channel.id}/messages/{message.id}`
+     * - DELETE `/channels/{channel.id}/messages/{message.id}`
+     */
+    channelMessage(channelId, messageId) {
+        return `/channels/${channelId}/messages/${messageId}`;
+    },
+    /**
+     * Route for:
+     * - POST `/channels/{channel.id}/messages/{message.id}/crosspost`
+     */
+    channelMessageCrosspost(channelId, messageId) {
+        return `/channels/${channelId}/messages/${messageId}/crosspost`;
+    },
+    /**
+     * Route for:
+     * - PUT    `/channels/{channel.id}/messages/{message.id}/reactions/{emoji}/@me`
+     * - DELETE `/channels/{channel.id}/messages/{message.id}/reactions/{emoji}/@me`
+     *
+     * **Note**: You need to URL encode the emoji yourself
+     */
+    channelMessageOwnReaction(channelId, messageId, emoji) {
+        return `/channels/${channelId}/messages/${messageId}/reactions/${emoji}/@me`;
+    },
+    /**
+     * Route for:
+     * - DELETE `/channels/{channel.id}/messages/{message.id}/reactions/{emoji}/{user.id}`
+     *
+     * **Note**: You need to URL encode the emoji yourself
+     */
+    channelMessageUserReaction(channelId, messageId, emoji, userId) {
+        return `/channels/${channelId}/messages/${messageId}/reactions/${emoji}/${userId}`;
+    },
+    /**
+     * Route for:
+     * - GET    `/channels/{channel.id}/messages/{message.id}/reactions/{emoji}`
+     * - DELETE `/channels/{channel.id}/messages/{message.id}/reactions/{emoji}`
+     *
+     * **Note**: You need to URL encode the emoji yourself
+     */
+    channelMessageReaction(channelId, messageId, emoji) {
+        return `/channels/${channelId}/messages/${messageId}/reactions/${emoji}`;
+    },
+    /**
+     * Route for:
+     * - DELETE `/channels/{channel.id}/messages/{message.id}/reactions`
+     */
+    channelMessageAllReactions(channelId, messageId) {
+        return `/channels/${channelId}/messages/${messageId}/reactions`;
+    },
+    /**
+     * Route for:
+     * - POST `/channels/{channel.id}/messages/bulk-delete`
+     */
+    channelBulkDelete(channelId) {
+        return `/channels/${channelId}/messages/bulk-delete`;
+    },
+    /**
+     * Route for:
+     * - PUT    `/channels/{channel.id}/permissions/{overwrite.id}`
+     * - DELETE `/channels/{channel.id}/permissions/{overwrite.id}`
+     */
+    channelPermission(channelId, overwriteId) {
+        return `/channels/${channelId}/permissions/${overwriteId}`;
+    },
+    /**
+     * Route for:
+     * - GET  `/channels/{channel.id}/invites`
+     * - POST `/channels/{channel.id}/invites`
+     */
+    channelInvites(channelId) {
+        return `/channels/${channelId}/invites`;
+    },
+    /**
+     * Route for:
+     * - POST `/channels/{channel.id}/followers`
+     */
+    channelFollowers(channelId) {
+        return `/channels/${channelId}/followers`;
+    },
+    /**
+     * Route for:
+     * - POST `/channels/{channel.id}/typing`
+     */
+    channelTyping(channelId) {
+        return `/channels/${channelId}/typing`;
+    },
+    /**
+     * Route for:
+     * - GET `/channels/{channel.id}/pins`
+     */
+    channelPins(channelId) {
+        return `/channels/${channelId}/pins`;
+    },
+    /**
+     * Route for:
+     * - PUT    `/channels/{channel.id}/pins/{message.id}`
+     * - DELETE `/channels/{channel.id}/pins/{message.id}`
+     */
+    channelPin(channelId, messageId) {
+        return `/channels/${channelId}/pins/${messageId}`;
+    },
+    /**
+     * Route for:
+     * - PUT    `/channels/{channel.id}/recipients/{user.id}`
+     * - DELETE `/channels/{channel.id}/recipients/{user.id}`
+     */
+    channelRecipient(channelId, userId) {
+        return `/channels/${channelId}/recipients/${userId}`;
+    },
+    /**
+     * Route for:
+     * - GET  `/guilds/{guild.id}/emojis`
+     * - POST `/guilds/{guild.id}/emojis`
+     */
+    guildEmojis(guildId) {
+        return `/guilds/${guildId}/emojis`;
+    },
+    /**
+     * Route for:
+     * - GET    `/guilds/{guild.id}/emojis/{emoji.id}`
+     * - PATCH  `/guilds/{guild.id}/emojis/{emoji.id}`
+     * - DELETE `/guilds/{guild.id}/emojis/{emoji.id}`
+     */
+    guildEmoji(guildId, emojiId) {
+        return `/guilds/${guildId}/emojis/${emojiId}`;
+    },
+    /**
+     * Route for:
+     * - POST `/guilds`
+     */
+    guilds() {
+        return '/guilds';
+    },
+    /**
+     * Route for:
+     * - GET    `/guilds/{guild.id}`
+     * - PATCH  `/guilds/{guild.id}`
+     * - DELETE `/guilds/{guild.id}`
+     */
+    guild(guildId) {
+        return `/guilds/${guildId}`;
+    },
+    /**
+     * Route for:
+     * - GET `/guilds/{guild.id}/preview`
+     */
+    guildPreview(guildId) {
+        return `/guilds/${guildId}/preview`;
+    },
+    /**
+     * Route for:
+     * - GET   `/guilds/{guild.id}/channels`
+     * - POST  `/guilds/{guild.id}/channels`
+     * - PATCH `/guilds/{guild.id}/channels`
+     */
+    guildChannels(guildId) {
+        return `/guilds/${guildId}/channels`;
+    },
+    /**
+     * Route for:
+     * - GET    `/guilds/{guild.id}/members/{user.id}`
+     * - PUT    `/guilds/{guild.id}/members/{user.id}`
+     * - PATCH  `/guilds/{guild.id}/members/{user.id}`
+     * - DELETE `/guilds/{guild.id}/members/{user.id}`
+     */
+    guildMember(guildId, userId) {
+        return `/guilds/${guildId}/members/${userId}`;
+    },
+    /**
+     * Route for:
+     * - GET `/guilds/{guild.id}/members`
+     */
+    guildMembers(guildId) {
+        return `/guilds/${guildId}/members`;
+    },
+    /**
+     * Route for:
+     * - GET `/guilds/{guild.id}/members/search`
+     */
+    guildMembersSearch(guildId) {
+        return `/guilds/${guildId}/members/search`;
+    },
+    /**
+     * Route for:
+     * - PATCH `/guilds/{guild.id}/members/@me/nick`
+     */
+    guildCurrentMemberNickname(guildId) {
+        return `/guilds/${guildId}/members/@me/nick`;
+    },
+    /**
+     * Route for:
+     * - PUT    `/guilds/{guild.id}/members/{user.id}/roles/{role.id}`
+     * - DELETE `/guilds/{guild.id}/members/{user.id}/roles/{role.id}`
+     */
+    guildMemberRole(guildId, memberId, roleId) {
+        return `/guilds/${guildId}/members/${memberId}/roles/${roleId}`;
+    },
+    /**
+     * Route for:
+     * - GET `/guilds/{guild.id}/bans`
+     */
+    guildBans(guildId) {
+        return `/guilds/${guildId}/bans`;
+    },
+    /**
+     * Route for:
+     * - GET    `/guilds/{guild.id}/bans/{user.id}`
+     * - PUT    `/guilds/{guild.id}/bans/{user.id}`
+     * - DELETE `/guilds/{guild.id}/bans/{user.id}`
+     */
+    guildBan(guildId, userId) {
+        return `/guilds/${guildId}/bans/${userId}`;
+    },
+    /**
+     * Route for:
+     * - GET   `/guilds/{guild.id}/roles`
+     * - POST  `/guilds/{guild.id}/roles`
+     * - PATCH `/guilds/{guild.id}/roles`
+     */
+    guildRoles(guildId) {
+        return `/guilds/${guildId}/roles`;
+    },
+    /**
+     * Route for:
+     * - PATCH  `/guilds/{guild.id}/roles/{role.id}`
+     * - DELETE `/guilds/{guild.id}/roles/{role.id}`
+     */
+    guildRole(guildId, roleId) {
+        return `/guilds/${guildId}/roles/${roleId}`;
+    },
+    /**
+     * Route for:
+     * - GET  `/guilds/{guild.id}/prune`
+     * - POST `/guilds/{guild.id}/prune`
+     */
+    guildPrune(guildId) {
+        return `/guilds/${guildId}/prune`;
+    },
+    /**
+     * Route for:
+     * - GET `/guilds/{guild.id}/regions`
+     */
+    guildVoiceRegions(guildId) {
+        return `/guilds/${guildId}/regions`;
+    },
+    /**
+     * Route for:
+     * - GET `/guilds/{guild.id}/invites`
+     */
+    guildInvites(guildId) {
+        return `/guilds/${guildId}/invites`;
+    },
+    /**
+     * Route for:
+     * - GET  `/guilds/{guild.id}/integrations`
+     */
+    guildIntegrations(guildId) {
+        return `/guilds/${guildId}/integrations`;
+    },
+    /**
+     * Route for:
+     * - DELETE `/guilds/{guild.id}/integrations/{integration.id}`
+     */
+    guildIntegration(guildId, integrationId) {
+        return `/guilds/${guildId}/integrations/${integrationId}`;
+    },
+    /**
+     * Route for:
+     * - GET   `/guilds/{guild.id}/widget`
+     * - PATCH `/guilds/{guild.id}/widget`
+     */
+    guildWidgetSettings(guildId) {
+        return `/guilds/${guildId}/widget`;
+    },
+    /**
+     * Route for:
+     * - GET `/guilds/{guild.id}/widget.json`
+     */
+    guildWidgetJSON(guildId) {
+        return `/guilds/${guildId}/widget.json`;
+    },
+    /**
+     * Route for:
+     * - GET `/guilds/{guild.id}/vanity-url`
+     */
+    guildVanityUrl(guildId) {
+        return `/guilds/${guildId}/vanity-url`;
+    },
+    /**
+     * Route for:
+     * - GET `/guilds/{guild.id}/widget.png`
+     */
+    guildWidgetImage(guildId) {
+        return `/guilds/${guildId}/widget.png`;
+    },
+    /**
+     * Route for:
+     * - GET    `/invites/{invite.code}`
+     * - DELETE `/invites/{invite.code}`
+     */
+    invite(code) {
+        return `/invites/${code}`;
+    },
+    /**
+     * Route for:
+     * - GET  `/guilds/templates/{template.code}`
+     * - POST `/guilds/templates/{template.code}`
+     */
+    template(code) {
+        return `/guilds/templates/${code}`;
+    },
+    /**
+     * Route for:
+     * - GET  `/guilds/{guild.id}/templates`
+     * - POST `/guilds/{guild.id}/templates`
+     */
+    guildTemplates(guildId) {
+        return `/guilds/${guildId}/templates`;
+    },
+    /**
+     * Route for:
+     * - PUT    `/guilds/{guild.id}/templates/{template.code}`
+     * - PATCH  `/guilds/{guild.id}/templates/{template.code}`
+     * - DELETE `/guilds/{guild.id}/templates/{template.code}`
+     */
+    guildTemplate(guildId, code) {
+        return `/guilds/${guildId}/templates/${code}`;
+    },
+    /**
+     * Route for:
+     * - POST `/channels/{channel.id}/threads`
+     * - POST `/channels/{channel.id}/messages/{message.id}/threads`
+     */
+    threads(parentId, messageId) {
+        const parts = ['', 'channels', parentId];
+        if (messageId)
+            parts.push('messages', messageId);
+        parts.push('threads');
+        return parts.join('/');
+    },
+    /**
+     * Route for:
+     * - GET `/guilds/{guild.id}/threads/active`
+     */
+    guildActiveThreads(guildId) {
+        return `/guilds/${guildId}/threads/active`;
+    },
+    /**
+     * Route for:
+     * - GET `/channels/{channel.id}/threads/active`
+     * 	 (deprecated, use [List Active Guild Threads](https://discord.com/developers/docs/resources/guild#list-active-threads) instead.
+     * 	 Will be removed in v10.)
+     * - GET `/channels/{channel.id}/threads/archived/public`
+     * - GET `/channels/{channel.id}/threads/archived/private`
+     */
+    channelThreads(channelId, archived) {
+        const parts = ['', 'channels', channelId, 'threads'];
+        if (archived)
+            parts.push('archived', archived);
+        else
+            parts.push('active');
+        return parts.join('/');
+    },
+    /**
+     * Route for:
+     * - GET `/channels/{channel.id}/users/@me/threads/archived/prviate`
+     */
+    channelJoinedArchivedThreads(channelId) {
+        return `/channels/${channelId}/users/@me/threads/archived/private`;
+    },
+    /**
+     * Route for:
+     * - GET    `/channels/{thread.id}/thread-members`
+     * - PUT    `/channels/{thread.id}/thread-members/@me`
+     * - PUT    `/channels/{thread.id}/thread-members/{user.id}`
+     * - DELETE `/channels/{thread.id}/thread-members/@me`
+     * - DELETE `/channels/{thread.id}/thread-members/{user.id}`
+     */
+    threadMembers(threadId, userId) {
+        const parts = ['', 'channels', threadId, 'thread-members'];
+        if (userId)
+            parts.push(userId);
+        return parts.join('/');
+    },
+    /**
+     * Route for:
+     * - GET   `/users/@me`
+     * - GET   `/users/{user.id}`
+     * - PATCH `/users/@me`
+     *
+     * @param [userId='@me'] The user ID, defaulted to `@me`
+     */
+    user(userId = '@me') {
+        return `/users/${userId}`;
+    },
+    /**
+     * Route for:
+     * - GET `/users/@me/guilds`
+     */
+    userGuilds() {
+        return `/users/@me/guilds`;
+    },
+    /**
+     * Route for:
+     * - DELETE `/users/@me/guilds/{guild.id}`
+     */
+    userGuild(guildId) {
+        return `/users/@me/guilds/${guildId}`;
+    },
+    /**
+     * Route for:
+     * - POST `/users/@me/channels`
+     */
+    userChannels() {
+        return `/users/@me/channels`;
+    },
+    /**
+     * Route for:
+     * - GET `/users/@me/connections`
+     */
+    userConnections() {
+        return `/users/@me/connections`;
+    },
+    /**
+     * Route for:
+     * - GET `/voice/regions`
+     */
+    voiceRegions() {
+        return `/voice/regions`;
+    },
+    /**
+     * Route for:
+     * - GET  `/channels/{channel.id}/webhooks`
+     * - POST `/channels/{channel.id}/webhooks`
+     */
+    channelWebhooks(channelId) {
+        return `/channels/${channelId}/webhooks`;
+    },
+    /**
+     * Route for:
+     * - GET `/guilds/{guild.id}/webhooks`
+     */
+    guildWebhooks(guildId) {
+        return `/guilds/${guildId}/webhooks`;
+    },
+    /**
+     * Route for:
+     * - GET    `/webhooks/{webhook.id}`
+     * - GET    `/webhooks/{webhook.id}/{webhook.token}`
+     * - PATCH  `/webhooks/{webhook.id}`
+     * - PATCH  `/webhooks/{webhook.id}/{webhook.token}`
+     * - DELETE `/webhooks/{webhook.id}`
+     * - DELETE `/webhooks/{webhook.id}/{webhook.token}`
+     * - POST   `/webhooks/{webhook.id}/{webhook.token}`
+     *
+     * - POST   `/webhooks/{application.id}/{interaction.token}`
+     */
+    webhook(webhookId, webhookToken) {
+        const parts = ['', 'webhooks', webhookId];
+        if (webhookToken)
+            parts.push(webhookToken);
+        return parts.join('/');
+    },
+    /**
+     * Route for:
+     * - GET    `/webhooks/{webhook.id}/{webhook.token}/messages/@original`
+     * - GET    `/webhooks/{webhook.id}/{webhook.token}/messages/{message.id}`
+     * - PATCH  `/webhooks/{webhook.id}/{webhook.token}/messages/@original`
+     * - PATCH  `/webhooks/{webhook.id}/{webhook.token}/messages/{message.id}`
+     * - DELETE `/webhooks/{webhook.id}/{webhook.token}/messages/@original`
+     * - DELETE `/webhooks/{webhook.id}/{webhook.token}/messages/{message.id}`
+     *
+     * - PATCH  `/webhooks/{application.id}/{interaction.token}/messages/@original`
+     * - PATCH  `/webhooks/{application.id}/{interaction.token}/messages/{message.id}`
+     * - DELETE `/webhooks/{application.id}/{interaction.token}/messages/{message.id}`
+     *
+     * @param [messageId='@original'] The message ID to change, defaulted to `@original`
+     */
+    webhookMessage(webhookId, webhookToken, messageId = '@original') {
+        return `/webhooks/${webhookId}/${webhookToken}/messages/${messageId}`;
+    },
+    /**
+     * Route for:
+     * - POST `/webhooks/{webhook.id}/{webhook.token}/github`
+     * - POST `/webhooks/{webhook.id}/{webhook.token}/slack`
+     */
+    webhookPlatform(webhookId, webhookToken, platform) {
+        return `/webhooks/${webhookId}/${webhookToken}/${platform}`;
+    },
+    /**
+     * Route for:
+     * - GET `/gateway`
+     */
+    gateway() {
+        return `/gateway`;
+    },
+    /**
+     * Route for:
+     * - GET `/gateway/bot`
+     */
+    gatewayBot() {
+        return `/gateway/bot`;
+    },
+    /**
+     * Route for:
+     * - GET `/oauth2/applications/@me`
+     */
+    oauth2CurrentApplication() {
+        return `/oauth2/applications/@me`;
+    },
+    /**
+     * Route for:
+     * - GET `/oauth2/@me`
+     */
+    oauth2CurrentAuthorization() {
+        return `/oauth2/@me`;
+    },
+    /**
+     * Route for:
+     * - GET `/oauth2/authorize`
+     */
+    oauth2Authorization() {
+        return `/oauth2/authorize`;
+    },
+    /**
+     * Route for:
+     * - POST `/oauth2/token`
+     */
+    oauth2TokenExchange() {
+        return `/oauth2/token`;
+    },
+    /**
+     * Route for:
+     * - POST `/oauth2/token/revoke`
+     */
+    oauth2TokenRevocation() {
+        return `/oauth2/token/revoke`;
+    },
+    /**
+     * Route for:
+     * - GET  `/applications/{application.id}/commands`
+     * - PUT  `/applications/{application.id}/commands`
+     * - POST `/applications/{application.id}/commands`
+     */
+    applicationCommands(applicationId) {
+        return `/applications/${applicationId}/commands`;
+    },
+    /**
+     * Route for:
+     * - GET    `/applications/{application.id}/commands/{command.id}`
+     * - PATCH  `/applications/{application.id}/commands/{command.id}`
+     * - DELETE `/applications/{application.id}/commands/{command.id}`
+     */
+    applicationCommand(applicationId, commandId) {
+        return `/applications/${applicationId}/commands/${commandId}`;
+    },
+    /**
+     * Route for:
+     * - GET  `/applications/{application.id}/guilds/{guild.id}/commands`
+     * - PUT  `/applications/{application.id}/guilds/{guild.id}/commands`
+     * - POST `/applications/{application.id}/guilds/{guild.id}/commands`
+     */
+    applicationGuildCommands(applicationId, guildId) {
+        return `/applications/${applicationId}/guilds/${guildId}/commands`;
+    },
+    /**
+     * Route for:
+     * - GET    `/applications/{application.id}/guilds/{guild.id}/commands/{command.id}`
+     * - PATCH  `/applications/{application.id}/guilds/{guild.id}/commands/{command.id}`
+     * - DELETE `/applications/{application.id}/guilds/{guild.id}/commands/{command.id}`
+     */
+    applicationGuildCommand(applicationId, guildId, commandId) {
+        return `/applications/${applicationId}/guilds/${guildId}/commands/${commandId}`;
+    },
+    /**
+     * Route for:
+     * - POST `/interactions/{interaction.id}/{interaction.token}/callback`
+     */
+    interactionCallback(interactionId, interactionToken) {
+        return `/interactions/${interactionId}/${interactionToken}/callback`;
+    },
+    /**
+     * Route for:
+     * - GET   `/guilds/{guild.id}/member-verification`
+     * - PATCH `/guilds/{guild.id}/member-verification`
+     */
+    guildMemberVerification(guildId) {
+        return `/guilds/${guildId}/member-verification`;
+    },
+    /**
+     * Route for:
+     * - PATCH `/guilds/{guild.id}/voice-states/@me`
+     * - PATCH `/guilds/{guild.id}/voice-states/{user.id}`
+     */
+    guildVoiceState(guildId, userId = '@me') {
+        return `/guilds/${guildId}/voice-states/${userId}`;
+    },
+    /**
+     * Route for:
+     * - GET `/applications/{application.id}/guilds/{guild.id}/commands/permissions`
+     * - PUT `/applications/{application.id}/guilds/{guild.id}/commands/permissions`
+     */
+    guildApplicationCommandsPermissions(applicationId, guildId) {
+        return `/applications/${applicationId}/guilds/${guildId}/commands/permissions`;
+    },
+    /**
+     * Route for:
+     * - GET `/applications/{application.id}/guilds/{guild.id}/commands/{command.id}/permissions`
+     * - PUT `/applications/{application.id}/guilds/{guild.id}/commands/{command.id}/permissions`
+     */
+    applicationCommandPermissions(applicationId, guildId, commandId) {
+        return `/applications/${applicationId}/guilds/${guildId}/commands/${commandId}/permissions`;
+    },
+    /**
+     * Route for:
+     * - GET   `/guilds/{guild.id}/welcome-screen`
+     * - PATCH `/guilds/{guild.id}/welcome-screen`
+     */
+    guildWelcomeScreen(guildId) {
+        return `/guilds/${guildId}/welcome-screen`;
+    },
+    /**
+     * Route for:
+     * - POST `/stage-instances`
+     */
+    stageInstances() {
+        return `/stage-instances`;
+    },
+    /**
+     * Route for:
+     * - GET `/stage-instances/{channel.id}`
+     * - PATCH `/stage-instances/{channel.id}`
+     * - DELETE `/stage-instances/{channel.id}`
+     */
+    stageInstance(channelId) {
+        return `/stage-instances/${channelId}`;
+    },
+    /**
+     * Route for:
+     * - GET `/stickers/{sticker.id}`
+     */
+    sticker(stickerId) {
+        return `/stickers/${stickerId}`;
+    },
+    /**
+     * Route for:
+     * - GET `/sticker-packs`
+     */
+    nitroStickerPacks() {
+        return '/sticker-packs';
+    },
+    /**
+     * Route for:
+     * - GET  `/guilds/{guild.id}/stickers`
+     * - POST `/guilds/{guild.id}/stickers`
+     */
+    guildStickers(guildId) {
+        return `/guilds/${guildId}/stickers`;
+    },
+    /**
+     * Route for:
+     * - GET    `/guilds/{guild.id}/stickers/{sticker.id}`
+     * - PATCH  `/guilds/{guild.id}/stickers/{sticker.id}`
+     * - DELETE `/guilds/{guild.id}/stickers/{sticker.id}`
+     */
+    guildSticker(guildId, stickerId) {
+        return `/guilds/${guildId}/stickers/${stickerId}`;
+    },
+};
+exports.RouteBases = {
+    api: `https://discord.com/api/v${exports.APIVersion}`,
+    cdn: 'https://cdn.discordapp.com',
+    invite: 'https://discord.gg',
+    template: 'https://discord.new',
+    gift: 'https://discord.gift',
+};
+// Freeze bases object
+Object.freeze(exports.RouteBases);
+exports.OAuth2Routes = {
+    authorizationURL: `${exports.RouteBases.api}${exports.Routes.oauth2Authorization()}`,
+    tokenURL: `${exports.RouteBases.api}${exports.Routes.oauth2TokenExchange()}`,
+    /**
+     * See https://tools.ietf.org/html/rfc7009
+     */
+    tokenRevocationURL: `${exports.RouteBases.api}${exports.Routes.oauth2TokenRevocation()}`,
+};
+// Freeze OAuth2 route object
+Object.freeze(exports.OAuth2Routes);
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ 5876:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+//# sourceMappingURL=interactions.js.map
+
+/***/ }),
+
+/***/ 886:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+//# sourceMappingURL=invite.js.map
+
+/***/ }),
+
+/***/ 3894:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+//# sourceMappingURL=oauth2.js.map
+
+/***/ }),
+
+/***/ 4885:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+//# sourceMappingURL=stageInstance.js.map
+
+/***/ }),
+
+/***/ 2291:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+//# sourceMappingURL=sticker.js.map
+
+/***/ }),
+
+/***/ 9305:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+//# sourceMappingURL=template.js.map
+
+/***/ }),
+
+/***/ 3124:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+//# sourceMappingURL=user.js.map
+
+/***/ }),
+
+/***/ 1306:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+//# sourceMappingURL=voice.js.map
+
+/***/ }),
+
+/***/ 8878:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+//# sourceMappingURL=webhook.js.map
+
+/***/ }),
+
+/***/ 6979:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.RPCCloseEventCodes = exports.RPCErrorCodes = void 0;
+/**
+ * https://discord.com/developers/docs/topics/opcodes-and-status-codes#rpc-rpc-error-codes
+ */
+var RPCErrorCodes;
+(function (RPCErrorCodes) {
+    RPCErrorCodes[RPCErrorCodes["UnknownError"] = 1000] = "UnknownError";
+    RPCErrorCodes[RPCErrorCodes["InvalidPayload"] = 4000] = "InvalidPayload";
+    RPCErrorCodes[RPCErrorCodes["InvalidCommand"] = 4002] = "InvalidCommand";
+    RPCErrorCodes[RPCErrorCodes["InvalidGuild"] = 4003] = "InvalidGuild";
+    RPCErrorCodes[RPCErrorCodes["InvalidEvent"] = 4004] = "InvalidEvent";
+    RPCErrorCodes[RPCErrorCodes["InvalidChannel"] = 4005] = "InvalidChannel";
+    RPCErrorCodes[RPCErrorCodes["InvalidPermissions"] = 4006] = "InvalidPermissions";
+    RPCErrorCodes[RPCErrorCodes["InvalidClientId"] = 4007] = "InvalidClientId";
+    RPCErrorCodes[RPCErrorCodes["InvalidOrigin"] = 4008] = "InvalidOrigin";
+    RPCErrorCodes[RPCErrorCodes["InvalidToken"] = 4009] = "InvalidToken";
+    RPCErrorCodes[RPCErrorCodes["InvalidUser"] = 4010] = "InvalidUser";
+    RPCErrorCodes[RPCErrorCodes["OAuth2Error"] = 5000] = "OAuth2Error";
+    RPCErrorCodes[RPCErrorCodes["SelectChannelTimedOut"] = 5001] = "SelectChannelTimedOut";
+    RPCErrorCodes[RPCErrorCodes["GetGuildTimedOut"] = 5002] = "GetGuildTimedOut";
+    RPCErrorCodes[RPCErrorCodes["SelectVoiceForceRequired"] = 5003] = "SelectVoiceForceRequired";
+    RPCErrorCodes[RPCErrorCodes["CaptureShortcutAlreadyListening"] = 5004] = "CaptureShortcutAlreadyListening";
+})(RPCErrorCodes = exports.RPCErrorCodes || (exports.RPCErrorCodes = {}));
+/**
+ * https://discord.com/developers/docs/topics/opcodes-and-status-codes#rpc-rpc-close-event-codes
+ */
+var RPCCloseEventCodes;
+(function (RPCCloseEventCodes) {
+    RPCCloseEventCodes[RPCCloseEventCodes["InvalidClientId"] = 4000] = "InvalidClientId";
+    RPCCloseEventCodes[RPCCloseEventCodes["InvalidOrigin"] = 4001] = "InvalidOrigin";
+    RPCCloseEventCodes[RPCCloseEventCodes["RateLimited"] = 4002] = "RateLimited";
+    RPCCloseEventCodes[RPCCloseEventCodes["TokenRevoked"] = 4003] = "TokenRevoked";
+    RPCCloseEventCodes[RPCCloseEventCodes["InvalidVersion"] = 4004] = "InvalidVersion";
+    RPCCloseEventCodes[RPCCloseEventCodes["InvalidEncoding"] = 4005] = "InvalidEncoding";
+})(RPCCloseEventCodes = exports.RPCCloseEventCodes || (exports.RPCCloseEventCodes = {}));
+//# sourceMappingURL=v9.js.map
+
+/***/ }),
+
+/***/ 5842:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.isInteractionButton = exports.isLinkButton = exports.isMessageComponentGuildInteraction = exports.isMessageComponentDMInteraction = exports.isApplicationCommandGuildInteraction = exports.isApplicationCommandDMInteraction = exports.isGuildInteraction = exports.isDMInteraction = void 0;
+__nccwpck_require__(7178);
+// Interactions
+/**
+ * A type-guard check for DM interactions
+ * @param interaction The interaction to check against
+ * @returns A boolean that indicates if the interaction was received in a DM channel
+ */
+function isDMInteraction(interaction) {
+    return Reflect.has(interaction, 'user');
+}
+exports.isDMInteraction = isDMInteraction;
+/**
+ * A type-guard check for guild interactions
+ * @param interaction The interaction to check against
+ * @returns A boolean that indicates if the interaction was received in a guild
+ */
+function isGuildInteraction(interaction) {
+    return Reflect.has(interaction, 'guild_id');
+}
+exports.isGuildInteraction = isGuildInteraction;
+// ApplicationCommandInteractions
+/**
+ * A type-guard check for DM application command interactions
+ * @param interaction The application command interaction to check against
+ * @returns A boolean that indicates if the application command interaction was received in a DM channel
+ */
+function isApplicationCommandDMInteraction(interaction) {
+    return isDMInteraction(interaction);
+}
+exports.isApplicationCommandDMInteraction = isApplicationCommandDMInteraction;
+/**
+ * A type-guard check for guild application command interactions
+ * @param interaction The interaction to check against
+ * @returns A boolean that indicates if the application command interaction was received in a guild
+ */
+function isApplicationCommandGuildInteraction(interaction) {
+    return isGuildInteraction(interaction);
+}
+exports.isApplicationCommandGuildInteraction = isApplicationCommandGuildInteraction;
+// MessageComponentInteractions
+/**
+ * A type-guard check for DM message component interactions
+ * @param interaction The message component interaction to check against
+ * @returns A boolean that indicates if the message component interaction was received in a DM channel
+ */
+function isMessageComponentDMInteraction(interaction) {
+    return isDMInteraction(interaction);
+}
+exports.isMessageComponentDMInteraction = isMessageComponentDMInteraction;
+/**
+ * A type-guard check for guild message component interactions
+ * @param interaction The interaction to check against
+ * @returns A boolean that indicates if the message component interaction was received in a guild
+ */
+function isMessageComponentGuildInteraction(interaction) {
+    return isGuildInteraction(interaction);
+}
+exports.isMessageComponentGuildInteraction = isMessageComponentGuildInteraction;
+// Buttons
+/**
+ * A type-guard check for buttons that have a `url` attached to them.
+ * @param component The button to check against
+ * @returns A boolean that indicates if the button has a `url` attached to it
+ */
+function isLinkButton(component) {
+    return component.style === 5 /* Link */;
+}
+exports.isLinkButton = isLinkButton;
+/**
+ * A type-guard check for buttons that have a `custom_id` attached to them.
+ * @param button The button to check against
+ * @returns A boolean that indicates if the button has a `custom_id` attached to it
+ */
+function isInteractionButton(component) {
+    return component.style !== 5 /* Link */;
+}
+exports.isInteractionButton = isInteractionButton;
+//# sourceMappingURL=v9.js.map
+
+/***/ }),
+
+/***/ 6634:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Utils = void 0;
+__exportStar(__nccwpck_require__(9352), exports);
+__exportStar(__nccwpck_require__(8174), exports);
+__exportStar(__nccwpck_require__(7178), exports);
+__exportStar(__nccwpck_require__(6001), exports);
+__exportStar(__nccwpck_require__(6979), exports);
+exports.Utils = __nccwpck_require__(5842);
+//# sourceMappingURL=v9.js.map
 
 /***/ }),
 
@@ -1846,7 +4685,16 @@ DelayedStream.prototype._checkIfMaxDataSizeExceeded = function() {
 
 /***/ }),
 
-/***/ 6930:
+/***/ 9851:
+/***/ ((__unused_webpack_module, exports) => {
+
+var u=Object.defineProperty;var f=(o,e,i)=>e in o?u(o,e,{enumerable:!0,configurable:!0,writable:!0,value:i}):o[e]=i;var K=o=>u(o,"__esModule",{value:!0}),h=(o,e)=>u(o,"name",{value:e,configurable:!0});var p=(o,e)=>{K(o);for(var i in e)u(o,i,{get:e[i],enumerable:!0})};var a=(o,e,i)=>(f(o,typeof e!="symbol"?e+"":e,i),i);p(exports,{Collection:()=>s,default:()=>d});var c=class extends Map{hasAll(...e){return e.every(i=>super.has(i))}hasAny(...e){return e.some(i=>super.has(i))}first(e){if(typeof e=="undefined")return this.values().next().value;if(e<0)return this.last(e*-1);e=Math.min(this.size,e);let i=this.values();return Array.from({length:e},()=>i.next().value)}firstKey(e){if(typeof e=="undefined")return this.keys().next().value;if(e<0)return this.lastKey(e*-1);e=Math.min(this.size,e);let i=this.keys();return Array.from({length:e},()=>i.next().value)}last(e){let i=[...this.values()];return typeof e=="undefined"?i[i.length-1]:e<0?this.first(e*-1):e?i.slice(-e):[]}lastKey(e){let i=[...this.keys()];return typeof e=="undefined"?i[i.length-1]:e<0?this.firstKey(e*-1):e?i.slice(-e):[]}at(e=0){return e=Math.floor(e),[...this.values()].at(e)}keyAt(e=0){return e=Math.floor(e),[...this.keys()].at(e)}random(e){let i=[...this.values()];return typeof e=="undefined"?i[Math.floor(Math.random()*i.length)]:!i.length||!e?[]:Array.from({length:Math.min(e,i.length)},()=>i.splice(Math.floor(Math.random()*i.length),1)[0])}randomKey(e){let i=[...this.keys()];return typeof e=="undefined"?i[Math.floor(Math.random()*i.length)]:!i.length||!e?[]:Array.from({length:Math.min(e,i.length)},()=>i.splice(Math.floor(Math.random()*i.length),1)[0])}find(e,i){typeof i!="undefined"&&(e=e.bind(i));for(let[t,n]of this)if(e(n,t,this))return n}findKey(e,i){typeof i!="undefined"&&(e=e.bind(i));for(let[t,n]of this)if(e(n,t,this))return t}sweep(e,i){typeof i!="undefined"&&(e=e.bind(i));let t=this.size;for(let[n,l]of this)e(l,n,this)&&this.delete(n);return t-this.size}filter(e,i){typeof i!="undefined"&&(e=e.bind(i));let t=new this.constructor[Symbol.species];for(let[n,l]of this)e(l,n,this)&&t.set(n,l);return t}partition(e,i){typeof i!="undefined"&&(e=e.bind(i));let t=[new this.constructor[Symbol.species],new this.constructor[Symbol.species]];for(let[n,l]of this)e(l,n,this)?t[0].set(n,l):t[1].set(n,l);return t}flatMap(e,i){let t=this.map(e,i);return new this.constructor[Symbol.species]().concat(...t)}map(e,i){typeof i!="undefined"&&(e=e.bind(i));let t=this.entries();return Array.from({length:this.size},()=>{let[n,l]=t.next().value;return e(l,n,this)})}mapValues(e,i){typeof i!="undefined"&&(e=e.bind(i));let t=new this.constructor[Symbol.species];for(let[n,l]of this)t.set(n,e(l,n,this));return t}some(e,i){typeof i!="undefined"&&(e=e.bind(i));for(let[t,n]of this)if(e(n,t,this))return!0;return!1}every(e,i){typeof i!="undefined"&&(e=e.bind(i));for(let[t,n]of this)if(!e(n,t,this))return!1;return!0}reduce(e,i){let t;if(typeof i!="undefined"){t=i;for(let[l,r]of this)t=e(t,r,l,this);return t}let n=!0;for(let[l,r]of this){if(n){t=r,n=!1;continue}t=e(t,r,l,this)}if(n)throw new TypeError("Reduce of empty collection with no initial value");return t}each(e,i){return this.forEach(e,i),this}tap(e,i){return typeof i!="undefined"&&(e=e.bind(i)),e(this),this}clone(){return new this.constructor[Symbol.species](this)}concat(...e){let i=this.clone();for(let t of e)for(let[n,l]of t)i.set(n,l);return i}equals(e){if(!e)return!1;if(this===e)return!0;if(this.size!==e.size)return!1;for(let[i,t]of this)if(!e.has(i)||t!==e.get(i))return!1;return!0}sort(e=c.defaultSort){let i=[...this.entries()];i.sort((t,n)=>e(t[1],n[1],t[0],n[0])),super.clear();for(let[t,n]of i)super.set(t,n);return this}intersect(e){let i=new this.constructor[Symbol.species];for(let[t,n]of e)this.has(t)&&i.set(t,n);return i}difference(e){let i=new this.constructor[Symbol.species];for(let[t,n]of e)this.has(t)||i.set(t,n);for(let[t,n]of this)e.has(t)||i.set(t,n);return i}sorted(e=c.defaultSort){return new this.constructor[Symbol.species](this).sort((i,t,n,l)=>e(i,t,n,l))}toJSON(){return[...this.values()]}static defaultSort(e,i){return Number(e>i)||Number(e===i)-1}},s=c;h(s,"Collection"),a(s,"default",c);var d=s;0&&(0);
+//# sourceMappingURL=index.js.map
+
+
+/***/ }),
+
+/***/ 9998:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -1856,7 +4704,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 2117:
+/***/ 952:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -1876,7 +4724,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GatewayDispatchEvents = exports.GatewayIntentBits = exports.GatewayCloseCodes = exports.GatewayOpcodes = exports.GatewayVersion = void 0;
-__exportStar(__nccwpck_require__(6930), exports);
+__exportStar(__nccwpck_require__(9998), exports);
 exports.GatewayVersion = '9';
 /**
  * https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-opcodes
@@ -2094,7 +4942,7 @@ var GatewayDispatchEvents;
 
 /***/ }),
 
-/***/ 2215:
+/***/ 4303:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -2181,7 +5029,7 @@ Object.freeze(exports.FormattingPatterns);
 
 /***/ }),
 
-/***/ 1900:
+/***/ 9349:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -2208,7 +5056,7 @@ var ApplicationCommandOptionType;
 
 /***/ }),
 
-/***/ 9637:
+/***/ 6323:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -2218,7 +5066,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 6314:
+/***/ 8059:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -2237,7 +5085,7 @@ var ApplicationCommandPermissionType;
 
 /***/ }),
 
-/***/ 6289:
+/***/ 7997:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -2254,9 +5102,9 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApplicationCommandType = void 0;
-__exportStar(__nccwpck_require__(1900), exports);
-__exportStar(__nccwpck_require__(9637), exports);
-__exportStar(__nccwpck_require__(6314), exports);
+__exportStar(__nccwpck_require__(9349), exports);
+__exportStar(__nccwpck_require__(6323), exports);
+__exportStar(__nccwpck_require__(8059), exports);
 /**
  * https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-types
  */
@@ -2270,7 +5118,7 @@ var ApplicationCommandType;
 
 /***/ }),
 
-/***/ 76:
+/***/ 5553:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -2280,7 +5128,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 3204:
+/***/ 8257:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -2290,7 +5138,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 1184:
+/***/ 1449:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -2300,7 +5148,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 8083:
+/***/ 907:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -2346,7 +5194,7 @@ var InteractionResponseType;
 
 /***/ }),
 
-/***/ 7074:
+/***/ 194:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -2375,7 +5223,7 @@ var ApplicationFlags;
 
 /***/ }),
 
-/***/ 4168:
+/***/ 7555:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -2444,7 +5292,7 @@ var AuditLogOptionsType;
 
 /***/ }),
 
-/***/ 3034:
+/***/ 8916:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -2697,7 +5545,7 @@ var ButtonStyle;
 
 /***/ }),
 
-/***/ 177:
+/***/ 5208:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -2710,7 +5558,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 1213:
+/***/ 3762:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -2783,7 +5631,7 @@ var ActivityFlags;
 
 /***/ }),
 
-/***/ 4252:
+/***/ 8876:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -3023,7 +5871,7 @@ var MembershipScreeningFieldType;
 
 /***/ }),
 
-/***/ 197:
+/***/ 8178:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -3039,28 +5887,28 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-__exportStar(__nccwpck_require__(7074), exports);
-__exportStar(__nccwpck_require__(4168), exports);
-__exportStar(__nccwpck_require__(3034), exports);
-__exportStar(__nccwpck_require__(177), exports);
-__exportStar(__nccwpck_require__(1213), exports);
-__exportStar(__nccwpck_require__(4252), exports);
-__exportStar(__nccwpck_require__(7663), exports);
-__exportStar(__nccwpck_require__(7838), exports);
-__exportStar(__nccwpck_require__(6108), exports);
-__exportStar(__nccwpck_require__(8982), exports);
-__exportStar(__nccwpck_require__(5209), exports);
-__exportStar(__nccwpck_require__(550), exports);
-__exportStar(__nccwpck_require__(3985), exports);
-__exportStar(__nccwpck_require__(675), exports);
-__exportStar(__nccwpck_require__(5287), exports);
-__exportStar(__nccwpck_require__(8445), exports);
-__exportStar(__nccwpck_require__(2834), exports);
+__exportStar(__nccwpck_require__(194), exports);
+__exportStar(__nccwpck_require__(7555), exports);
+__exportStar(__nccwpck_require__(8916), exports);
+__exportStar(__nccwpck_require__(5208), exports);
+__exportStar(__nccwpck_require__(3762), exports);
+__exportStar(__nccwpck_require__(8876), exports);
+__exportStar(__nccwpck_require__(8945), exports);
+__exportStar(__nccwpck_require__(3173), exports);
+__exportStar(__nccwpck_require__(5083), exports);
+__exportStar(__nccwpck_require__(9181), exports);
+__exportStar(__nccwpck_require__(1901), exports);
+__exportStar(__nccwpck_require__(649), exports);
+__exportStar(__nccwpck_require__(6254), exports);
+__exportStar(__nccwpck_require__(5930), exports);
+__exportStar(__nccwpck_require__(4536), exports);
+__exportStar(__nccwpck_require__(6096), exports);
+__exportStar(__nccwpck_require__(7537), exports);
 //# sourceMappingURL=index.js.map
 
 /***/ }),
 
-/***/ 7663:
+/***/ 8945:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -3076,16 +5924,16 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-__exportStar(__nccwpck_require__(76), exports);
-__exportStar(__nccwpck_require__(3204), exports);
-__exportStar(__nccwpck_require__(1184), exports);
-__exportStar(__nccwpck_require__(8083), exports);
-__exportStar(__nccwpck_require__(6289), exports);
+__exportStar(__nccwpck_require__(5553), exports);
+__exportStar(__nccwpck_require__(8257), exports);
+__exportStar(__nccwpck_require__(1449), exports);
+__exportStar(__nccwpck_require__(907), exports);
+__exportStar(__nccwpck_require__(7997), exports);
 //# sourceMappingURL=interactions.js.map
 
 /***/ }),
 
-/***/ 7838:
+/***/ 3173:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -3107,7 +5955,7 @@ var InviteTargetType;
 
 /***/ }),
 
-/***/ 6108:
+/***/ 5083:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -3226,7 +6074,7 @@ var OAuth2Scopes;
 
 /***/ }),
 
-/***/ 8982:
+/***/ 9181:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -3293,7 +6141,7 @@ Object.freeze(exports.PermissionFlagsBits);
 
 /***/ }),
 
-/***/ 5209:
+/***/ 1901:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -3318,7 +6166,7 @@ var StageInstancePrivacyLevel;
 
 /***/ }),
 
-/***/ 550:
+/***/ 649:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -3355,7 +6203,7 @@ var StickerFormatType;
 
 /***/ }),
 
-/***/ 3985:
+/***/ 6254:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -3377,7 +6225,7 @@ var TeamMemberMembershipState;
 
 /***/ }),
 
-/***/ 675:
+/***/ 5930:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -3390,7 +6238,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 5287:
+/***/ 4536:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -3444,7 +6292,7 @@ var ConnectionVisibility;
 
 /***/ }),
 
-/***/ 8445:
+/***/ 6096:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -3457,7 +6305,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 2834:
+/***/ 7537:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -3486,7 +6334,7 @@ var WebhookType;
 
 /***/ }),
 
-/***/ 9932:
+/***/ 4347:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -3641,7 +6489,7 @@ var RESTJSONErrorCodes;
 
 /***/ }),
 
-/***/ 9916:
+/***/ 7132:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -3651,7 +6499,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 5339:
+/***/ 2767:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -3661,7 +6509,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 6647:
+/***/ 1241:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -3671,7 +6519,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 9498:
+/***/ 4915:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -3681,7 +6529,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 432:
+/***/ 3416:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -3691,7 +6539,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 789:
+/***/ 4883:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -3708,21 +6556,21 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.OAuth2Routes = exports.RouteBases = exports.Routes = exports.APIVersion = void 0;
-__exportStar(__nccwpck_require__(9932), exports);
-__exportStar(__nccwpck_require__(9916), exports);
-__exportStar(__nccwpck_require__(5339), exports);
-__exportStar(__nccwpck_require__(6647), exports);
-__exportStar(__nccwpck_require__(9498), exports);
-__exportStar(__nccwpck_require__(432), exports);
-__exportStar(__nccwpck_require__(8734), exports);
-__exportStar(__nccwpck_require__(3206), exports);
-__exportStar(__nccwpck_require__(226), exports);
-__exportStar(__nccwpck_require__(3077), exports);
-__exportStar(__nccwpck_require__(8136), exports);
-__exportStar(__nccwpck_require__(9847), exports);
-__exportStar(__nccwpck_require__(2040), exports);
-__exportStar(__nccwpck_require__(4617), exports);
-__exportStar(__nccwpck_require__(2937), exports);
+__exportStar(__nccwpck_require__(4347), exports);
+__exportStar(__nccwpck_require__(7132), exports);
+__exportStar(__nccwpck_require__(2767), exports);
+__exportStar(__nccwpck_require__(1241), exports);
+__exportStar(__nccwpck_require__(4915), exports);
+__exportStar(__nccwpck_require__(3416), exports);
+__exportStar(__nccwpck_require__(9871), exports);
+__exportStar(__nccwpck_require__(7939), exports);
+__exportStar(__nccwpck_require__(1801), exports);
+__exportStar(__nccwpck_require__(9634), exports);
+__exportStar(__nccwpck_require__(1123), exports);
+__exportStar(__nccwpck_require__(3907), exports);
+__exportStar(__nccwpck_require__(6441), exports);
+__exportStar(__nccwpck_require__(5166), exports);
+__exportStar(__nccwpck_require__(2368), exports);
 exports.APIVersion = '9';
 exports.Routes = {
     /**
@@ -4444,7 +7292,7 @@ Object.freeze(exports.OAuth2Routes);
 
 /***/ }),
 
-/***/ 8734:
+/***/ 9871:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -4454,7 +7302,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 3206:
+/***/ 7939:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -4464,7 +7312,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 226:
+/***/ 1801:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -4474,7 +7322,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 3077:
+/***/ 9634:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -4484,7 +7332,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 8136:
+/***/ 1123:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -4494,7 +7342,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 9847:
+/***/ 3907:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -4504,7 +7352,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 2040:
+/***/ 6441:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -4514,7 +7362,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 4617:
+/***/ 5166:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -4524,7 +7372,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 2937:
+/***/ 2368:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -4534,7 +7382,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 9098:
+/***/ 1682:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -4579,14 +7427,14 @@ var RPCCloseEventCodes;
 
 /***/ }),
 
-/***/ 5067:
+/***/ 2751:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.isInteractionButton = exports.isLinkButton = exports.isMessageComponentGuildInteraction = exports.isMessageComponentDMInteraction = exports.isApplicationCommandGuildInteraction = exports.isApplicationCommandDMInteraction = exports.isGuildInteraction = exports.isDMInteraction = void 0;
-__nccwpck_require__(197);
+__nccwpck_require__(8178);
 // Interactions
 /**
  * A type-guard check for DM interactions
@@ -4667,7 +7515,7 @@ exports.isInteractionButton = isInteractionButton;
 
 /***/ }),
 
-/***/ 8453:
+/***/ 7464:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -4684,12 +7532,12 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Utils = void 0;
-__exportStar(__nccwpck_require__(2215), exports);
-__exportStar(__nccwpck_require__(2117), exports);
-__exportStar(__nccwpck_require__(197), exports);
-__exportStar(__nccwpck_require__(789), exports);
-__exportStar(__nccwpck_require__(9098), exports);
-exports.Utils = __nccwpck_require__(5067);
+__exportStar(__nccwpck_require__(4303), exports);
+__exportStar(__nccwpck_require__(952), exports);
+__exportStar(__nccwpck_require__(8178), exports);
+__exportStar(__nccwpck_require__(4883), exports);
+__exportStar(__nccwpck_require__(1682), exports);
+exports.Utils = __nccwpck_require__(2751);
 //# sourceMappingURL=v9.js.map
 
 /***/ }),
@@ -4829,7 +7677,7 @@ module.exports = BaseClient;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const BaseClient = __nccwpck_require__(1508);
 const ActionsManager = __nccwpck_require__(4987);
 const ClientVoiceManager = __nccwpck_require__(126);
@@ -5605,8 +8453,8 @@ module.exports = ClientVoiceManager;
 
 
 const EventEmitter = __nccwpck_require__(5673);
-const { Collection } = __nccwpck_require__(2374);
-const { RPCErrorCodes } = __nccwpck_require__(8453);
+const { Collection } = __nccwpck_require__(9851);
+const { RPCErrorCodes } = __nccwpck_require__(7464);
 const WebSocketShard = __nccwpck_require__(4415);
 const PacketHandlers = __nccwpck_require__(4155);
 const { Error } = __nccwpck_require__(2284);
@@ -7043,7 +9891,7 @@ module.exports = (client, packet) => {
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const { Events } = __nccwpck_require__(8310);
 
 module.exports = (client, { d: data }) => {
@@ -7951,7 +10799,7 @@ exports.ActivityFlags = __nccwpck_require__(2733);
 exports.ApplicationFlags = __nccwpck_require__(5760);
 exports.BaseManager = __nccwpck_require__(9636);
 exports.BitField = __nccwpck_require__(3372);
-exports.Collection = __nccwpck_require__(2374).Collection;
+exports.Collection = __nccwpck_require__(9851).Collection;
 exports.Constants = __nccwpck_require__(8310);
 exports.DataResolver = __nccwpck_require__(9697);
 exports.DiscordAPIError = __nccwpck_require__(6836);
@@ -7991,7 +10839,7 @@ exports.GuildStickerManager = __nccwpck_require__(6426);
 exports.MessageManager = __nccwpck_require__(699);
 exports.PermissionOverwriteManager = __nccwpck_require__(8088);
 exports.PresenceManager = __nccwpck_require__(4020);
-exports.ReactionManager = __nccwpck_require__(3907);
+exports.ReactionManager = __nccwpck_require__(6533);
 exports.ReactionUserManager = __nccwpck_require__(594);
 exports.RoleManager = __nccwpck_require__(488);
 exports.StageInstanceManager = __nccwpck_require__(5530);
@@ -8098,7 +10946,7 @@ exports.WebSocket = __nccwpck_require__(6354);
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const ApplicationCommandPermissionsManager = __nccwpck_require__(125);
 const CachedManager = __nccwpck_require__(1550);
 const { TypeError } = __nccwpck_require__(2284);
@@ -8323,7 +11171,7 @@ module.exports = ApplicationCommandManager;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const BaseManager = __nccwpck_require__(9636);
 const { Error, TypeError } = __nccwpck_require__(2284);
 const { ApplicationCommandPermissionTypes, APIErrors } = __nccwpck_require__(8310);
@@ -9167,7 +12015,7 @@ module.exports = GuildApplicationCommandManager;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const CachedManager = __nccwpck_require__(1550);
 const { TypeError, Error } = __nccwpck_require__(2284);
 const GuildBan = __nccwpck_require__(1315);
@@ -9352,7 +12200,7 @@ module.exports = GuildBanManager;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const CachedManager = __nccwpck_require__(1550);
 const ThreadManager = __nccwpck_require__(9388);
 const { Error } = __nccwpck_require__(2284);
@@ -9596,7 +12444,7 @@ module.exports = GuildChannelManager;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const BaseGuildEmojiManager = __nccwpck_require__(6606);
 const { TypeError } = __nccwpck_require__(2284);
 const DataResolver = __nccwpck_require__(9697);
@@ -9709,7 +12557,7 @@ module.exports = GuildEmojiManager;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const DataManager = __nccwpck_require__(2634);
 const { TypeError } = __nccwpck_require__(2284);
 const Role = __nccwpck_require__(2083);
@@ -9835,7 +12683,7 @@ module.exports = GuildEmojiRoleManager;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const CachedManager = __nccwpck_require__(1550);
 const { Error } = __nccwpck_require__(2284);
 const Invite = __nccwpck_require__(2059);
@@ -10056,7 +12904,7 @@ module.exports = GuildInviteManager;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const CachedManager = __nccwpck_require__(1550);
 const Guild = __nccwpck_require__(2747);
 const GuildChannel = __nccwpck_require__(9193);
@@ -10359,7 +13207,7 @@ module.exports = GuildManager;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const CachedManager = __nccwpck_require__(1550);
 const { Error, TypeError, RangeError } = __nccwpck_require__(2284);
 const BaseGuildVoiceChannel = __nccwpck_require__(5337);
@@ -10810,7 +13658,7 @@ module.exports = GuildMemberManager;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const DataManager = __nccwpck_require__(2634);
 const { TypeError } = __nccwpck_require__(2284);
 const Role = __nccwpck_require__(2083);
@@ -11009,7 +13857,7 @@ module.exports = GuildMemberRoleManager;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const CachedManager = __nccwpck_require__(1550);
 const { TypeError } = __nccwpck_require__(2284);
 const MessagePayload = __nccwpck_require__(8544);
@@ -11183,7 +14031,7 @@ module.exports = GuildStickerManager;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const CachedManager = __nccwpck_require__(1550);
 const { TypeError } = __nccwpck_require__(2284);
 const Message = __nccwpck_require__(9758);
@@ -11417,7 +14265,7 @@ module.exports = MessageManager;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const CachedManager = __nccwpck_require__(1550);
 const { TypeError } = __nccwpck_require__(2284);
 const PermissionOverwrites = __nccwpck_require__(4163);
@@ -11649,7 +14497,7 @@ module.exports = PresenceManager;
 
 /***/ }),
 
-/***/ 3907:
+/***/ 6533:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
@@ -11729,7 +14577,7 @@ module.exports = ReactionManager;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const CachedManager = __nccwpck_require__(1550);
 const { Error } = __nccwpck_require__(2284);
 const User = __nccwpck_require__(9752);
@@ -11808,7 +14656,7 @@ module.exports = ReactionUserManager;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const CachedManager = __nccwpck_require__(1550);
 const { TypeError } = __nccwpck_require__(2284);
 const Role = __nccwpck_require__(2083);
@@ -12267,7 +15115,7 @@ module.exports = StageInstanceManager;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const CachedManager = __nccwpck_require__(1550);
 const { TypeError } = __nccwpck_require__(2284);
 const ThreadChannel = __nccwpck_require__(3066);
@@ -12530,7 +15378,7 @@ module.exports = ThreadManager;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const CachedManager = __nccwpck_require__(1550);
 const { TypeError } = __nccwpck_require__(2284);
 const ThreadMember = __nccwpck_require__(8907);
@@ -13100,7 +15948,7 @@ module.exports = HTTPError;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const APIRequest = __nccwpck_require__(2224);
 const routeBuilder = __nccwpck_require__(6805);
 const RequestHandler = __nccwpck_require__(3705);
@@ -14284,7 +17132,7 @@ module.exports = ShardClientUtil;
 const EventEmitter = __nccwpck_require__(5673);
 const fs = __nccwpck_require__(7561);
 const path = __nccwpck_require__(9411);
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const Shard = __nccwpck_require__(3122);
 const { Error, TypeError, RangeError } = __nccwpck_require__(2284);
 const Util = __nccwpck_require__(2866);
@@ -15239,7 +18087,7 @@ module.exports = Base;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const Interaction = __nccwpck_require__(3670);
 const InteractionWebhook = __nccwpck_require__(4769);
 const InteractionResponses = __nccwpck_require__(9658);
@@ -15630,7 +18478,7 @@ module.exports = BaseGuildEmoji;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const GuildChannel = __nccwpck_require__(9193);
 const Webhook = __nccwpck_require__(9239);
 const TextBasedChannel = __nccwpck_require__(137);
@@ -15874,7 +18722,7 @@ module.exports = BaseGuildTextChannel;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const GuildChannel = __nccwpck_require__(9193);
 const Permissions = __nccwpck_require__(5193);
 
@@ -17416,7 +20264,7 @@ module.exports = Emoji;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const AnonymousGuild = __nccwpck_require__(7825);
 const GuildAuditLogs = __nccwpck_require__(538);
 const GuildPreview = __nccwpck_require__(6306);
@@ -18789,7 +21637,7 @@ module.exports = Guild;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const Integration = __nccwpck_require__(3100);
 const StageInstance = __nccwpck_require__(4331);
 const Sticker = __nccwpck_require__(563);
@@ -20608,7 +23456,7 @@ module.exports = GuildMember;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const Base = __nccwpck_require__(7650);
 const GuildPreviewEmoji = __nccwpck_require__(3875);
 const SnowflakeUtil = __nccwpck_require__(1590);
@@ -21582,7 +24430,7 @@ module.exports = Interaction;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const Collector = __nccwpck_require__(475);
 const { Events } = __nccwpck_require__(8310);
 const { InteractionTypes, MessageComponentTypes } = __nccwpck_require__(8310);
@@ -22193,7 +25041,7 @@ module.exports = InviteGuild;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const Base = __nccwpck_require__(7650);
 
 /**
@@ -22287,7 +25135,7 @@ module.exports = InviteStageInstance;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const Base = __nccwpck_require__(7650);
 const BaseMessageComponent = __nccwpck_require__(388);
 const ClientApplication = __nccwpck_require__(5373);
@@ -22299,7 +25147,7 @@ const MessagePayload = __nccwpck_require__(8544);
 const ReactionCollector = __nccwpck_require__(9541);
 const Sticker = __nccwpck_require__(563);
 const { Error } = __nccwpck_require__(2284);
-const ReactionManager = __nccwpck_require__(3907);
+const ReactionManager = __nccwpck_require__(6533);
 const { InteractionTypes, MessageTypes, SystemMessageTypes } = __nccwpck_require__(8310);
 const MessageFlags = __nccwpck_require__(8056);
 const Permissions = __nccwpck_require__(5193);
@@ -24470,7 +27318,7 @@ module.exports = MessageEmbed;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const { ChannelTypes } = __nccwpck_require__(8310);
 const Util = __nccwpck_require__(2866);
 
@@ -26086,7 +28934,7 @@ exports.RichPresenceAssets = RichPresenceAssets;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const Collector = __nccwpck_require__(475);
 const { Events } = __nccwpck_require__(8310);
 
@@ -27389,7 +30237,7 @@ module.exports = Sticker;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const Base = __nccwpck_require__(7650);
 const Sticker = __nccwpck_require__(563);
 const SnowflakeUtil = __nccwpck_require__(1590);
@@ -27553,7 +30401,7 @@ module.exports = StoreChannel;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const Base = __nccwpck_require__(7650);
 const TeamMember = __nccwpck_require__(2341);
 const SnowflakeUtil = __nccwpck_require__(1590);
@@ -29783,7 +32631,7 @@ module.exports = WelcomeChannel;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const Base = __nccwpck_require__(7650);
 const WelcomeChannel = __nccwpck_require__(3948);
 
@@ -29839,7 +32687,7 @@ module.exports = WelcomeScreen;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const Base = __nccwpck_require__(7650);
 const WidgetMember = __nccwpck_require__(2724);
 
@@ -30181,7 +33029,7 @@ module.exports = Application;
 
 
 const EventEmitter = __nccwpck_require__(5673);
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const { TypeError } = __nccwpck_require__(2284);
 const Util = __nccwpck_require__(2866);
 
@@ -30743,7 +33591,7 @@ module.exports = InteractionResponses;
 const MessageCollector = __nccwpck_require__(2526);
 const MessagePayload = __nccwpck_require__(8544);
 const SnowflakeUtil = __nccwpck_require__(1590);
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const { InteractionTypes } = __nccwpck_require__(8310);
 const { TypeError, Error } = __nccwpck_require__(2284);
 const InteractionCollector = __nccwpck_require__(7778);
@@ -32945,7 +35793,7 @@ module.exports = Intents;
 "use strict";
 
 
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const { _cleanupSymbol } = __nccwpck_require__(8310);
 const { TypeError } = __nccwpck_require__(4285);
 
@@ -33431,7 +36279,7 @@ class Options extends null {
    * });
    */
   static cacheWithLimits(settings = {}) {
-    const { Collection } = __nccwpck_require__(2374);
+    const { Collection } = __nccwpck_require__(9851);
     const LimitedCollection = __nccwpck_require__(4111);
 
     return manager => {
@@ -33466,7 +36314,7 @@ class Options extends null {
    * @returns {CacheFactory}
    */
   static cacheEverything() {
-    const { Collection } = __nccwpck_require__(2374);
+    const { Collection } = __nccwpck_require__(9851);
     return () => new Collection();
   }
 
@@ -33944,7 +36792,7 @@ module.exports = UserFlags;
 
 
 const { parse } = __nccwpck_require__(9411);
-const { Collection } = __nccwpck_require__(2374);
+const { Collection } = __nccwpck_require__(9851);
 const fetch = __nccwpck_require__(7797);
 const { Colors, Endpoints } = __nccwpck_require__(8310);
 const Options = __nccwpck_require__(8283);
@@ -47920,7 +50768,7 @@ function receiverOnFinish() {
 /**
  * The listener of the `Receiver` `'message'` event.
  *
- * @param {(Buffer|ArrayBuffer|Buffer[])} data The message
+ * @param {Buffer|ArrayBuffer|Buffer[])} data The message
  * @param {Boolean} isBinary Specifies whether the message is binary or not
  * @private
  */
