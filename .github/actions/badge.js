@@ -17,6 +17,11 @@ try {
     var content = resultado_test != "failure" ? succes:fail;
     content =`RESULTADOS DE LOS ÚLTIMOS TEST: ![Image text](${content})`
     fs.readFile(readme, 'utf8', function (err, data) {
+        data = data.split("<!-- RESULTADO -->")
+
+        data = data[0]+ "\n<!-- RESULTADO -->\n"+content+"\n<!-- RESULTADO -->\n"+ data[2];
+        
+        
         fs.writeFile(readme, content, function (err, result) {
             if (err) console.log('error', err);
         });
@@ -32,7 +37,7 @@ try {
 
         data = data.split("<!-- RESULTADO -->")
 
-        data = pepino[0]+ "\n<!-- RESULTADO -->\n"+content+"\n<!-- RESULTADO -->\n"+ pepino[2];
+        data = data[0]+ "\n<!-- RESULTADO -->\n"+content+"\n<!-- RESULTADO -->\n"+ data[2];
         
         
 

@@ -1697,7 +1697,7 @@ try {
     fs.readFile(readme, 'utf8', function (err, data) {
         data = data.split("<!-- RESULTADO -->")
 
-        data = pepino[0]+ "\n<!-- RESULTADO -->\n"+content+"\n<!-- RESULTADO -->\n"+ pepino[2];
+        data = data[0]+ "\n<!-- RESULTADO -->\n"+content+"\n<!-- RESULTADO -->\n"+ data[2];
         
         
         fs.writeFile(readme, content, function (err, result) {
@@ -1715,7 +1715,7 @@ try {
         data= "prueba"+data+"prueba"
         data = data.split("<!-- RESULTADO -->")
 
-        data = pepino[0]+ "\n<!-- RESULTADO -->\n"+content+"\n<!-- RESULTADO -->\n"+ pepino[2];
+        data = data[0]+ "\n<!-- RESULTADO -->\n"+content+"\n<!-- RESULTADO -->\n"+ data[2];
         
         
 
