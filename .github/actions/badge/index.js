@@ -1679,46 +1679,34 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(370)
 const fs = __nccwpck_require__(147);
 
-// const github = require('@actions/github')
-/* const TelegramBot = require('node-telegram-bot-api');
- */
 const resultado_test = core.getInput('resultado_test')
 
 var succes= "https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg"
 var fail =  "https://img.shields.io/badge/test-failure-red";
 console.log(resultado_test)
 
+const readme = "./README.md";
+var content = resultado_test != "failure" ? succes:fail;
 
-try {
-
-    const readme = "./README.md";
-    var content = resultado_test != "failure" ? succes:fail;
-    content =`RESULTADOS DE LOS ÚLTIMOS TEST: ![Image text](${content})`
+content =`RESULTADOS DE LOS ÚLTIMOS TEST: ![Image text](${content})`
+try {  
     fs.readFile(readme, 'utf8', function (err, data) {
-        data = data.split("<!-- RESULTADO -->")
 
-        data = data[0]+ "\n<!-- RESULTADO -->\n"+content+"\n<!-- RESULTADO -->\n"+ data[2];
-        
-        
-        fs.writeFile(readme, content, function (err, result) {
+        data = data.replace(`RESULTADOS DE LOS ÚLTIMOS TEST: ![Image text](${succes})`, content)
+        data = data.replace(`RESULTADOS DE LOS ÚLTIMOS TEST: ![Image text](${fail})`, content)
+        fs.writeFile(readme, data, function (err, result) {
             if (err) console.log('error', err);
         });
     });
     core.setOutput = ("frase-de-prueba resultado_test", resultado_test)
 
-
 } catch (error) {
-    var content =  "failure";
 
-
+    var content = `RESULTADOS DE LOS ÚLTIMOS TEST: ![Image text](${fail})`;
     fs.readFile(readme, 'utf8', function (err, data) {
-        data= "prueba"+data+"prueba"
-        data = data.split("<!-- RESULTADO -->")
 
-        data = data[0]+ "\n<!-- RESULTADO -->\n"+content+"\n<!-- RESULTADO -->\n"+ data[2];
-        
-        
-
+        data = data.replace(`RESULTADOS DE LOS ÚLTIMOS TEST: ![Image text](${succes})`, content)
+        data = data.replace(`RESULTADOS DE LOS ÚLTIMOS TEST: ![Image text](${fail})`, content)
         fs.writeFile(readme, data, function (err, result) {
             if (err) console.log('error', err);
         });
