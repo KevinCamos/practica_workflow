@@ -122,14 +122,13 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: "16"
-          cache: 'npm'
-          cache-dependency-path: ./.github/actions/discord/package-lock.json
+          # cache: 'npm'
+          # cache-dependency-path: ./.github/actions/discord/package-lock.json
         run: npm install
       - name: Expose git commit data
         uses: rlespinasse/git-commit-data-action@v1.x
-      # - name: npm install
-      #   run: |
-      #     npm install ./.github/actions/discord/package.json 
+        run: |
+          npm install ./.github/actions/discord/package.json 
       - name: Send message discord
         uses: ./.github/actions/discord/
         with:
