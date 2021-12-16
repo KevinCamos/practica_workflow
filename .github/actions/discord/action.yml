@@ -20,5 +20,5 @@ outputs:
   respuesta:
     description: 'Mensaje enviado al canal de discord!'
 runs:
-  using: 'node12'
+  using: 'node16'
   main: 'index.js'

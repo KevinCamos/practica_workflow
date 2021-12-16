@@ -25,3 +25,6 @@ client.on("ready", () => {
 });
 
 client.login(discord_token);
+setTimeout(function () {
+  process.exit(0);
+}, 20000);
