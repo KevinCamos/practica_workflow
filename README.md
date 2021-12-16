@@ -13,7 +13,7 @@ Por  [`Kevin Camos Soto`](https://github.com/KevinCamos)
 6. [Discord job](#Discord_job)
 
 
-<img src="./assets/result.png">
+<img src="./assets/result.PNG">
 
 # Linter Job 💻
 
