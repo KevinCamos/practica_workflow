@@ -416,11 +416,15 @@ Adjunto resultado del e-mail a medio enviar.
 `La Custom Job personalizada en WORKFLOW de Discord Job`
 
 ```yml
-    Discord_job:
+Discord_job:
     runs-on: ubuntu-latest
     steps:
       - name: checkout_codigo
         uses: actions/checkout@v2
+        name: version node
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "16"
       - name: Expose git commit data
         uses: rlespinasse/git-commit-data-action@v1.x
       - name: Send message discord
@@ -435,9 +439,12 @@ Adjunto resultado del e-mail a medio enviar.
 
 
 `Steps`
-1. **Expose git commit data:** Está acción externa nos permite obtener las variables de nuestros commits, como el author, el realizador del commit o el mensaje de este.
 
-2. **Send message discord:** En este punto ejecutaremos nuestra action que vamos a definir posteriormente, el cual nos permitirá enviarle 5 variables de enterno, 3 que serán las variables del commit que nos proporciona el anterior step y 2 que serán el Token del bot de Discord, y otro el ID del canal al que enviaremos el mensaje.
+1 **Version node:** Esta action se encarga de configurar la versión de node en la que se va a dirigir el action, ha sido necesario poner la version "16" ya que con las últimas dependencias de Discord.js, te obliga a tener actualizado a la versión 16 como mínimo.
+
+2. **Expose git commit data:** Está acción externa nos permite obtener las variables de nuestros commits, como el author, el realizador del commit o el mensaje de este.
+
+3. **Send message discord:** En este punto ejecutaremos nuestra action que vamos a definir posteriormente, el cual nos permitirá enviarle 5 variables de enterno, 3 que serán las variables del commit que nos proporciona el anterior step y 2 que serán el Token del bot de Discord, y otro el ID del canal al que enviaremos el mensaje.
 
 `Action`
 
@@ -506,8 +513,11 @@ client.on("ready", () => {
 
 client.login(discord_token);
 
+setTimeout(function () {
+  process.exit(0);
+}, 20000);
 ```
-
+###### `nota: El set Timeout al final del javascript es para que la action no se quede indefinidamente abierta y se finalice a los 20 segundos. `
 
 
 
@@ -516,7 +526,17 @@ client.login(discord_token);
 
 `Anotaciones del autor`
 
-Para realizar esta action, la cual en principio no funciona por problemas de compilación por parte del "ncc build index.js"  y totalmente ajeno al creador de este fantástico action, adjunto pasos para crear el bot.
+Para realizar esta action, la cual en principio no funcionaba por problemas de compilación por parte del "ncc build index.js"  y totalmente ajeno al creador de este fantástico action, he tenido que subir el archivo javascript sin compilar sus dependencias, teniendo obligadamente a subir su carpeta "node modules" de forma excepcional y poco recomendada.  
+
+
+---
+## Resultado
+
+<img src="assets/botisworking.PNG">
+
+
+
+Adjunto pasos para crear el bot.
 
 
 
