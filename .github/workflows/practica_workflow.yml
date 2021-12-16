@@ -114,7 +114,6 @@ jobs:
           send_to: ${{ secrets.EMAIL_TO}}
           apy_key: ${{ secrets.KEY_MAILCHIMP}}
           
-
   Discord_job:
     runs-on: ubuntu-latest
     steps:
