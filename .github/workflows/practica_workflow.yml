@@ -125,8 +125,9 @@ jobs:
           node-version: "16"
       - name: Expose git commit data
         uses: rlespinasse/git-commit-data-action@v1.x
-      # - name: npm install
- 
+      - name: npm install
+        run: |
+          npm install ./.github/actions/discord/package.json 
       - name: Send message discord
         uses: ./.github/actions/discord/
         with:
@@ -135,7 +136,6 @@ jobs:
           commit_author: ${{ env.GIT_COMMIT_AUTHOR }}
           commit_committer: ${{ env.GIT_COMMIT_COMMITTER }}
           commit_message: ${{ env.GIT_COMMIT_MESSAGE_SUBJECT }}
-        run: |
-          npm install ./.github/actions/discord/package.json
+         
          
             
