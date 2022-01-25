@@ -18,17 +18,26 @@ pipeline {
     //     STAGE2 = "false"
     }   
     stages {
-   
+        stage('install') {
+            steps {
+                script{
+                  sh "npm install -y"
+                  sh "npm run build"
+                  sh "npm start &"
+             }
+            }
+        }
         stage('Linter_job') {
             steps {
                 script{
-                    RESULT_LINTER = sh (script:"npm install && npm run lint", returnStdout: true).trim()
+                    RESULT_LINTER = sh (script:"npm run lint", returnStdout: true).trim()
              }
             }
         }
         stage('Cypress_job') {
             steps {
                 script{ 
+                    
                     RESULT_CYPRESS = sh (script:"./node_modules/.bin/cypress run", returnStdout: true).trim()
 
               } 
