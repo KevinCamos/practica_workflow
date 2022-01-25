@@ -31,7 +31,7 @@ pipeline {
               } 
             }
         }
-        stage('Cypress_job') {
+        stage('Echo') {
             steps {
                echo ="$RESULT"
 
