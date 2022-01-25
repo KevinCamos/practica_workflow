@@ -46,11 +46,11 @@ pipeline {
             steps {
                 script{
                     sh "node ./jenkinscripts/badge.js $RESULT_CYPRESS"
-                    git config user.name KevinCamos
-                    git config user.email kevincamossoto@gmail.com
-                    git pull 
-                    git add .
-                    git commit --allow-empty -m "update readme"
+                    sh "git config user.name KevinCamos"
+                    sh "git config user.email kevincamossoto@gmail.com"
+                    sh "git pull "
+                    sh "git add ."
+                    sh "git commit --allow-empty -m 'update readme' "
                    
                     RESULT_BADGE = sh (script: "git push" , returnStdout: true).trim()    
 
