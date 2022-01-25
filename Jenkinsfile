@@ -29,7 +29,7 @@ pipeline {
         stage('Cypress_job') {
             steps {
                 script{
-                    RESULT_CYPRESS = sh (script:"npx cypress run --config-file cypress.json", returnStdout: true).trim()
+                    RESULT_CYPRESS = sh (script:"cypress open --config-file cypress.json", returnStdout: true).trim()
 
               } 
             }
