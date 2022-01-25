@@ -28,8 +28,8 @@ pipeline {
         }
         stage('Cypress_job') {
             steps {
-                script{
-                    RESULT_CYPRESS = sh (script:"cypress open --config-file cypress.json", returnStdout: true).trim()
+                script{ 
+                    RESULT_CYPRESS = sh (script:"./node_modules/.bin/cypress run", returnStdout: true).trim()
 
               } 
             }
