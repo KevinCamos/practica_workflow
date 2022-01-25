@@ -84,10 +84,10 @@ jobs:
     - name: vercel-action
       uses: amondnet/vercel-action@v20
       with:
-        vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
+        vercel-token: ${{ secrets.VERCEL_TOKEN }} # FICAT-JENKINS
         github-token: ${{ secrets.GITHUB_TOKEN }} #Optional 
         # vercel-args: '--prod' #Optional
-        vercel-org-id: ${{ secrets.ORG_ID}}  #Required
+        vercel-org-id: ${{ secrets.ORG_ID}}  #FICAT-JENKINS
         vercel-project-id: ${{ secrets.PROJECT_ID}} #Required 
         working-directory: ./
 # https://vercel.com/kevincamos/workflowactionsdaw/HeBe4wxE8FG23zW64GZbcrDF3KhX

@@ -1,4 +1,3 @@
-const core = require('@actions/core')
 const discord_token = core.getInput('discord_token')
 const id_channel = core.getInput('id_channel')
 const commit_author = core.getInput('commit_author')
