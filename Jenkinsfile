@@ -11,7 +11,10 @@ pipeline {
     //     string(name: 'apellido', defaultValue: 'Doe', description: 'Apellido')
     // }
     environment {
-        RESULT = "false"
+        RESULT_LINTER = "false"
+        RESULT_CYPRESS = "false"
+        RESULT_BADGE = "false"
+        RESULT_DEPLOY = "false"
     //     STAGE2 = "false"
     }   
     stages {
@@ -19,21 +22,22 @@ pipeline {
         stage('Linter_job') {
             steps {
                 script{
-                  sh "npm install && npm run lint"
+                    RESULT_LINTER = sh (script:"npm install && npm run lint", returnStdout: true).trim()
              }
             }
         }
         stage('Cypress_job') {
             steps {
                 script{
-                    RESULT = sh (script:"cypress run --config-file cypress.json", returnStdout: true).trim()
+                    RESULT_CYPRESS = sh (script:"npx cypress run --config-file cypress.json", returnStdout: true).trim()
 
               } 
             }
         }
         stage('Echo') {
             steps {
-               echo "$RESULT"
+               echo "$RESULT_LINTER"
+               echo "$RESULT_CYPRESS"
 
               
             }
@@ -41,23 +45,39 @@ pipeline {
         stage('Add_badge_job') {
             steps {
                 script{
-                    sh "node ./jenkinscripts/badge.js $RESULT"
+                    sh "node ./jenkinscripts/badge.js $RESULT_CYPRESS"
                     git config user.name KevinCamos
                     git config user.email kevincamossoto@gmail.com
                     git pull 
                     git add .
                     git commit --allow-empty -m "update readme"
-                    git push 
+                   
+                    RESULT_BADGE = sh (script: "git push" , returnStdout: true).trim()    
+
+            }
+        }
+        stage('Add_badge_job') {
+            steps {
+                script{
+                    sh "node ./jenkinscripts/badge.js $RESULT_CYPRESS"
+                    git config user.name KevinCamos
+                    git config user.email kevincamossoto@gmail.com
+                    git pull 
+                    git add .
+                    git commit --allow-empty -m "update readme"
+                   
+                    RESULT_BADGE = sh (script: "git push" , returnStdout: true).trim()    
+
             }
         }
 
-        
+
         // stage('Linter_job') {
         //     steps {
         //         script{
         //             sh "npm install && npm run lint"
         //         }
-        //     }
+        //     } 
         // }
         //  stage('Stage3') {
         //     steps {
