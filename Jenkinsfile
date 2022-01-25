@@ -25,8 +25,8 @@ pipeline {
         }
         stage('Cypress_job') {
             steps {
-              script{
-                RESULT = sh (script:"cypress run --config-file cypress.json", returnStdout: true).trim()
+                script{
+                    RESULT = sh (script:"cypress run --config-file cypress.json", returnStdout: true).trim()
 
               } 
             }
@@ -37,7 +37,21 @@ pipeline {
 
               
             }
+
+        stage('Add_badge_job') {
+            steps {
+                script{
+                    sh "node ./jenkinscripts/badge.js $RESULT"
+                    git config user.name KevinCamos
+                    git config user.email kevincamossoto@gmail.com
+                    git pull 
+                    git add .
+                    git commit --allow-empty -m "update readme"
+                    git push 
+            }
         }
+
+        
         // stage('Linter_job') {
         //     steps {
         //         script{
