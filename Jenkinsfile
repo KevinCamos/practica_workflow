@@ -33,7 +33,7 @@ pipeline {
         }
         stage('Echo') {
             steps {
-               echo ="$RESULT"
+               echo "$RESULT"
 
               
             }
