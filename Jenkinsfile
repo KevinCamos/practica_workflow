@@ -42,6 +42,7 @@ pipeline {
               
             }
 
+        } 
         stage('Add_badge_job') {
             steps {
                 script{
@@ -59,8 +60,7 @@ pipeline {
     
     } 
 
-
-    }       
+      
 }
 }
 
