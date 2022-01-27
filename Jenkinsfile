@@ -1,75 +1,69 @@
 
 pipeline {
     agent any
+        environment {
+            RESULT_LINTER = "false"
+            RESULT_CYPRESS = "false"
+            RESULT_BADGE = "false"
+            RESULT_DEPLOY = "false"
+        }   
+        stages {
+            stage('install') {
+                steps {
+                    script{
+                    sh "npm install -y"
+                    sh "npm run build"
+                    sh "npm start &"
+                    }
+                }
+            }
+            stage('Linter_job') {
+                steps {
+                    script{
+                        RESULT_LINTER = sh (script:"npm run lint", returnStdout: true).trim()
+                    }
+                }
+            }
+            stage('Cypress_job') {
+                steps {
+                    script{ 
+                        
+                        RESULT_CYPRESS = sh (script:"./node_modules/.bin/cypress run", returnStdout: true).trim()
 
-    // triggers {
-    
-    //     pollSCM(' H/5 * * * * ')
-    // } 
-    // parameters {
-    //     string(name: 'nombrepersona', defaultValue: 'John', description: 'Nombre')
-    //     string(name: 'apellido', defaultValue: 'Doe', description: 'Apellido')
-    // }
-    environment {
-        RESULT_LINTER = "false"
-        RESULT_CYPRESS = "false"
-        RESULT_BADGE = "false"
-        RESULT_DEPLOY = "false"
-    //     STAGE2 = "false"
-    }   
-    stages {
-        stage('install') {
-            steps {
-                script{
-                  sh "npm install -y"
-                  sh "npm run build"
-                  sh "npm start &"
-             }
+                    } 
+                }
             }
-        }
-        stage('Linter_job') {
-            steps {
-                script{
-                    RESULT_LINTER = sh (script:"npm run lint", returnStdout: true).trim()
-             }
-            }
-        }
-        stage('Cypress_job') {
-            steps {
-                script{ 
+             
+            stage('Add_badge_job') {
+                steps {
+                    script{
+                        sh "node ./jenkinscripts/badge.js $RESULT_CYPRESS"
+                        sh "git config user.name KevinCamos"
+                        sh "git config user.email kevincamossoto@gmail.com"
+                        sh "git pull "
+                        sh "git add ."
+                        sh "git commit --allow-empty -m 'update readme' "
                     
-                    RESULT_CYPRESS = sh (script:"./node_modules/.bin/cypress run", returnStdout: true).trim()
+                        RESULT_BADGE = sh (script: "git push" , returnStdout: true).trim()    
 
-              } 
+                    }
+                }
+            
+            } 
+            stage('Send_email') {
+                steps {
+                    script{
+                        sh "node ./jenkinscripts/email.js $RESULT_LINTER $RESULT_CYPRESS $RESULT_BADGE $RESULT_DEPLOY EMAIL TOKENMANDRILL" //Faltaran les credencials de mail              
+                    }      
+                }
             }
-        }
-        stage('Echo') {
-            steps {
-               echo "$RESULT_LINTER"
-               echo "$RESULT_CYPRESS"
-
-              
-            }
-
-        } 
-        stage('Add_badge_job') {
-            steps {
-                script{
-                    sh "node ./jenkinscripts/badge.js $RESULT_CYPRESS"
-                    sh "git config user.name KevinCamos"
-                    sh "git config user.email kevincamossoto@gmail.com"
-                    sh "git pull "
-                    sh "git add ."
-                    sh "git commit --allow-empty -m 'update readme' "
-                   
-                    RESULT_BADGE = sh (script: "git push" , returnStdout: true).trim()    
-
-            }
-        }
-    
-    } 
-
-      
-}
+            stage('Discord_Token') {
+                steps {
+                    script{
+                        sh "node ./jenkinscripts/discord token1 token2" //Faltaran les credencials de mail              
+                    }      
+                }             
+            }    
+    }
 }
 
