@@ -44,11 +44,13 @@ pipeline {
                         sh "node ./jenkinscripts/badge.js $RESULT_CYPRESS"
                         sh "git config user.name KevinCamos"
                         sh "git config user.email kevincamossoto@gmail.com"
-                        sh "git pull "
                         sh "git add ."
                         sh "git commit --allow-empty -m 'update readme' "
-                    
-                        RESULT_BADGE = sh (script: "git push" , returnStdout: true).trim()    
+                        withCredentials([usernameColonPassword(credentialsId: 'dd4df5a6-38ac-4fb6-89e8-fa9da0d7ac5e', variable: 'USERPASS')]) {
+                            sh 'git remote origin set-url https://$USERPASS@github.com/KevinCamos/practica_workflow'
+                        }
+  
+                        RESULT_BADGE = sh (script: "git push origin HEAD:jenkins" , returnStatus: true) 
 
                     }
                 }
