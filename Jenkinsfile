@@ -27,7 +27,7 @@ pipeline {
                 steps {
                     script{ 
                         sh "npm run build"
-                        sh "npm start &"
+                        sh "npm run start &"
                         RESULT_CYPRESS = sh (script:"cypress run --headed", returnStdout: true).trim()
 
                     } 
