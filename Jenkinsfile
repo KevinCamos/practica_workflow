@@ -6,6 +6,10 @@ pipeline {
             RESULT_CYPRESS = "false"
             RESULT_BADGE = "false"
             RESULT_DEPLOY = "false"
+            TERM = 'xterm'
+            NO_COLOR = '1'
+
+
         }   
         stages {
             stage('install') {
@@ -19,7 +23,7 @@ pipeline {
             stage('Linter_job') {
                 steps {
                     script{
-                        RESULT_LINTER = sh (script:"npm run lint", returnStdout: true).trim()
+                        RESULT_LINTER = sh (script:"npm run lint", returnStatus: true)
                     }
                 }
             }
@@ -28,7 +32,7 @@ pipeline {
                     script{ 
                         sh "npm run build"
                         sh "npm run start &"
-                        RESULT_CYPRESS = sh (script:"cypress run --headed", returnStdout: true).trim()
+                        RESULT_CYPRESS = sh (script:"cypress run --headed", returnStatus: true)
 
                     } 
                 }
