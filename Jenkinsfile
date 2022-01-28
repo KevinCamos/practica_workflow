@@ -44,7 +44,7 @@ pipeline {
                         sh "node ./jenkinscripts/badge.js $RESULT_CYPRESS"
                         sh "git config user.name KevinCamos"
                         sh "git config user.email kevincamossoto@gmail.com"
-                        sh "git add ."
+                        sh "git add README.md"
                         sh "git commit --allow-empty -m 'update readme' "
                         withCredentials([usernameColonPassword(credentialsId: 'dd4df5a6-38ac-4fb6-89e8-fa9da0d7ac5e', variable: 'USERPASS')]) {
                             sh "git remote set-url origin https://$USERPASS@github.com/KevinCamos/practica_workflow"
