@@ -11,7 +11,7 @@ const mandrill = require('node-mandrill')(API_KEY);
 mandrill('/messages/send', {
     message: {
         to: [{email: sender_sending}],
-        from_email: sesender_sendingnd_from,
+        from_email: sender_sending,
         subject: "Resultado del workflow ejecutado",
         text: `Se ha realizado un push en la rama main que ha provocado la ejecución del
         workflow nombre_repositorio_workflow con los siguientes resultados:
