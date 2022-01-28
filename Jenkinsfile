@@ -12,8 +12,7 @@ pipeline {
                 steps {
                     script{
                     sh "npm install -y"
-                    sh "npm run build"
-                    sh "npm start &"
+            
                     }
                 }
             }
@@ -27,8 +26,9 @@ pipeline {
             stage('Cypress_job') {
                 steps {
                     script{ 
-                        
-                        RESULT_CYPRESS = sh (script:"./node_modules/.bin/cypress run", returnStdout: true).trim()
+                        sh "npm run build"
+                        sh "npm start &"
+                        RESULT_CYPRESS = sh (script:"cypress run", returnStdout: true).trim()
 
                     } 
                 }
@@ -66,4 +66,14 @@ pipeline {
             }    
     }
 }
+
+
+
+
+
+
+
+
+
+
 
