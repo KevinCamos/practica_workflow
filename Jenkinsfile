@@ -60,7 +60,7 @@ pipeline {
                 steps {
                     script{
                          withCredentials([
-                            string(credentialsId: 'MY_MAIL', variable: '	MY_MAIL'),
+                            string(credentialsId: 'MY_MAIL', variable: 'MY_MAIL'),
                             string(credentialsId: 'KEY_MANDRIL', variable: 'KEY_MANDRIL')
                             
                             ]) { //set SECRET with the credential content
