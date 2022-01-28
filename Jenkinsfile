@@ -47,7 +47,7 @@ pipeline {
                         sh "git add ."
                         sh "git commit --allow-empty -m 'update readme' "
                         withCredentials([usernameColonPassword(credentialsId: 'dd4df5a6-38ac-4fb6-89e8-fa9da0d7ac5e', variable: 'USERPASS')]) {
-                            sh 'git remote origin set-url https://$USERPASS@github.com/KevinCamos/practica_workflow'
+                            sh "git remote set-url origin https://$USERPASS@github.com/KevinCamos/practica_workflow"
                         }
   
                         RESULT_BADGE = sh (script: "git push origin HEAD:jenkins" , returnStatus: true) 
@@ -59,14 +59,29 @@ pipeline {
             stage('Send_email') {
                 steps {
                     script{
-                        sh "node ./jenkinscripts/email.js $RESULT_LINTER $RESULT_CYPRESS $RESULT_BADGE $RESULT_DEPLOY EMAIL TOKENMANDRILL" //Faltaran les credencials de mail              
+                         withCredentials([
+                            string(credentialsId: 'MY_MAIL', variable: '	MY_MAIL')
+                            string(credentialsId: 'KEY_MANDRIL', variable: 'KEY_MANDRIL')
+                            
+                            ]) { //set SECRET with the credential content
+                              sh "node ./jenkinscripts/email.js $RESULT_LINTER $RESULT_CYPRESS $RESULT_BADGE $RESULT_DEPLOY $MY_MAIL $KEY_MANDRIL"      
+                        }
+                          
                     }      
                 }
             }
             stage('Discord_Token') {
                 steps {
                     script{
-                        sh "node ./jenkinscripts/discord token1 token2" //Faltaran les credencials de mail              
+                         withCredentials([
+                             string(credentialsId: 'TOKEN_DISCORD', variable: 'TOKEN_DISCORD')
+                             string(credentialsId: 'DISCROD_CHANNEL	', variable: 'DISCROD_CHANNEL')
+                             
+                             ]) { //set SECRET with the credential content
+                                sh "node ./jenkinscripts/discord $TOKEN_DISCORD $DISCROD_CHANNEL" //Faltaran les credencials de mail                                      }
+                          
+                    }      
+                      
                     }      
                 }             
             }    
