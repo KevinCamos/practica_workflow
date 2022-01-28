@@ -28,7 +28,7 @@ pipeline {
                     script{ 
                         sh "npm run build"
                         sh "npm start &"
-                        RESULT_CYPRESS = sh (script:"cypress run", returnStdout: true).trim()
+                        RESULT_CYPRESS = sh (script:"cypress run --headed", returnStdout: true).trim()
 
                     } 
                 }
