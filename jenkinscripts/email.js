@@ -1,4 +1,4 @@
-const sender_sending = process.argv[6] || "kevincamossoto@gmail.com";
+const sender_sending = process.argv[6];
 const API_KEY = process.argv[7];
 
 

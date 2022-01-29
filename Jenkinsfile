@@ -47,21 +47,7 @@ pipeline {
                 } 
             }
         }
-        stage('Vercel') {
-            steps {
-                script{
-                    withCredentials([
-                    string(credentialsId: 'VERCEL_TOKEN', variable: 'VERCEL_TOKEN'),
-                    string(credentialsId: 'ORG_ID', variable: 'ORG_ID'),
-                    string(credentialsId: 'PROJECT_ID	', variable: 'PROJECT_ID')
-                    
-                    ]) { 
-                      RESULT_VERCEL = sh (script:"sh vercel --env CLAVE1=$ORG_ID --env CLAVE2=$PROJECT_ID --token $VERCEL_TOKEN", returnStatus: true)
-                    }      
-                      
-                }      
-            }             
-        }            
+          
         stage('Git_commit') {
             steps {
                     script{
@@ -82,8 +68,23 @@ pipeline {
 
                 }
             }
-        
+
         } 
+        stage('Vercel') {
+            steps {
+                script{
+                    withCredentials([
+                    string(credentialsId: 'VERCEL_TOKEN', variable: 'VERCEL_TOKEN'),
+                    string(credentialsId: 'ORG_ID', variable: 'ORG_ID'),
+                    string(credentialsId: 'PROJECT_ID	', variable: 'PROJECT_ID')
+                    
+                    ]) { 
+                      RESULT_VERCEL = sh (script:"sh vercel --env KEY1=$ORG_ID --env KEY2=$PROJECT_ID --token $VERCEL_TOKEN", returnStatus: true)
+                    }      
+                      
+                }      
+            }             
+        }      
         stage('Parallel In Sequential') {
             parallel {
                   stage('Send_email') {
@@ -108,9 +109,7 @@ pipeline {
 
                                 ]) { //set SECRET with the credential content
                                 sh "node ./jenkinscripts/discord $TOKEN_DISCORD $DISCROD_CHANNEL" //Faltaran les credencials de mail                                      }
-
                             }      
-
                         }      
                     }
                 }             

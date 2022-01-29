@@ -1,386 +1,292 @@
-
 # PRÁCTICA ACTIONS
 
-Por  [`Kevin Camos Soto`](https://github.com/KevinCamos)
+Por [`Kevin Camos Soto`](https://github.com/KevinCamos)
 
 ## Table of Contents
 
-1. [Linter job](#Linter_job)
-2. [Cypress job](#Cypress_job)
-3. [Add_badge job](#Add_badge_job)
-4. [Deploy job](#Deploy_job)
-5. [Notification job](#Notification_job)
-6. [Discord job](#Discord_job)
+<!--
+1. [Linter Stage](#Linter_Stage)
+2. [Cypress Stage](#Cypress_Stage)
+3. [Add_badge Stage](#Add_badge_Stage)
+4. [Deploy Stage](#Deploy_Stage)
+5. [Notification Stage](#Notification_Stage)
+6. [Discord Stage](#Discord_Stage) -->
 
+# Trigger 💻
 
-<img src="./assets/result.PNG">
+`Trigger cada 3 horas`
 
-# Linter Job 💻
-
-`Job en WORKFLOW de Linter Job`
-
-```yml
-  Linter_job:
-    runs-on: ubuntu-latest
-    steps:
-    - name: checkout_codigo
-      uses: actions/checkout@v2
-    - name: Install dependencies
-      run: |
-        npm install
-
-    - name: Lint files
-      run: |
-        npm run lint
 ```
+  triggers {
+            pollSCM('H */3 * * *')
+     } 
+```
+
+
+1. **Trigger:** Cada 3 horas comprueba si hay algún cambio en el repositorio, si lo hay, vuelve a ejecutarse
+
+# Parameters 💻
+
+`Paramoetros para la aplicación`
+
+```
+          parameters {
+            string(name: 'EJECUTOR', defaultValue: 'Kevin', description: 'Ejecutor: de tipo texto en el que se especificará el nombre de la persona que ejecuta la pipeline')
+            string(name: 'MOTIVO', defaultValue: 'DAW', description: 'Motivo: de tipo texto también en que podremos especificar el motivo por el cual estamos ejecutando la pipeline.')
+            string(name: 'MAIL', defaultValue: 'ejemplo@gmail.com', description: 'Correo notificación: de tipo texto que almacenará el correo al que notificaremos el resultado de cada stage ejecutado')
+            booleanParam(name: 'COMMITPIPELINE', defaultValue: false, description: 'Esta variable es para determinar si quieres realizar un commit al ejecutar el pipeline y no entrar en un bucle de commits a causa del trigger') 
+
+        }
+```
+1. **EJECUTOR:** Ejecutor: de tipo texto en el que se especificará el nombre de la persona que ejecuta la pipeline
+2. **MOTIVO:** Motivo: de tipo texto también en que podremos especificar el motivo por el cual estamos ejecutando la pipeline.
+3. **MAIL:** Correo notificación: de tipo texto que almacenará el correo al que notificaremos el resultado de cada stage ejecutado
+4. **COMMITPIPELINE:** Esta variable es para determinar si quieres realizar un commit al ejecutar el pipeline y no entrar en un bucle de commits a causa del trigger
+
+
+`Iniciamos las variables para obtener los resultados y para evitar problemas con cypress`
+
+```
+      environment {
+            RESULT_LINTER = "false"
+            RESULT_CYPRESS = "false"
+            RESULT_BADGE = "false"
+            RESULT_VERCEL = "false"
+            TERM = 'xterm'
+            NO_COLOR = '1'
+
+
+        }   
+```
+
+1. **Obtener Valores:** Iniciamos las 4 primeras variables para obtener el valor del resultado de los scripts
+2. **TERM Y NO_COLOR:** Estas variables son iniciadas para evitar error con cypress.
+# Linter Stage 💻
+`Anotaciones del autor`
+ 
+- Estas dos últimas fueron idea del compañero de clase Juanjo, el qual me ayudó con errores que no debían de ocurrir en la ejecución.
+
+
+`Stage en PIPELINE de Linter `
+
+```
+          stage('Linter_Stage') {
+            steps {
+                script{
+                    RESULT_LINTER = sh (script:"npm run lint", returnStatus: true)
+                }
+            }
+        }
+```
+
 `Steps`
 
-1. **Checkout_codigo:**
-  Este step es recurrente en la aplicación y esta será la única vez que lo definamos. Sirve para obtener el código del repositorio y poder hacer los test necesarios sobre este o utilizarlo como creamos.
+1. **Script:** Dentro de script realizamos "npm run lint" para ejecutar linter, y obtenemos el resultado de la operación con "returnStatus" y los almacenamos para la posteridad
 
-2. **Install dependencies:**
-  Instala las dependencias de node modules del package.json, necesario para poder ejecutar el próximo step
+# Cypress Stage 💻
 
-3. **Lint files:**
-  Ejecuta linter con el comando "npm run lint", el cual verifica que no haya errores en el código como comillas simples en lugar de dobles o Switch-case mal ordenados
+`STAGE en PIPELINE de Cypress Stage`
+
+```
+ stage('Cypress_stage') {
+            steps {
+                script{
+                    sh "npm run build"
+                    sh "npm run start &"
+                    RESULT_CYPRESS = sh (script:"cypress run --headed", returnStatus: true)
+                }
+        }
+```
+
+`Steps`
+
+1. **Script:** Dentro de script realizamos "npm run build" y "npm run start &", este último comando que tiene "&" se realiza para poder seguir ejecutando comandos en la consola teniendo el proyecto iniciado. Tras esto ejecutamos "cypress run --headed"
 
 `Anotaciones del autor`
+ 
+- En este ejercicio hubo bastante ayuda entre toda la clase como comunidad, facilitandonos la cantidad de problemas que nos dio.
 
-  En el ejercicio, este job encuentra una serie de errores en pages/api/users, como un Switch donde el default está puesto antes que el último case, comillas simples en lugar de dobles o el "POST0", el cual no se si debía de dar error aquí o más tarde ya que lo quité de antemano para ahorrarme en salud.
-
----
-
-# Cypress Job 💻
-
-`Job en WORKFLOW de Cypress Job`
-
-```yml
-Cypress_job:
-    runs-on: ubuntu-latest
-    needs: Linter_job
-    steps:
-    - name: checkout_codigo
-      uses: actions/checkout@v2
-    - name: Cypress run
-      uses: cypress-io/github-action@v2
-      with:
-        config-file: cypress.json
-        start: npm start
-        build: npm run build
-      id: cypress
-      continue-on-error: true
-    - name: "Result"
-      run: |
-        echo ${{ steps.cypress.outcome }}  > result.txt
-    - name: "Upload Artifact"
-      uses: actions/upload-artifact@v2
-      with:
-        name: result.txt
-        path: result.txt
-```
-`Needs`
-
-Lo ejecutamos tras el anterior proceso siempre y cuando éste último haya finalizado con éxito.
-
-`Steps`
-1. **Cypress run:**
-  Esta actión está creado por otros usuarios, por lo que lo importamos y a partir de su documentación definimos el archivo de configuración, lo iniciamos y contruimos.  Seguidamente nos encontramos con "continue-on-error:true" que nos permite continuar el job incluso si se encuentra algún error. 
-
-2. **Result :**
-  Nos imprime la salida del action anterior en el archivo result.txt
-
-3. **Upload Artifact:**
-  Creará un artifact usando la acción ajena  con el nombre "result.txt" y la ruta homónima
-
+- Para ejecutar Cypress hay que instalar desde el script una serie de dependencias, las cuales he optado por instalar desde dentro del contenedor.
+<img src="assets/InstallCypress.PNG">
 
 ---
-# Badge Job 💻
 
-`Job en WORKFLOW de Badge Job`
+# Badge Stage 💻
 
-```yml
+`STAGE en PIPELINE de Badge Stage`
 
- Add_badge_job:
-    runs-on: ubuntu-latest
-    if: ${{always()}}
-    needs: Cypress_job
-    steps:
-    - name: checkout_codigo
-      uses: actions/checkout@v2
-    - name: Download a single artifact
-      uses: actions/download-artifact@v2
-      with:
-        name: result.txt
-    - name: output-artifact
-      run: echo "::set-output name=cypress_outcome::$(cat result.txt)"
-    - name: Action Update Readme
-      uses: ./.github/actions/badge/
-      with:
-        resultado_test: ${{ steps.cypress.outputs.cypress_outcome }}
-    - name: Push cambios Readme
-      run: |
-        git config user.name KevinCamos
-        git config user.email kevincamossoto@gmail.com
-        git add .
-        git commit --allow-empty -m "update readme"
-        git push 
+```
+        stage('Git_commit') {
+            steps {
+                    script{
+                if ("${params.COMMITPIPELINE}" == false) {
+                        sh "node ./jenkinscripts/badge.js $RESULT_CYPRESS"
+                        sh "git config user.name KevinCamos"
+                        sh "git config user.email kevincamossoto@gmail.com"
+                        sh "git add README.md"
+                        sh "git commit --allow-empty -m 'Pipeline ejecutada por ${params.EJECUTOR}. Motivo: ${params.MOTIVO}' "
+                        withCredentials([usernameColonPassword(credentialsId: 'dd4df5a6-38ac-4fb6-89e8-fa9da0d7ac5e', variable: 'USERPASS')]) {
+                            sh "git remote set-url origin https://$USERPASS@github.com/KevinCamos/practica_workflow"
+                        }
+
+                        RESULT_BADGE = sh (script: "git push origin HEAD:jenkins" , returnStatus: true)
+                    } else {
+                        echo 'Esta ejecución debe haberla realizado un trigger'
+                    }
+
+                }
+            }
+
+        }
 ```
 
-`If`
-
-Usamos "    if: ${{always()}}" para ordenar al action que indistíntamente de si las actions de las que depende (usando "needs") finalizan con nulo éxito, que realice la acción.
- ```yml 
-     if: ${{always()}}
- ```
-
-`Needs`
-
-Lo ejecutamos tras el proceso "Cypress_job" y indistíntamente de si  éste ha finalizado con éxito.
-
 `Steps`
-1. **Download a single artifact:** Este step continua el anterior job de Cypress, en el que creábamos un artifact y hacíamos upload. Esta vez realizamos un download para descargar el artifact que habíamos definido como "result.txt"
 
-2. **output-artifact :** Imprime el artifact del step anterior en nuestro archivo de nombre homónimo 
-3. **Action Update Readme:** En este punto ejecutaremos nuestra action que vamos a definir posteriormente, el cual nos permitirá editar este archivo README.md, y almacenar en un punto determinado el resultado que habíamos almacenado anteriormente en Artifact y nos hemos descargado.
+1. **Conditional:** Ejecutamos un "if" para comprobar que la variable "COMMITPIPELINE" no está por defecto, así podemos evitar un bucle de commits a raiz del trigger
 
-`Action`
-
- ```yml 
-name: 'badge'
-description: 'Resultado Test'
-inputs:
-    resultado_test: 
-      description: 'Resultado del test'
-      required: true
-outputs:
-  respuesta:
-    description: 'README Modificado!'
-runs:
-  using: 'node12'
-  main: 'index.js'
-   ```
-`Inputs`
-1. **Inputs:** Definimos que va a tener un único input obligatorio y requerido con el nombre "resultado_test"
-
-2. **Outputs :** Definimos las outputs que consideremos pertinentes
+2. **Comandos :** Al igual que la práctica anterior modificamos el README, pero en lugar de usar un action, facilitamos los valores por el comando de ejecución.
+3. **Más comandos:** A diferencia de la anterior práctica, aquí no estamos en github, por lo que necesitamos facilitar nuestras credenciales con "withCredentials", de tipo usernameColon Password, la cual hemos dado de alta desde Jenkins y posteriormente con "git remote set-url origin" poner nuestras credenciales junto a la ruta del proyecto.
 
 `Javascript del action`
 
-
 ```js
-const core = require('@actions/core')
 const fs = require("fs");
 
-const resultado_test = core.getInput('resultado_test')
+const resultado_test = process.argv[2];
 
-var succes= "https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg"
-var fail =  "https://img.shields.io/badge/test-failure-red";
-console.log(resultado_test)
+var succes = "https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg";
+var fail = "https://img.shields.io/badge/test-failure-red";
+console.log(resultado_test);
 
+const readme = "./README.md";
+var content = resultado_test != "failure" ? succes : fail;
+
+content = `RESULTADOS DE LOS ÚLTIMOS TEST: ![Image text](${content})`;
 try {
-    const readme = "./README.md";
-    var content = resultado_test != "failure" ? succes:fail;
-    content =`RESULTADOS DE LOS ÚLTIMOS TEST: ![Image text](${content})`
-    fs.readFile(readme, 'utf8', function (err, data) {
-        data = data.split("<!-- RESULTADO -->")
-
-        data = data[0]+ "\n<!-- RESULTADO -->\n"+content+"\n<!-- RESULTADO -->\n"+ data[2]; 
-        fs.writeFile(readme, content, function (err, result) {
-            if (err) console.log('error', err);
-        });
+  fs.readFile(readme, "utf8", function (err, data) {
+    data = data.replace(`RESULTADOS DE LOS ÚLTIMOS TEST: ![Image text](${succes})`, content);
+    data = data.replace(`RESULTADOS DE LOS ÚLTIMOS TEST: ![Image text](${fail})`, content);
+    fs.writeFile(readme, data, function (err, result) {
+      if (err) console.log("error", err);
     });
-    core.setOutput = ("frase-de-prueba resultado_test", resultado_test)
-
+  });
 } catch (error) {
-    var content =  "failure";
-    fs.readFile(readme, 'utf8', function (err, data) {
-        data = data.split("<!-- RESULTADO -->")
-        data = data[0]+ "\n<!-- RESULTADO -->\n"+content+"\n<!-- RESULTADO -->\n"+ data[2];
-        fs.writeFile(readme, data, function (err, result) {
-            if (err) console.log('error', err);
-        });
+  var content = `RESULTADOS DE LOS ÚLTIMOS TEST: ![Image text](${fail})`;
+  fs.readFile(readme, "utf8", function (err, data) {
+    data = data.replace(`RESULTADOS DE LOS ÚLTIMOS TEST: ![Image text](${succes})`, content);
+    data = data.replace(`RESULTADOS DE LOS ÚLTIMOS TEST: ![Image text](${fail})`, content);
+    fs.writeFile(readme, data, function (err, result) {
+      if (err) console.log("error", err);
     });
-
-    core.setFailed(error.message)
+  });
 }
 ```
 
-
-
-
-
 ---
-### RESULTADOS DE LOS ÚLTIMOS TEST: 
 
-
+### RESULTADOS DE LOS ÚLTIMOS TEST:
 
 <!-- RESULTADO -->
+
 ![Image text](https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg)
+
 <!-- RESULTADO -->
----
-
-`Anotaciones del autor`
-
-Aunque hemos definido outputs en todas las actions, no nos han sido necesario utilizarlos.
-
 
 ---
-# Deploy Job 💻
 
-`Job en WORKFLOW de Deploy Job`
+# Vercel 💻
 
-```yml
- Deploy_job:
-    runs-on: ubuntu-latest
-    needs: Cypress_job
-    steps:
-    - name: checkout_codigo
-      uses: actions/checkout@v2
-    - name: vercel-action
-      uses: amondnet/vercel-action@v20
-      with:
-        vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
-        github-token: ${{ secrets.GITHUB_TOKEN }} #Optional 
-        # vercel-args: '--prod' #Optional
-        vercel-org-id: ${{ secrets.ORG_ID}}  #Required
-        vercel-project-id: ${{ secrets.PROJECT_ID}} #Required 
-        working-directory: ./
-# https://vercel.com/kevincamos/workflowactionsdaw/HeBe4wxE8FG23zW64GZbcrDF3KhX
-# https://workflowactionsdaw-9931pzwjv-kevincamos.vercel.app/
+`STAGE en PIPELINE de Vercel`
+
+
 ```
-`Needs`
+stage('Vercel') { steps { script{ withCredentials([ string(credentialsId: 'VERCEL_TOKEN', variable: 'VERCEL_TOKEN'), string(credentialsId: 'ORG_ID', variable: 'ORG_ID'), string(credentialsId: 'PROJECT_ID ', variable: 'PROJECT_ID')
 
-Lo ejecutamos tras el proceso "Cypress_job" y cuando éste haya finalizado con éxito.
+                    ]) {
+                      RESULT_VERCEL = sh (script:"sh vercel --env KEY1=$ORG_ID --env KEY2=$PROJECT_ID --token $VERCEL_TOKEN", returnStatus: true)
+                    }
+
+                }
+            }
+        }
+
+```
 
 `Steps`
-1. **vercel-action:** Esta és una action externa que importamos, por lo que hay que seguir su documentación, en la que tenemos que definir una serie de variables.
 
 
-`Anotaciones del autor`
-
-GITHUB_TOKEN es la única que no debemos crear, las otras las conseguimos al registrarnos y linkearnos en vercel, esta nos ofrece un archivo con las ID que nos ha proporcionado, aparte tenemos que 
-<img src="./assets/20-login conect.png">
-
-El Token de vercel se consigue desde la aplicación web en la que nos hemos logeado.
+1. **Variables :** Facilitamos las credenciales de tipo texto necesarias y dadas de alta en la aplicación de jenkins.
+2. **Script:**   Ejecutamos el comando pertinente facilitado enla documentación con sus credenciales necesarias.
 
 
-`RESULTADO`
-
-##### https://vercel.com/kevincamos/workflowactionsdaw/HeBe4wxE8FG23zW64GZbcrDF3KhX
-##### https://workflowactionsdaw-9931pzwjv-kevincamos.vercel.app/
 ---
-# Notification Job 💻
 
-`Job en WORKFLOW de Notification Job`
+# Notification Stage && Discord Message en Paralelo 💻
 
-```yml
-  Notification_job:
-    runs-on: ubuntu-latest
-    if: ${{always()}}
-    needs: [Linter_job, Cypress_job, Add_badge_job, Deploy_job]
-    steps:
-      - name: checkout_codigo
-        uses: actions/checkout@v2
-      - name: Action Email
-        uses: ./.github/actions/email/
-        # id: hello 
-        with:
-          linter_job: ${{ needs.Linter_job.result }}
-          cypress_job: ${{ needs.Cypress_job.result }}
-          add_badge_job: ${{ needs.Add_badge_job.result }}
-          deploy_job: ${{ needs.Deploy_job.result }}
-          send_from: ${{ secrets.MY_EMAIL}}
-          send_to: ${{ secrets.EMAIL_TO}}
-          apy_key: ${{ secrets.KEY_MAILCHIMP}}
+`STAGE en WORKFLOW de Notification Stage`
+
 ```
-`If`
+ stage('Parallel In Sequential') {
+            parallel {
+                  stage('Send_email') {
+                    steps {
+                        script{
+                                withCredentials([
+                                string(credentialsId: 'MY_MAIL', variable: 'MY_MAIL'),
+                                string(credentialsId: 'KEY_MANDRIL', variable: 'KEY_MANDRIL')
+                                ]) { //set SECRET with the credential content
+                                    sh "node ./jenkinscripts/email.js $RESULT_LINTER $RESULT_CYPRESS $RESULT_BADGE $RESULT_VERCEL ${params.MAIL} $KEY_MANDRIL"
+                            }
 
-Usamos "if: ${{always()}}" para ordenar al action que indistíntamente de si las actions de las que depende (usando "needs") finalizan con nulo éxito, que realice la acción.
- ```yml 
-     if: ${{always()}}
- ```
-`Needs`
+                        }
+                    }
+                }
+                stage('Discord Message') {
+                    steps {
+                        script{
+                                withCredentials([
+                                string(credentialsId: 'TOKEN_DISCORD', variable: 'TOKEN_DISCORD'),
+                                string(credentialsId: 'DISCROD_CHANNEL	', variable: 'DISCROD_CHANNEL')
 
-Definimos una array de todos los procesos sobre los que queremos que dependa y que hayan finalizado antes de empezar
-
-`Steps`
-1. **Action Update Readme:** En este punto ejecutaremos nuestra action que vamos a definir posteriormente, el cual nos permitirá enviarle 7 variables de enterno, 4 de los que son los resultados de los jobs que dependíamos y 3 secrets entre los que se encuentra la KEY de la aplicación de mensajería.
-
-`Action`
-
- ```yml 
-name: 'email'
-description: 'Resultado Test'
-inputs:
-    linter_job: 
-      description: 'Resultado de linter_job'
-      required: true
-    cypress_job: 
-      description: 'Resultado de cypress_job'
-      required: true
-    add_badge_job: 
-      description: 'Resultado de add_badge_job'
-      required: true
-    deploy_job: 
-      description: 'Resultado de deploy_job'
-      required: true
-    send_from: 
-      description: 'Emisor del correo'
-      required: true
-    send_to: 
-      description: 'Receptor del correo'
-      required: true
-    apy_key: 
-      description: 'API_KEY de MialChimp Mandrill'
-      required: true
-outputs:
-  respuesta:
-    description: 'README Modificado!'
-runs:
-  using: 'node12'
-  main: 'index.js'
+                                ]) { //set SECRET with the credential content
+                                sh "node ./jenkinscripts/discord $TOKEN_DISCORD $DISCROD_CHANNEL" //Faltaran les credencials de mail                                      }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+```
 
 
-   ```
-`Inputs`
-1. **Inputs:** Definimos los 7 inputs que vamos a introducir en el job
-
-2. **Outputs :** Definimos las outputs que consideremos pertinentes
-
-`Javascript del action`
 
 
+1. **Parallel :** Para ejecutar los dos stage en paralel debemos crear los stages necesarios dentro de parallel, el qual para no tener problemas de sintaxis debemos introducir dentro de otro stage.
+
+
+
+
+
+
+    1. **Send Email:**   Facilitamos las credenciales necesarias dadas de alta en Jenkins y además también le pasamos por los params creados anteriormente para el mensaje, junto al email de quien lo va a recibir y el resultado de los anteriores Stages que hemos ido almacenando
 ```js
-const core = require('@actions/core')
-// const github = require('@actions/github')
-/* const TelegramBot = require('node-telegram-bot-api');
- */
-const apy_key = core.getInput('apy_key')
+const sender_sending = process.argv[6];
+const API_KEY = process.argv[7];
 
-const mandrill = require('node-mandrill')(apy_key); 
+const mandrill = require('node-mandrill')(API_KEY); 
 
-
-
-const linter_job = core.getInput('linter_job')
-const cypress_job = core.getInput('cypress_job')
-const add_badge_job = core.getInput('add_badge_job')
-const deploy_job = core.getInput('deploy_job')
-const send_from = core.getInput('send_from')
-// const send_to = core.getInput('send_from')
-const send_to = core.getInput('send_to')
-
-//send an e-mail to jim rubenstein
+//send an e-mail
 mandrill('/messages/send', {
     message: {
-        to: [{email: send_to}],
-        from_email: send_from,
-        subject: "Resultado del workflow ejecutado",
+        to: [{email: sender_sending}],
+        from_email: sender_sending,
+        subject: "Resultado de la pipeline ejecutada",
         text: `Se ha realizado un push en la rama main que ha provocado la ejecución del
         workflow nombre_repositorio_workflow con los siguientes resultados:
-        - linter_job: ${linter_job}
-        - cypress_job: ${cypress_job}
-        - add_badge_job: ${add_badge_job}
-        - deploy_job: ${deploy_job}`
+        - Linter_stage: ${process.argv[2]}
+        - Test_stage: ${process.argv[3]}
+        - Update_readme_stage: ${process.argv[4]}
+        - Deploy_to_Vercel_stage: ${process.argv[5]}`
     }
 }, function(error, response)
 {
@@ -390,105 +296,14 @@ mandrill('/messages/send', {
     //everything's good, lets see what mandrill said
     else console.log(response);
 });
-
 ```
 
 
-
-
-
-
-`Anotaciones del autor`
-
-La actión funciona perfectamente y sin problemas. Aunque al usar una aplicación externa de mensajería y solicitarme entre otros datos, la dirección web o la DNS, los correos llegan hasta el buzón de esta aplicaición, pero no llegan a recibirse. 
-
-Adjunto resultado del e-mail a medio enviar.
-
-
-<img src="assets/mandrill.PNG">
-
-
-
-
----
-#  Discord Job 💻
-
-`La Custom Job personalizada en WORKFLOW de Discord Job`
-
-```yml
-Discord_job:
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout_codigo
-        uses: actions/checkout@v2
-        name: version node
-      - uses: actions/setup-node@v2
-        with:
-          node-version: "16"
-      - name: Expose git commit data
-        uses: rlespinasse/git-commit-data-action@v1.x
-      - name: Send message discord
-        uses: ./.github/actions/discord/
-        with:
-          discord_token: ${{ secrets.DISCORD_TOKEN }}
-          id_channel: ${{ secrets.CHANNEL_ID }}
-          commit_author: ${{ env.GIT_COMMIT_AUTHOR }}
-          commit_committer: ${{ env.GIT_COMMIT_COMMITTER }}
-          commit_message: ${{ env.GIT_COMMIT_MESSAGE_SUBJECT }}
-```
-
-
-`Steps`
-
-1 **Version node:** Esta action se encarga de configurar la versión de node en la que se va a dirigir el action, ha sido necesario poner la version "16" ya que con las últimas dependencias de Discord.js, te obliga a tener actualizado a la versión 16 como mínimo.
-
-2. **Expose git commit data:** Está acción externa nos permite obtener las variables de nuestros commits, como el author, el realizador del commit o el mensaje de este.
-
-3. **Send message discord:** En este punto ejecutaremos nuestra action que vamos a definir posteriormente, el cual nos permitirá enviarle 5 variables de enterno, 3 que serán las variables del commit que nos proporciona el anterior step y 2 que serán el Token del bot de Discord, y otro el ID del canal al que enviaremos el mensaje.
-
-`Action`
-
- ```yml 
-name: 'discord'
-description: 'Discord Bot'
-inputs:
-    discord_token: 
-      description: 'discord_token'
-      required: true
-    id_channel: 
-      description: 'id_channel'
-      required: true
-    commit_author: 
-      description: 'commit_author'
-      required: false
-    commit_committer: 
-      description: 'commit_committer'
-      required: false
-    commit_message: 
-      description: 'commit_message'
-      required: false
-outputs:
-  respuesta:
-    description: 'Mensaje enviado al canal de discord!'
-runs:
-  using: 'node12'
-  main: 'index.js'
-   ```
-`Inputs`
-1. **Inputs:** Definimos los 5 inputs que vamos a introducir en el job
-
-2. **Outputs :** Definimos las outputs que consideremos pertinentes
-
-`Javascript del action`
-
-
+   2. **Discord Message:**   Facilitamos las credenciales necesarias dadas de alta en Jenkins del token de discord y nuestro canal que recibirá el mensaje.    
+  
 ```js
-const core = require('@actions/core')
-const discord_token = core.getInput('discord_token')
-const id_channel = core.getInput('id_channel')
-const commit_author = core.getInput('commit_author')
-const commit_committer = core.getInput('commit_committer')
-const commit_message = core.getInput('commit_message')
+const discord_token =  process.argv[2]
+const id_channel =  process.argv[3]
 
 
 const { Client, Intents } = require("discord.js");
@@ -501,60 +316,16 @@ client.on("ready", () => {
   client.channels
     .fetch(id_channel)
     .then((channel) => channel.send(`
-    COMMIT AUTHOR:    ${commit_author}
-    COMMIT COMMITTER:     ${commit_committer}
-    COMMIT MESSAGE:       ${commit_message}
+    Pipeline realizada con pleno éxito
     
     `))
     .catch((err) => console.log("Could not find the channel."));
 });
 
-
-
 client.login(discord_token);
-
 setTimeout(function () {
   process.exit(0);
 }, 20000);
 ```
-###### `nota: El set Timeout al final del javascript es para que la action no se quede indefinidamente abierta y se finalice a los 20 segundos. `
 
-
-
-
-
-
-`Anotaciones del autor`
-
-Para realizar esta action, la cual en principio no funcionaba por problemas de compilación por parte del "ncc build index.js"  y totalmente ajeno al creador de este fantástico action, he tenido que subir el archivo javascript sin compilar sus dependencias, teniendo obligadamente a subir su carpeta "node modules" de forma excepcional y poco recomendada.  
-
-
----
-## Resultado
-
-<img src="assets/botisworking.PNG">
-
-
-
-Adjunto pasos para crear el bot.
-
-
-
-1. Vamos a https://discord.com/developers/applications/ para crear el bot, el cual nos da un token
-
-<img src="assets/0-discordBot.PNG">
-
-
-2. Definimos el bot como administrador y obtenemos un enlace para poder importar el bot a tu sala de discord
-
-<img src="assets/01-discord.PNG">
-
-3. Importamos el bot en la sala que deseamos
-
-<img src="assets/02-discord.PNG">
-
-
-4. Comprobamos que se encuentra en nuestra sala
-
-<img src="assets/04-discord.PNG">
 
