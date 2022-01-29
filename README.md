@@ -13,12 +13,14 @@ Por [`Kevin Camos Soto`](https://github.com/KevinCamos)
 7. [Deploy Stage](#Deploy_Stage)
 8. [Notification Stage](#Notification_Stage)
 9. [Discord Stage](#Discord_Stage)
+10. [Credentials](#DCredentialsiscord_Stage)
+11. [Deashboard](#Deashboard)
 
 # Trigger 💻
 
 `Trigger cada 3 horas`
 
-```
+```php
   triggers {
             pollSCM('H */3 * * *')
      } 
@@ -73,7 +75,7 @@ Por [`Kevin Camos Soto`](https://github.com/KevinCamos)
 
 `Stage en PIPELINE de Linter `
 
-```
+```php
           stage('Linter_Stage') {
             steps {
                 script{
@@ -91,7 +93,7 @@ Por [`Kevin Camos Soto`](https://github.com/KevinCamos)
 
 `STAGE en PIPELINE de Cypress Stage`
 
-```
+```php
  stage('Cypress_stage') {
             steps {
                 script{
@@ -119,7 +121,7 @@ Por [`Kevin Camos Soto`](https://github.com/KevinCamos)
 
 `STAGE en PIPELINE de Badge Stage`
 
-```
+```php
         stage('Git_commit') {
             steps {
                     script{
@@ -203,11 +205,11 @@ try {
 `STAGE en PIPELINE de Vercel`
 
 
-```
+```php
 stage('Vercel') { steps { script{ withCredentials([ string(credentialsId: 'VERCEL_TOKEN', variable: 'VERCEL_TOKEN'), string(credentialsId: 'ORG_ID', variable: 'ORG_ID'), string(credentialsId: 'PROJECT_ID ', variable: 'PROJECT_ID')
 
                     ]) {
-                                            RESULT_VERCEL = sh (script:"VERCEL_ORG_ID=$ORG_ID VERCEL_PROJECT_ID=$PROJECT_ID vercel --confirm --production --scope acme --token=$VERCEL_TOKEN", returnStatus: true)
+                         RESULT_VERCEL = sh (script:"VERCEL_ORG_ID=$ORG_ID VERCEL_PROJECT_ID=$PROJECT_ID vercel --token=$VERCEL_TOKEN", returnStatus: true)
 
                     }
 
@@ -230,7 +232,7 @@ stage('Vercel') { steps { script{ withCredentials([ string(credentialsId: 'VERCE
 
 `STAGE en WORKFLOW de Notification Stage`
 
-```
+```php
  stage('Parallel In Sequential') {
             parallel {
                   stage('Send_email') {
@@ -280,7 +282,6 @@ const API_KEY = process.argv[7];
 
 const mandrill = require('node-mandrill')(API_KEY); 
 
-//send an e-mail
 mandrill('/messages/send', {
     message: {
         to: [{email: sender_sending}],
@@ -288,20 +289,20 @@ mandrill('/messages/send', {
         subject: "Resultado de la pipeline ejecutada",
         text: `Se ha realizado un push en la rama main que ha provocado la ejecución del
         workflow nombre_repositorio_workflow con los siguientes resultados:
-        - Linter_stage: ${process.argv[2]}
-        - Test_stage: ${process.argv[3]}
-        - Update_readme_stage: ${process.argv[4]}
-        - Deploy_to_Vercel_stage: ${process.argv[5]}`
+        - Linter_stage: ${process.argv[2]==0? "Éxito":"Fracaso"}
+        - Test_stage: ${process.argv[3]==0? "Éxito":"Fracaso"}
+        - Update_readme_stage: ${process.argv[4]==0? "Éxito":"Fracaso"}
+        - Deploy_to_Vercel_stage: ${process.argv[5]==0? "Éxito":"Fracaso"}`
     }
 }, function(error, response)
 {
-    //uh oh, there was an error
     if (error) console.log( JSON.stringify(error) );
 
-    //everything's good, lets see what mandrill said
     else console.log(response);
 });
+
 ```
+<img src="assets/Email.PNG">
 
 
    2. **Discord Message:**   Facilitamos las credenciales necesarias dadas de alta en Jenkins del token de discord y nuestro canal que recibirá el mensaje.    
@@ -334,3 +335,19 @@ setTimeout(function () {
 ```
 
 
+# Credentials 💻
+
+`Credentials de jenkins`
+
+
+<img src="assets/credentials.PNG">
+
+
+# DashboardView Plugin 💻
+
+`Proceso de instalación del Dashboard View, Plugin 2.18`
+
+
+<img src="assets/Deashboard1.PNG">
+<img src="assets/Deashboard2.PNG">
+<img src="assets/Deashboard3.PNG">
