@@ -55,7 +55,7 @@ pipeline {
                     string(credentialsId: 'ORG_ID', variable: 'ORG_ID'),
                     string(credentialsId: 'PROJECT_ID	', variable: 'PROJECT_ID')
                     
-                    ]) { //set SECRET with the credential content
+                    ]) { 
                       RESULT_VERCEL = sh (script:"sh vercel --env CLAVE1=$ORG_ID --env CLAVE2=$PROJECT_ID --token $VERCEL_TOKEN", returnStatus: true)
                     }      
                       
@@ -64,8 +64,8 @@ pipeline {
         }            
         stage('Git_commit') {
             steps {
-                if (params.COMMITPIPELINE == false) {
                     script{
+                if ("${params.COMMITPIPELINE}" == false) {
                         sh "node ./jenkinscripts/badge.js $RESULT_CYPRESS"
                         sh "git config user.name KevinCamos"
                         sh "git config user.email kevincamossoto@gmail.com"
@@ -76,41 +76,43 @@ pipeline {
                         }
 
                         RESULT_BADGE = sh (script: "git push origin HEAD:jenkins" , returnStatus: true) 
-
+                    } else {
+                        echo 'Esta ejecución debe haberla realizado un trigger'
                     }
-                } else {
-                    echo 'Esta ejecución debe haberla realizado un trigger'
-            echo 'I execute elsewhere'
-        }
+
+                }
             }
         
         } 
-        stage('Send_email && Discord Message') {
+        stage('Parallel In Sequential') {
             parallel {
-                steps {
-                    script{
-                            withCredentials([
-                            string(credentialsId: 'MY_MAIL', variable: 'MY_MAIL'),
-                            string(credentialsId: 'KEY_MANDRIL', variable: 'KEY_MANDRIL')
-                            ]) { //set SECRET with the credential content
-                                sh "node ./jenkinscripts/email.js $RESULT_LINTER $RESULT_CYPRESS $RESULT_BADGE $RESULT_VERCEL ${params.MAIL} $KEY_MANDRIL"      
-                        }
-                            
-                    }      
-                }
-             
-                steps {
-                    script{
-                            withCredentials([
-                            string(credentialsId: 'TOKEN_DISCORD', variable: 'TOKEN_DISCORD'),
-                            string(credentialsId: 'DISCROD_CHANNEL	', variable: 'DISCROD_CHANNEL')
-                            
-                            ]) { //set SECRET with the credential content
-                            sh "node ./jenkinscripts/discord $TOKEN_DISCORD $DISCROD_CHANNEL" //Faltaran les credencials de mail                                      }
-                            
+                  stage('Send_email') {
+                    steps {
+                        script{
+                                withCredentials([
+                                string(credentialsId: 'MY_MAIL', variable: 'MY_MAIL'),
+                                string(credentialsId: 'KEY_MANDRIL', variable: 'KEY_MANDRIL')
+                                ]) { //set SECRET with the credential content
+                                    sh "node ./jenkinscripts/email.js $RESULT_LINTER $RESULT_CYPRESS $RESULT_BADGE $RESULT_VERCEL ${params.MAIL} $KEY_MANDRIL"      
+                            }
+                                
                         }      
-                        
-                    }      
+                    }
+                }
+                stage('Discord Message') {
+                    steps {
+                        script{
+                                withCredentials([
+                                string(credentialsId: 'TOKEN_DISCORD', variable: 'TOKEN_DISCORD'),
+                                string(credentialsId: 'DISCROD_CHANNEL	', variable: 'DISCROD_CHANNEL')
+
+                                ]) { //set SECRET with the credential content
+                                sh "node ./jenkinscripts/discord $TOKEN_DISCORD $DISCROD_CHANNEL" //Faltaran les credencials de mail                                      }
+
+                            }      
+
+                        }      
+                    }
                 }             
             } 
         }
