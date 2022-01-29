@@ -9,6 +9,7 @@
     "cypress": "cypress open "
   },
   "dependencies": {
+    "ejemploNode": "file:jenkinscripts/discord",
     "fs": "^0.0.1-security",
     "next": "latest",
     "node-mandrill": "^1.0.1",

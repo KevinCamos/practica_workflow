@@ -108,7 +108,9 @@ pipeline {
                                 string(credentialsId: 'DISCROD_CHANNEL	', variable: 'DISCROD_CHANNEL')
 
                                 ]) { //set SECRET with the credential content
-                                sh "node ./jenkinscripts/discord $TOKEN_DISCORD $DISCROD_CHANNEL" //Faltaran les credencials de mail                                      }
+                                sh "npm install ./jenkinscripts/discord"                                     
+                                sh "node ./jenkinscripts/discord $TOKEN_DISCORD $DISCROD_CHANNEL" 
+                                
                             }      
                         }      
                     }
