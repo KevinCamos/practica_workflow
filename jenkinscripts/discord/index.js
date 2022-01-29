@@ -12,7 +12,7 @@ client.on("ready", () => {
   client.channels
     .fetch(id_channel)
     .then((channel) => channel.send(`
-    Hello JENKINS
+    Pipeline realizada con pleno éxito
     
     `))
     .catch((err) => console.log("Could not find the channel."));

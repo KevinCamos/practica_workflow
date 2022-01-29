@@ -12,13 +12,13 @@ mandrill('/messages/send', {
     message: {
         to: [{email: sender_sending}],
         from_email: sender_sending,
-        subject: "Resultado del workflow ejecutado",
+        subject: "Resultado de la pipeline ejecutada",
         text: `Se ha realizado un push en la rama main que ha provocado la ejecución del
         workflow nombre_repositorio_workflow con los siguientes resultados:
-        - linter_job: ${process.argv[2]}
-        - cypress_job: ${process.argv[3]}
-        - add_badge_job: ${process.argv[4]}
-        - deploy_job: ${process.argv[5]}`
+        - Linter_stage: ${process.argv[2]}
+        - Test_stage: ${process.argv[3]}
+        - Update_readme_stage: ${process.argv[4]}
+        - Deploy_to_Vercel_stage: ${process.argv[5]}`
     }
 }, function(error, response)
 {
