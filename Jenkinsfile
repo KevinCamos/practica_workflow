@@ -79,7 +79,7 @@ pipeline {
                     string(credentialsId: 'PROJECT_ID	', variable: 'PROJECT_ID')
                     
                     ]) { 
-                      RESULT_VERCEL = sh (script:"vercel --confirm --env KEY1=$ORG_ID --env KEY2=$PROJECT_ID --token $VERCEL_TOKEN", returnStatus: true)
+                      RESULT_VERCEL = sh (script:"VERCEL_ORG_ID=$ORG_ID VERCEL_PROJECT_ID=$PROJECT_ID vercel --confirm --production --scope acme --token=$VERCEL_TOKEN", returnStatus: true)
                     }      
                       
                 }      
