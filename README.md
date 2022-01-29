@@ -4,13 +4,15 @@ Por [`Kevin Camos Soto`](https://github.com/KevinCamos)
 
 ## Table of Contents
 
-<!--
-1. [Linter Stage](#Linter_Stage)
-2. [Cypress Stage](#Cypress_Stage)
-3. [Add_badge Stage](#Add_badge_Stage)
-4. [Deploy Stage](#Deploy_Stage)
-5. [Notification Stage](#Notification_Stage)
-6. [Discord Stage](#Discord_Stage) -->
+1. [Trigger](#Trigger)
+2. [Parameters](#Parameters)
+3. [Environments](#Environments)
+4. [Linter Stage](#Linter_Stage)
+5. [Cypress Stage](#Cypress_Stage)
+6. [Add_badge Stage](#Add_badge_Stage)
+7. [Deploy Stage](#Deploy_Stage)
+8. [Notification Stage](#Notification_Stage)
+9. [Discord Stage](#Discord_Stage)
 
 # Trigger 💻
 
@@ -27,7 +29,7 @@ Por [`Kevin Camos Soto`](https://github.com/KevinCamos)
 
 # Parameters 💻
 
-`Paramoetros para la aplicación`
+`Parametros para la aplicación`
 
 ```
           parameters {
@@ -42,6 +44,8 @@ Por [`Kevin Camos Soto`](https://github.com/KevinCamos)
 2. **MOTIVO:** Motivo: de tipo texto también en que podremos especificar el motivo por el cual estamos ejecutando la pipeline.
 3. **MAIL:** Correo notificación: de tipo texto que almacenará el correo al que notificaremos el resultado de cada stage ejecutado
 4. **COMMITPIPELINE:** Esta variable es para determinar si quieres realizar un commit al ejecutar el pipeline y no entrar en un bucle de commits a causa del trigger
+
+# Environments 💻
 
 
 `Iniciamos las variables para obtener los resultados y para evitar problemas con cypress`
@@ -61,11 +65,11 @@ Por [`Kevin Camos Soto`](https://github.com/KevinCamos)
 
 1. **Obtener Valores:** Iniciamos las 4 primeras variables para obtener el valor del resultado de los scripts
 2. **TERM Y NO_COLOR:** Estas variables son iniciadas para evitar error con cypress.
-# Linter Stage 💻
 `Anotaciones del autor`
  
 - Estas dos últimas fueron idea del compañero de clase Juanjo, el qual me ayudó con errores que no debían de ocurrir en la ejecución.
 
+# Linter Stage 💻
 
 `Stage en PIPELINE de Linter `
 
