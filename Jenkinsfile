@@ -2,7 +2,7 @@
 pipeline {
     agent any
         triggers {
-            pollSCM(' 0 0 */3 ? * *	 ')
+            pollSCM('H */2 * * *')
      } 
         parameters {
             string(name: 'EJECUTOR', defaultValue: 'Kevin', description: 'Ejecutor: de tipo texto en el que se especificará el nombre de la persona que ejecuta la pipeline')
