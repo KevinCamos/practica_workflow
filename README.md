@@ -207,7 +207,7 @@ try {
 stage('Vercel') { steps { script{ withCredentials([ string(credentialsId: 'VERCEL_TOKEN', variable: 'VERCEL_TOKEN'), string(credentialsId: 'ORG_ID', variable: 'ORG_ID'), string(credentialsId: 'PROJECT_ID ', variable: 'PROJECT_ID')
 
                     ]) {
-                      RESULT_VERCEL = sh (script:"vercel --env KEY1=$ORG_ID --env KEY2=$PROJECT_ID --token $VERCEL_TOKEN", returnStatus: true)
+                      RESULT_VERCEL = sh (script:"vercel -confirm --env KEY1=$ORG_ID --env KEY2=$PROJECT_ID --token $VERCEL_TOKEN", returnStatus: true)
                     }
 
                 }
