@@ -15,10 +15,10 @@ mandrill('/messages/send', {
         subject: "Resultado de la pipeline ejecutada",
         text: `Se ha realizado un push en la rama main que ha provocado la ejecución del
         workflow nombre_repositorio_workflow con los siguientes resultados:
-        - Linter_stage: ${process.argv[2]}
-        - Test_stage: ${process.argv[3]}
-        - Update_readme_stage: ${process.argv[4]}
-        - Deploy_to_Vercel_stage: ${process.argv[5]}`
+        - Linter_stage: ${process.argv[2]==0? "Éxito":"Fracaso"}
+        - Test_stage: ${process.argv[3]==0? "Éxito":"Fracaso"}
+        - Update_readme_stage: ${process.argv[4]==0? "Éxito":"Fracaso"}
+        - Deploy_to_Vercel_stage: ${process.argv[5]==0? "Éxito":"Fracaso"}`
     }
 }, function(error, response)
 {

@@ -51,7 +51,7 @@ pipeline {
         stage('Git_commit') {
             steps {
                     script{
-                if ("${params.COMMITPIPELINE}" == true) {
+                if ("${params.COMMITPIPELINE}" == "true") {
                         sh "node ./jenkinscripts/badge.js $RESULT_CYPRESS"
                         sh "git config user.name KevinCamos"
                         sh "git config user.email kevincamossoto@gmail.com"
