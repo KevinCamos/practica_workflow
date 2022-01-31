@@ -18,15 +18,12 @@ pipeline {
             RESULT_VERCEL = "false"
             TERM = 'xterm'
             NO_COLOR = '1'
-
-
         }   
         stages {
         stage('install') {
             steps {
                 script{
                 sh "npm install -y"
-        
                 }
             }
         }
@@ -43,7 +40,6 @@ pipeline {
                     sh "npm run build"
                     sh "npm run start &"
                     RESULT_CYPRESS = sh (script:"cypress run --headed", returnStatus: true)
-
                 } 
             }
         }

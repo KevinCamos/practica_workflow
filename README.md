@@ -15,7 +15,7 @@ Por [`Kevin Camos Soto`](https://github.com/KevinCamos)
 9. [Discord Stage](#Discord_Stage)
 10. [Credentials](#DCredentialsiscord_Stage)
 11. [Deashboard](#Deashboard)
-
+12. [Pipeline](#Pipeline)
 # Trigger 💻
 
 `Trigger cada 3 horas`
@@ -351,3 +351,11 @@ setTimeout(function () {
 <img src="assets/Deashboard1.PNG">
 <img src="assets/Deashboard2.PNG">
 <img src="assets/Deashboard3.PNG">
+
+
+
+# Configuración Pipeline con Github 💻
+
+
+
+<img src="assets/Pipeline.PNG">
